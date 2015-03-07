@@ -58,15 +58,16 @@
 
 %% Elena's favorite green (thanks, Fernando!)
 \definecolor{ForestGreen}{RGB}{34,139,34}
-% Uncomment this if you want to show work-in-progress comments
+\definecolor{BlueViolet}{RGB}{138,43,226}
+%Uncomment this if you want to show work-in-progress comments
 %\newcommand{\comment}[1]{{\bf \tt  {#1}}}
 % Uncomment this if you don't want to show comments
 \newcommand{\comment}[1]{}
 \newcommand{\emcomment}[1]{\textcolor{ForestGreen}{\comment{Elena: {#1}}}}
 \newcommand{\todo}[1]{\textcolor{blue}{\comment{To Do: {#1}}}}
-
 \newcommand{\pscomment}[1]{\textcolor{red}{\comment{Paul: {#1}}}}
 \newcommand{\mmcomment}[1]{\textcolor{magenta}{\comment{Max: {#1}}}}
+\newcommand{\escomment}[1]{\textcolor{BlueViolet}{\comment{Emma: {#1}}}}
 \begin{document}
 \pagestyle{plain}
 %
@@ -79,7 +80,7 @@
 %(X-XXXXX-XX-X/XX/XX) to be over-ridden. 
 % --- End of Author Metadata ---
 
-\title{The titel goes here}
+\title{Developing Beginner-Friendly User Interactions for the Clojure Programming Language}
 %\subtitle{[Extended Abstract \comment{DO WE NEED THIS?}]
 %\titlenote{}}
 %
@@ -96,11 +97,13 @@
 % References or any Appendices.
 
 \author{
-???, Paul Schliep, Max Magnuson, and Elena Machkasova \\
+Henry Fellows, Aaron Lemmon, Max Magnuson, \\
+	Emma Sax, Paul Schliep, and Elena Machkasova \\
 Computer Science Discipline \\
 University of Minnesota Morris\\
 Morris, MN 56267\\
-??, schli202@umn.edu, magnu401@umn.edu, elenam@umn.edu
+fello056@umn.edu, lemmo031@umn.edu, magnu401@umn.edu, \\
+	saxxx027@umn.edu, schli202@umn.edu, elenam@umn.edu
 }
 
 \date{}
@@ -110,13 +113,44 @@ Morris, MN 56267\\
 
 \section*{\centering Abstract}
 The abstract
-
+%\escomment{Is this supposed to be the abstract that we submitted? The one that's three paragraphs long?}
 
 \newpage
 \setcounter{page}{1}
 
-\section{Introduction}\label{sec:intro}
-%\todo{Overview of project and goals, Paul's section}
+\section{Introduction and Background}\label{sec:intro}
+%\todo{Overview of project and goals, Emma's section}
+%\escomment{All of my titles and stuff are optional. I'm just trying to give us a template.}
+\subsection{Overview of Clojure}\label{sec:clojure}
+Clojure, developed in 2007 by Rich Hickey, is a dynamic, functional programming language in the Lisp family. It utilizes the Java Virtual Machine, which means that it compiles to JVM bytecode, and it offers easy availability to Java frameworks, including optional type hints and type inference and easy multithreading options. All the while, Clojure remains completely dynamic.
+
+Because Clojure is a functional language, it puts strong emphasis on immutable data types. An immutable data type means data types cannot be changed, unlike many imperative programming languages. When using Clojure, in order to change a data type, an entirely new data item must be made. Immutable data types are practical for novice programmers because immutable data types are useful for avoiding side effects in functions. A side effect is when a function alters memory or interacts outside of its scope instead of returning a value. Side effects can make debugging or resolving errors or failures more difficult. This is because when a function interacts with other functions than itself, when it's not supposed to, any issues in the code can be spread out throughout the program. The reduction of side effects means problems with the code are easier to find and fix.
+
+Clojure, like other Lisp languages, uses prefix notation. This means that function calls use parenthesis, followed by the function name, and then any parameters:
+\begin{verbatim}
+	(<function name> <parameter 1> <parameter 2>)
+\end{verbatim}
+
+Even built-in functions, such as mathematical functions, use this form:
+\begin{verbatim}
+	(+ 5 5)
+	-> 10
+\end{verbatim}
+
+Note that \texttt{->} signals the result of the function.
+
+
+\subsection{Overview of ClojurEd}\label{sec:project}
+
+\section{Error Messages}\label{sec:errors}
+
+\section{Technical Setup}\label{sec:technical}
+
+\section{Conclusions}\label{sec:conclusion}
+
+\section{References?}\label{sec:reference}
+%\escomment{unsure if we actually put references directly into the paper or not...}
+
 
 
 % That's all folks!
