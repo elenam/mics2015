@@ -68,6 +68,9 @@
 \newcommand{\pscomment}[1]{\textcolor{red}{\comment{Paul: {#1}}}}
 \newcommand{\mmcomment}[1]{\textcolor{magenta}{\comment{Max: {#1}}}}
 \newcommand{\escomment}[1]{\textcolor{BlueViolet}{\comment{Emma: {#1}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 \pagestyle{plain}
 %
@@ -105,9 +108,7 @@ Morris, MN 56267\\
 fello056@umn.edu, lemmo031@umn.edu, magnu401@umn.edu, \\
 	saxxx027@umn.edu, schli202@umn.edu, elenam@umn.edu
 }
-
 \date{}
-
 \maketitle
 \thispagestyle{empty}
 
@@ -119,7 +120,6 @@ The abstract
 \setcounter{page}{1}
 
 \section{Introduction and Background}\label{sec:intro}
-%\todo{Overview of project and goals, Emma's section}
 %\escomment{All of my titles and stuff are optional. I'm just trying to give us a template.}
 \subsection{Overview of Clojure}\label{sec:clojure}
 Clojure, developed in 2007 by Rich Hickey, is a dynamic, functional programming language in the Lisp family. It utilizes the Java Virtual Machine, which means that it compiles to JVM bytecode, and it offers easy availability to Java frameworks, including optional type hints and type inference and easy multithreading options. All the while, Clojure remains completely dynamic.
@@ -128,7 +128,7 @@ Because Clojure is a functional language, it puts strong emphasis on immutable d
 
 Clojure, like other Lisp languages, uses prefix notation. This means that function calls use parenthesis, followed by the function name, and then any parameters:
 \begin{verbatim}
-	(<function name> <parameter 1> <parameter 2>)
+	(<function-name> <argument 1> <argument 2>)
 \end{verbatim}
 
 Even built-in functions, such as mathematical functions, use this form:
@@ -139,6 +139,43 @@ Even built-in functions, such as mathematical functions, use this form:
 
 Note that \texttt{->} signals the result of the function.
 
+Clojure also has easy accessibility to Java functions and Java interoperability. This means that any Java method can be called just like normal Clojure functions:
+\begin{verbatim}
+	(.methodName object *arguments)
+\end{verbatim}
+
+As well as the use of Java methods, Clojure can also use macros, Java utilities, concurrency and multithreading, and even certain Java objects to enhance the abilities of using Clojure.
+
+Clojure supports anonymous functions. Anonymous functions allow programmers to quickly make rare functions when needed. However, these functions are not  stored, and so the program would not be able to called by name after the usage. The following example is an anonymous function that takes a number and increments it by one:
+\begin{verbatim}
+	(fn [number] (+ number 1))
+\end{verbatim}
+
+In anonymous functions, anything in the brackets that is following the \texttt{fn} is arguments. After the arguments in \texttt{[]}, is the body. If the program wanted to be able to call this function multiple times, it would make more sense to simple put a \texttt{def} with a name in front:
+\begin{verbatim}
+	(def increment-number [number] (+ number 1))
+\end{verbatim}
+
+Now, the program can call this function any time by using the name \texttt{increment-number}.
+
+Clojure also has a variety of different types of data structures. All of Clojure's collections are both immutable and persistent. This means that the data in the structures cannot be modified, and that each structure preserves the previous version of itself. The different types of structures Clojure uses are lists (denoted by \texttt{()}), sets (denoted by \texttt{\#\{\}}), vectors (denoted by \texttt{[]}), and hashmaps (denoted by \texttt{\{\}}). The first three types of data structures listed above are normal data structures:
+\begin{verbatim}
+	(1 2 "foo" :a 9 "bar")
+\end{verbatim}
+
+They can hold any amount, including \texttt{nil}, of values of any type (a data structure is untyped, which means it does not care if types of values in one structure as mismatched). However, hashmaps are unique in the fact that a hashmap is a collection of key-value pairs:
+\begin{verbatim}
+	{:a 1 :b 2 :c 3}
+\end{verbatim}
+
+In hashmaps, usually keywords, indicated by a colon in front of a simple indicating word, are used as keys, and the value is what the key is pointing to. In the hashmap above, the keywords are \texttt{:a}, \texttt{:b}, and \texttt{:c}, and they are pointing to the values \texttt{1}, \texttt{2}, and \texttt{3}.
+
+Just like variables and values, data structures can also be bound to a variable name:
+\begin{verbatim}
+	(def myhashmap {:a 1 :b 2 :c 3})
+\end{verbatim}
+
+This enables the data structures to be called, traversed, etc by the use of a single name.
 
 \subsection{Overview of ClojurEd}\label{sec:project}
 
@@ -151,9 +188,5 @@ Note that \texttt{->} signals the result of the function.
 \section{References?}\label{sec:reference}
 %\escomment{unsure if we actually put references directly into the paper or not...}
 
-
-
 % That's all folks!
 \end{document}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
