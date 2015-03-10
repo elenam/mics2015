@@ -60,9 +60,9 @@
 \definecolor{ForestGreen}{RGB}{34,139,34}
 \definecolor{BlueViolet}{RGB}{138,43,226}
 %Uncomment this if you want to show work-in-progress comments
-%\newcommand{\comment}[1]{{\bf \tt  {#1}}}
+\newcommand{\comment}[1]{{\bf \tt  {#1}}}
 % Uncomment this if you don't want to show comments
-\newcommand{\comment}[1]{}
+%\newcommand{\comment}[1]{}
 \newcommand{\emcomment}[1]{\textcolor{ForestGreen}{\comment{Elena: {#1}}}}
 \newcommand{\todo}[1]{\textcolor{blue}{\comment{To Do: {#1}}}}
 \newcommand{\pscomment}[1]{\textcolor{red}{\comment{Paul: {#1}}}}
@@ -114,7 +114,11 @@ fello056@umn.edu, lemmo031@umn.edu, magnu401@umn.edu, \\
 
 \section*{\centering Abstract}
 The abstract
-%\escomment{Is this supposed to be the abstract that we submitted? The one that's three paragraphs long?}
+\escomment{Is this supposed to be the abstract that we submitted? The
+  one that's three paragraphs long?}
+\emcomment{No, usually it's different from the abstract submitted for
+  review. An abstract is usually written when the paper is nearly
+  finished.}
 
 \newpage
 \setcounter{page}{1}
@@ -122,11 +126,52 @@ The abstract
 \section{Introduction and Background}\label{sec:intro}
 %\escomment{All of my titles and stuff are optional. I'm just trying to give us a template.}
 \subsection{Overview of Clojure}\label{sec:clojure}
-Clojure, developed in 2007 by Rich Hickey, is a dynamic, functional programming language in the Lisp family. It utilizes the Java Virtual Machine, which means that it compiles to JVM bytecode, and it offers easy availability to Java frameworks, including optional type hints and type inference and easy multithreading options. All the while, Clojure remains completely dynamic.
+\emcomment{Emma - many thanks for getting things started! Below are
+  comments. The majority of them refer to making this material
+  understandable to the target audience (i.e not using terms that
+  CSci undergrads typically don't know. Otehrwise things are well
+  organized and well written.}
+Clojure, developed in 2007 by Rich Hickey, is a dynamic, functional
+programming language in the Lisp family. 
+\emcomment{Use simpler, more concrete terminology: there are many ways
+  in which JVM can be utilized. Probably need to explain that the JVM
+  is Clojure interpreter, mention and explain REPL somewhere in this paragraph.}
+\emcomment{Need to explain what you mean by dynamic}
+It utilizes the Java Virtual
+Machine, which means that it compiles to JVM bytecode, and it offers
+easy 
+\emcomment{accessibilty?} 
+availability of Java frameworks, 
+\emcomment{This wouldn't make any sense to the target audience and is
+  not needed (perhaps with the exception of multithreading:}
+including optional type hints
+and type inference and easy multithreading options. All the while,
+Clojure remains completely dynamic.  
+\emcomment{This is a strange wording: what does it mena to ``remain''
+  in this context? And you already said it was dynamic.}
 
-Because Clojure is a functional language, it puts strong emphasis on immutable data types. An immutable data type means data types cannot be changed, unlike many imperative programming languages. When using Clojure, in order to change a data type, an entirely new data item must be made. Immutable data types are practical for novice programmers because immutable data types are useful for avoiding side effects in functions. A side effect is when a function alters memory or interacts outside of its scope instead of returning a value. Side effects can make debugging or resolving errors or failures more difficult. This is because when a function interacts with other functions than itself, when it's not supposed to, any issues in the code can be spread out throughout the program. The reduction of side effects means problems with the code are easier to find and fix.
+Because Clojure is a functional language, it puts strong emphasis on
+immutable data types. An immutable data type means data types cannot
+be changed, unlike \emcomment{in? Also, why ``many'' and not all of
+  them?} many imperative programming languages. When using
+Clojure, in order to change a data type, an entirely new data item
+must be made. Immutable data types are practical for novice
+programmers because immutable data types are useful for avoiding side
+effects in functions. \emcomment{I would first explain what side
+  effects are, and only then why they complicate things for novice
+  programmers}
+A side effect is when a function alters memory
+or interacts outside of its scope instead of returning a value. Side
+effects can make debugging or resolving errors or failures more
+difficult. This is because when a function interacts with other
+functions \emcomment{``other'' usually means ``than itself''} than
+itself, when it is not supposed to, any issues in the 
+code can be spread out throughout the program. The reduction of side
+effects means problems with the code are easier to find and fix. 
 
-Clojure, like other Lisp languages, uses prefix notation. This means that function calls use parenthesis, followed by the function name, and then any parameters:
+Clojure, like other Lisp languages, uses prefix notation. This means
+that function calls use parenthesis, followed by the function name,
+and then any parameters: 
 \begin{verbatim}
 	(<function-name> <argument 1> <argument 2>)
 \end{verbatim}
@@ -137,45 +182,108 @@ Even built-in functions, such as mathematical functions, use this form:
 	-> 10
 \end{verbatim}
 
-Note that \texttt{->} signals the result of the function.
+Note that \texttt{->} signals the result of the
+function. \emcomment{We indicate the result of computations in Clojure
+  interpreter as \texttt{->} -- plus we need to explain REPL and
+  interpreter.}
 
-Clojure also has easy accessibility to Java functions and Java interoperability. This means that any Java method can be called just like normal Clojure functions:
+\emcomment{I don't think we need syntax for interop. I would comment
+ out the example for now.}
+Clojure also has easy accessibility to Java functions and Java
+interoperability. This means that any Java method can be called just
+like normal Clojure functions: 
 \begin{verbatim}
 	(.methodName object *arguments)
 \end{verbatim}
 
-As well as the use of Java methods, Clojure can also use macros, Java utilities, concurrency and multithreading, and even certain Java objects to enhance the abilities of using Clojure.
+\emcomment{Thsi is true, but probably not useful for our readers}
+As well as the use of Java methods, Clojure can also use macros, Java
+utilities, concurrency and multithreading, and even certain Java
+objects to enhance the abilities of using Clojure. 
 
-Clojure supports anonymous functions. Anonymous functions allow programmers to quickly make rare functions when needed. However, these functions are not  stored, and so the program would not be able to called by name after the usage. The following example is an anonymous function that takes a number and increments it by one:
+\emcomment{before we get into anonymous functions, we need to show how
+to define regular functions (general syntax and a couple of examples)}
+Clojure supports anonymous functions. Anonymous functions allow
+programmers to quickly make rare \emcomment{not sure what you mean by
+  ``rare'' here. Those that aren't predefined?}  functions when
+needed. 
+However, these
+functions are not  stored, and so the program would not be able to
+called \emcomment{call them?} by name after the usage. 
+The following example is an anonymous
+function that takes a number and increments it by one: 
 \begin{verbatim}
 	(fn [number] (+ number 1))
 \end{verbatim}
 
-In anonymous functions, anything in the brackets that is following the \texttt{fn} is arguments. After the arguments in \texttt{[]}, is the body. If the program wanted to be able to call this function multiple times, it would make more sense to simple put a \texttt{def} with a name in front:
+In anonymous functions, anything in the brackets that is following the
+\texttt{fn} is arguments. 
+\emcomment{and in regular functions as well} 
+After the arguments in \texttt{[]}, is the
+body. If the program wanted to be able to call this function multiple
+times, it would make more sense to simply put a \texttt{def} with a
+name in front: 
+\emcomment{It's not quite that: firstly, it's defn, and not def, but
+  you also need to explain where the function name is}
 \begin{verbatim}
 	(def increment-number [number] (+ number 1))
 \end{verbatim}
 
 Now, the program can call this function any time by using the name \texttt{increment-number}.
 
-Clojure also has a variety of different types of data structures. All of Clojure's collections are both immutable and persistent. This means that the data in the structures cannot be modified, and that each structure preserves the previous version of itself. The different types of structures Clojure uses are lists (denoted by \texttt{()}), sets (denoted by \texttt{\#\{\}}), vectors (denoted by \texttt{[]}), and hashmaps (denoted by \texttt{\{\}}). The first three types of data structures listed above are normal data structures:
+Clojure also has a variety of different types of data structures. All
+of Clojure's collections are both immutable and persistent. 
+\emcomment{I wouldn't go into persistent, just talk about immutable.}
+This means
+that the data in the structures cannot be modified, and that each
+structure preserves the previous version of itself. The different
+types of structures Clojure uses are lists (denoted by \texttt{()}),
+sets (denoted by \texttt{\#\{\}}), vectors (denoted by \texttt{[]}),
+and hashmaps (denoted by \texttt{\{\}}). The first three types of data
+structures listed above are normal \emcomment{don't use the word
+  ``normal'' in a research paper} data structures: 
 \begin{verbatim}
 	(1 2 "foo" :a 9 "bar")
 \end{verbatim}
+\emcomment{I am not sure which of data structures we will actually need; we
+  never defined keywords, and I am not sure we will need those (but if
+  we do, we will need to explain them). We will definitely need
+  vectors and lists and hashmaps. Sets probably not.}
 
-They can hold any amount, including \texttt{nil}, of values of any type (a data structure is untyped, which means it does not care if types of values in one structure as mismatched). However, hashmaps are unique in the fact that a hashmap is a collection of key-value pairs:
+They \emcomment{Not sure what ``they'' referes to; most structures can
+hold any amount (any number, to be more precise) of values, nil isn't
+explained, and probably needs to 
+be, but I am not sure; nil isn't an amount of anything.} can hold any
+amount, including \texttt{nil}, of values of any 
+type 
+\emcomment{we need to mention earlier that all data structures are
+  untyped: not unique to hashmaps}
+(a data structure is untyped, which means it does not care if
+types of values in one structure as mismatched). However, hashmaps are
+unique in the fact that a hashmap is a collection of key-value pairs: 
 \begin{verbatim}
 	{:a 1 :b 2 :c 3}
 \end{verbatim}
+\emcomment{It's unclear from just the syntax what it means to be a
+  collection of key/value pairs.}
 
-In hashmaps, usually keywords, indicated by a colon in front of a simple indicating word, are used as keys, and the value is what the key is pointing to. In the hashmap above, the keywords are \texttt{:a}, \texttt{:b}, and \texttt{:c}, and they are pointing to the values \texttt{1}, \texttt{2}, and \texttt{3}.
+In hashmaps, usually keywords, indicated by a colon in front of a
+simple indicating word, are used as keys, and the value is what the
+key is pointing to. 
+\emcomment{keys aren't pointing to anything, they are bound to something}
+In the hashmap above, the keywords are
+\texttt{:a}, \texttt{:b}, and \texttt{:c}, and they are pointing to
+the values \texttt{1}, \texttt{2}, and \texttt{3}. 
 
-Just like variables and values, data structures can also be bound to a variable name:
+Just like variables and values, data structures can also be bound to a
+variable name: 
 \begin{verbatim}
 	(def myhashmap {:a 1 :b 2 :c 3})
 \end{verbatim}
 
-This enables the data structures to be called, traversed, etc by the use of a single name.
+This enables the data structures to be called, traversed, etc by the
+use of a single name. \emcomment{I am not sure this addds anything; an
+example would be better.}
 
 \subsection{Overview of ClojurEd}\label{sec:project}
 
@@ -186,7 +294,10 @@ This enables the data structures to be called, traversed, etc by the use of a si
 \section{Conclusions}\label{sec:conclusion}
 
 \section{References?}\label{sec:reference}
-%\escomment{unsure if we actually put references directly into the paper or not...}
+\escomment{unsure if we actually put references directly into the
+  paper or not...}
+\emcomment{Emma - Don't worry about it for now. Do you have a reference you
+  would like to add?}
 
 % That's all folks!
 \end{document}
