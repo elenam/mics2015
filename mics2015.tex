@@ -133,9 +133,9 @@ The abstract
   
   
 Clojure, developed in 2007 by Rich Hickey~\cite{Hickey:2008}, is a dynamic, functional
-programming language in the Lisp family. Dynamic means that the process of solving
-a problem is broken down into subparts in order to make solving easier and less complex.
-\emcomment{``dynamic'' refers to ``dynamically typed''} 
+programming language in the Lisp family. Dynamic typing means that Clojure does not try to specifically associate
+values with a type, but rather tries to figure out what type a value is at runtime.
+%\emcomment{``dynamic'' refers to ``dynamically typed''} 
 %\emcomment{Use simpler, more concrete terminology: there are many ways
   %in which JVM can be utilized. Probably need to explain that the JVM
   %is Clojure interpreter, mention and explain REPL somewhere in this paragraph.}
@@ -143,8 +143,11 @@ a problem is broken down into subparts in order to make solving easier and less 
 Clojure utilizes the Java Virtual Machine (JVM) as an interpreter, and Clojure code compiles to JVM bytecode.
 It offers easy 
 %\emcomment{accessibilty?} 
-accessibility of Java frameworks. The Clojure REPL \emcomment{what is REPL?} is another easy way to get acquainted with Clojure.
-The REPL allows users to see immediate results and respond easily and quickly. For any programmer, the use of the REPL 
+accessibility of Java frameworks. The Clojure REPL
+% \emcomment{what is REPL?} 
+is another easy way to get acquainted with Clojure. A REPL is an interactive shell program that takes single 
+expressions, evaluates them, and returns the result to the user. The REPL allows users to see immediate results
+ and respond easily and quickly. For any programmer, the use of the REPL 
 is highly advised and can make programming in Clojure much simpler.
 %\emcomment{This wouldn't make any sense to the target audience and is
   %not needed (perhaps with the exception of multithreading:}
@@ -155,7 +158,8 @@ is highly advised and can make programming in Clojure much simpler.
  % in this context? And you already said it was dynamic.}
 
 Because Clojure is a functional language, it puts strong emphasis on
-immutable data types. An immutable data type means data types \emcomment{data cannot be changed, not data types} cannot
+immutable data types. An immutable data type means data cannot 
+%\emcomment{data cannot be changed, not data types}
 be changed, unlike %\emcomment{in? Also, why ``many'' and not all of
   %them?}
   imperative programming languages. When using
@@ -181,7 +185,8 @@ and then any parameters:
 	(<function-name> <argument 1> <argument 2>)
 \end{verbatim}
 
-Even \emcomment{All functions, including built-in mathematical functions, use this form? ``Even'' implies that somehow this is unexpected.} built-in functions, such as mathematical functions, use this form:
+An example of this can be seen through a built-in mathematical function, addition:
+% \emcomment{All functions, including built-in mathematical functions, use this form? ``Even'' implies that somehow this is unexpected.} built-in functions, such as mathematical functions, use this form:
 \begin{verbatim}
 	(+ 5 5)
 	-> 10
@@ -217,8 +222,9 @@ can define functions and variables:
 	-> "Hello World"
 \end{verbatim}
 
-In the above example, we define a string to be \texttt{"Hello World"}. This way, whenever we call \emcomment{I would avoid ``call'' here since calling is for functions} \texttt{mystring},
-it will return the string we bound to the variable name. Here is an example of using \texttt{defn}:
+In the above example, we define a string to be \texttt{"Hello World"}. This way, whenever we utilize 
+%\emcomment{I would avoid ``call'' here since calling is for functions} 
+\texttt{mystring}, the string we bound to the variable name will be returned. Here is an example of using \texttt{defn}:
 \begin{verbatim}
 	(defn increment-number [number] (+ number 1))
 	(increment-number 2)
@@ -227,7 +233,8 @@ it will return the string we bound to the variable name. Here is an example of u
 
 In this example, we saved a function that takes a number and increments it by adding 1 to it. In any function, the 
 function name is the word after the \texttt{defn}, the pieces in the square brackets after the function name indicate 
-the arguments that the function takes in, and what follows is the body, or what the function does. \emcomment{the expression returned by the function? ``does'' has imperative flavor}
+the arguments that the function takes in, and what follows is the body, or what the action of the function is. 
+%\emcomment{the expression returned by the function? ``does'' has imperative flavor}
 
 Now let us say that we have a program where we want to use a function, but only once. This means that we do not
 necessarily need to define it with a name because Clojure supports anonymous functions. Anonymous functions allow 
@@ -265,8 +272,9 @@ The different types of structures Clojure uses are lists (denoted by \texttt{()}
 sets (denoted by \texttt{\#\{\}}), vectors (denoted by \texttt{[]}),
 and hashmaps (denoted by \texttt{\{\}}). The first three types of data
 structures listed can contain any number, including \texttt{nil} (Clojure's equivalent of \texttt{null} or nothing), of 
-values of any type (a data structure is untyped, which means it does not care \emcomment{too informal, rephrase} if types of values in one structure
-are mismatched):
+values of any type (a data structure is untyped, which means values of different types can be  
+%\emcomment{too informal, rephrase} if types of values in one structure
+mismatched):
 %\emcomment{don't use the word ``normal'' in a research paper} data structures: 
 \begin{verbatim}
 	(1 2 "foo" :a 9 "bar")
@@ -292,21 +300,28 @@ However, hashmaps are unique in the fact that a hashmap is a collection of key-v
 	{key value, key value, key value}
 \end{verbatim}
 
-A more realistic \emcomment{why ``realistic''? Just an example. What you are showing above is abstract syntax} example would look something like:
+An example 
+%\emcomment{why ``realistic''? Just an example. What you are showing above is abstract syntax} 
+ would look something like:
 \begin{verbatim}
 	{:a 1, :b 2, :c 3}
 \end{verbatim}
 %\emcomment{It's unclear from just the syntax what it means to be a
 %  collection of key/value pairs.}
 
-\emcomment{I would first introduce keywords and then explain that they are typcally used as keys}
-In hashmaps, usually keywords, indicated by a colon in front of a
-simple indicating word, are used as keys, and the value is what the
-key is bound to. 
+%\emcomment{I would first introduce keywords and then explain that they are typically used as keys}
+Keywords are a simple indicating word that have a colon in front. Examples of keywords can be seen in the
+above hashmap: \texttt{:a}, \texttt{:b}, and \texttt{:c}. Keywords, such as the ones above,
+are often used as keys within hashmaps. The value is the second piece of key-value pair,
+and each value is bound to each key. In the above example, \texttt{:a} is bound to \texttt{1}, \texttt{:b}
+is bound to \texttt{2}, and \texttt{:c} is bound to \texttt{3}.
+%.  Keywords, such 
+%In hashmaps, usually keywords, indicated by a colon in front of a
+%simple indicating word, are used as keys, and the value is what the
+%key is bound to. 
 %\emcomment{keys aren't pointing to anything, they are bound to something}
-In the hashmap above, the keywords are
-\texttt{:a}, \texttt{:b}, and \texttt{:c}, and they are pointing to
-the values \texttt{1}, \texttt{2}, and \texttt{3}. 
+%In the hashmap above, the keywords are
+
 
 Just like variables and values, data structures can also be bound to a
 variable name: 
