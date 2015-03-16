@@ -353,6 +353,35 @@ Error messages in Clojure are not particularly useful for introductory programme
 \subsection{Hints}\label{sec:hints}
 
 \section{Technical Setup}\label{sec:technical}
+In approaching error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we need to figure out how to integrate that system with the tools for managing Clojure projects. Throughout this process it is important to keep in mind the usability for introductory students. Therefore, we would like to abstract over as much as we can, while still providing a robust system for students to develop their Clojure projects.
+
+\subsection{Leiningen}
+Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
+
+While Leiningen is an incredibly helpful tool, there are still some aspects that are challenging for introductory students. The most difficult of which is the interface. Leiningen uses the command line as its primary interface. The command line is both a distraction and a barrier to teaching the material in an introductory course. Therefore, we would like to abstract over the command line by using a graphical interface. This graphical interface would extend the simplicity of Leiningen while still providing the same functionality needed for students.
+
+Notes:
+\mmcomment{At some point talk about automated skeleton building}
+
+Leiningen is the primary tool in the Clojure community for handling Clojure projects.
+
+Because of this we will use Leiningen in our system for introductory students.
+
+\subsection{IDEs}
+Outline for the Section:
+We are looking at LightTable or NightCode for our primary IDE.
+
+Ideally we would like our system to be IDE independent. But we need to be mindful of the usability of the IDE.
+
+We would like to use an IDE that will be actively developed because that means there is less for us to maintain.
+
+\subsection{Implementing Error Handling}
+Outline for the Section:
+We attempted to use IDE specific plugins to handle error messages.
+
+Then we tried Leiningen, and that didn't work out.
+
+Now we are pretty sure that NRepl and its middleware is the key.
 
 \section{Conclusions}\label{sec:conclusion}
 
