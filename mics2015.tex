@@ -65,7 +65,7 @@
 %\newcommand{\comment}[1]{}
 \newcommand{\emcomment}[1]{\textcolor{ForestGreen}{\comment{Elena: {#1}}}}
 \newcommand{\todo}[1]{\textcolor{blue}{\comment{To Do: {#1}}}}
-\newcommand{\pscomment}[1]{\textcolor{red}{\comment{Paul: {#1}}}}
+\newcommand{\pscomment}[1]{\textcolor{orange}{\comment{Paul: {#1}}}}
 \newcommand{\mmcomment}[1]{\textcolor{magenta}{\comment{Max: {#1}}}}
 \newcommand{\escomment}[1]{\textcolor{BlueViolet}{\comment{Emma: {#1}}}}
 
@@ -338,6 +338,19 @@ variable name:
 \subsection{Overview of ClojurEd}\label{sec:project}
 
 \section{Error Messages}\label{sec:errors}
+
+\subsection{Current error messages in Clojure}\label{sec:currentem}
+Error messages are an important part of programming since they are the main source of communication between a user and the system when an error occurs in the program. Error messages are especially important for introductory programmers who have had little to no experience with troubleshooting problems.  These error messages need to be user friendly to provide value to the introductory students. For error messages to be useful, they should provide helpful and easy to understand information that can be used to resolve issues. 
+
+Error messages in Clojure are not particularly useful for introductory programmers because they do not provide information that can help lead a student to fixing the error. Also, Clojure’s error messages are typically complex because they originate from the underlying Java interpreter, which many novice programmers will be unfamiliar with.
+
+\todo{examples of bad clojure messages and explain why they're bad}
+
+\subsection{User scenarios}\label{sec:scenarios}
+
+\subsection{Error message transformations}\label{sec:transform}
+
+\subsection{Hints}\label{sec:hints}
 
 \section{Technical Setup}\label{sec:technical}
 
