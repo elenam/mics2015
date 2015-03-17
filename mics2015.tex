@@ -341,11 +341,34 @@ variable name:
 \section{Error Messages}\label{sec:errors}
 
 \subsection{Current error messages in Clojure}\label{sec:currentem}
-Error messages are an important part of programming since they are the main source of communication between a user and the system when an error occurs in the program. Error messages are especially important for introductory programmers who have had little to no experience with troubleshooting problems.  These error messages need to be user friendly to provide value to the introductory students. For error messages to be useful, they should provide helpful and easy to understand information that can be used to resolve issues. 
+Error messages are an important part of programming since they are the main source of communication between a user and the system when an error occurs in the program.
+Error messages are especially important for introductory programmers who have had little to no experience with troubleshooting problems.
+These error messages need to be user friendly to provide value to the introductory students.
+For error messages to be useful, they should provide helpful and easy to understand information that can be used to resolve issues. 
 
-Error messages in Clojure are not particularly useful for introductory programmers because they do not provide information that can help lead a student to fixing the error. Also, Clojure’s error messages are typically complex because they originate from the underlying Java interpreter, which many novice programmers will be unfamiliar with.
+Error messages in Clojure are not particularly useful for introductory programmers because they do not provide information that can help lead a student to fixing the error.
+Also, Clojure’s error messages are typically complex because they originate from the underlying Java interpreter, which many novice programmers will be unfamiliar with.
+Below is an example of an error message in Clojure that might be unhelpful or unintuitive for an introductory student:
 
-\todo{examples of bad clojure messages and explain why they're bad}
+Code Sample:
+\begin{verbatim}
+(defn squareThis (* input input))
+\end{verbatim}
+
+In this code sample, the programmer is attempting to create a function \texttt{squareThis} which will take a number and return the square of its value.
+However, the programmer forgot to declare that \texttt{input} should be a parameter.
+In Clojure, function declarations typically require a vector containing the declared parameter names.
+The error message that results does provide key words that could lead the programmer to fixing the issue such as \texttt{Parameter} and \texttt{vector}.
+However, the error message also includes information that a new programmer might find intimidating or confusing such as \texttt{clojure.core/assert-valid-fdecl (core.clj:6842)}.
+
+Error Message:
+
+\begin{verbatim}
+IllegalArgumentException Parameter declaration * should be a vector 
+clojure.core/assert-valid-fdecl (core.clj:6842)
+\end{verbatim}
+
+
 
 \subsection{User scenarios}\label{sec:scenarios}
 
