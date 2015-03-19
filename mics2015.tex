@@ -129,7 +129,7 @@ The abstract
 %\emcomment{Emma - many thanks for getting things started! Below are
 %  comments. The majority of them refer to making this material
   %understandable to the target audience (i.e not using terms that
-  %CSci undergrads typically don't know. Otehrwise things are well
+  %CSci undergrads typically don't know. Otherwise things are well
   %organized and well written.}
   
   
@@ -217,8 +217,10 @@ like normal Clojure functions.
 %\emcomment{before we get into anonymous functions, we need to show how
 %to define regular functions (general syntax and a couple of examples)}
 When a program needs to use a single value or function, it can be helpful to define it under a variable name
-so that it's easier to access throughout the program. Using the command \texttt{def} or \texttt{defn}, we
-can define functions and variables:
+so that it's easier to access throughout the program. 
+\emcomment{I don't think we need to explain why people name functions} 
+Using the command \texttt{def} or \texttt{defn}, we
+can define functions and variables \emcomment{this is a confusing way of saying it, especially because what you are showing is not a function. How about just talking about defining variables? (and technically functions are values anyway, just liek numbers and strings }:
 \begin{verbatim}
 	(def mystring "Hello World")
 	mystring
@@ -227,16 +229,17 @@ can define functions and variables:
 
 In the above example, we define a string to be \texttt{"Hello World"}. This way, whenever we utilize 
 %\emcomment{I would avoid ``call'' here since calling is for functions} 
-\texttt{mystring}, the string we bound to the variable name will be returned. Here is an example of using \texttt{defn}:
+\texttt{mystring}, the string we bound to the variable name will be returned. Here is an example of using \texttt{defn} \emcomment{need to say that defn is used for defining functions} :
 \begin{verbatim}
 	(defn increment-number [number] (+ number 1))
 	(increment-number 2)
 	-> 3
 \end{verbatim}
 
-In this example, we saved a function that takes a number and increments it by adding 1 to it. In any function, the 
+In this example, we saved \emcomment{define} a function that takes a number and increments it by adding 1 to it \emcomment{returns that number incremented by 1}. 
+In any function, the 
 function name is the word after the \texttt{defn}, the pieces in the square brackets after the function name indicate 
-the arguments that the function takes in, and what follows is the body, or what the action of the function is. 
+the arguments that the function takes in, and what follows is the body, or what the action of the function is \emcomment{the expression that the function returns ("action" sounds imperative)}. 
 %\emcomment{the expression returned by the function? ``does'' has imperative flavor}
 
 Now let us say that we have a program where we want to use a function, but only once. This means that we do not
@@ -244,12 +247,13 @@ necessarily need to define it with a name because Clojure supports anonymous fun
 programmers to quickly make
 % \emcomment{not sure what you mean by``rare'' here. Those that aren't predefined?}  
 functions when needed. 
-However, since these functions are not  stored, the program would not be able to use them by name more than once. 
+However, since these functions are not  stored, the program would not be able to use them more than once. 
 %\emcomment{call them?} by name after the usage. 
 The following example is of the same increment-number function as above, but implemented anonymously: 
 \begin{verbatim}
 	(fn [number] (+ number 1))
 \end{verbatim}
+\emcomment{Give an example of using an anonymous function}
 
 %In anonymous functions, anything in the brackets that is following the
 %\texttt{fn} is arguments. 
@@ -279,6 +283,7 @@ values of any type (a data structure is untyped, which means values of different
 %\emcomment{too informal, rephrase} if types of values in one structure
 mismatched):
 \mmcomment{I think that the above sentence should make it more clear that a collection may contain any data type. Maybe, don't mention numbers and stick to data types?}
+\emcomment{agree}
 %\emcomment{don't use the word ``normal'' in a research paper} data structures: 
 \begin{verbatim}
 	(1 2 "foo" :a 9 "bar")
@@ -314,6 +319,7 @@ An example
 %  collection of key/value pairs.}
 
 %\emcomment{I would first introduce keywords and then explain that they are typically used as keys}
+\emcomment{Introduce keywords as a datatype before you first use them in an example (perhaps before collections)}
 Keywords are a simple indicating word that have a colon in front. Examples of keywords can be seen in the
 above hashmap: \texttt{:a}, \texttt{:b}, and \texttt{:c}. Keywords, such as the ones above,
 are often used as keys within hashmaps. The value is the second piece of key-value pair,
@@ -339,7 +345,7 @@ variable name:
 %use of a single name. \emcomment{I am not sure this addds anything; an
 %example would be better.}
 
-\subsection{Overview of ClojurEd}\label{sec:project}
+\subsection{Overview of ClojurEd project}\label{sec:project}
 
 \section{Error Messages}\label{sec:errors}
 
