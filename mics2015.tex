@@ -136,20 +136,22 @@ The abstract
 Clojure, developed in 2007 by Rich Hickey~\cite{Hickey:2008}, is a dynamic, functional
 programming language in the Lisp family. Dynamic typing means that Clojure does not try to specifically associate
 values with a type, but rather tries to figure out what type a value is at runtime.
+\emcomment{need to be more precise here; also probably need to explain what ``functional'' means.}
 %\emcomment{``dynamic'' refers to ``dynamically typed''} 
 %\emcomment{Use simpler, more concrete terminology: there are many ways
   %in which JVM can be utilized. Probably need to explain that the JVM
   %is Clojure interpreter, mention and explain REPL somewhere in this paragraph.}
 %\emcomment{Need to explain what you mean by dynamic}
 Clojure utilizes the Java Virtual Machine (JVM) as an interpreter, and Clojure code compiles to JVM bytecode.
-It offers easy 
+This setup offers easy 
 %\emcomment{accessibilty?} 
 accessibility of Java frameworks. The Clojure REPL
-% \emcomment{what is REPL?} 
-is another easy way to get acquainted with Clojure. A REPL is an interactive shell program that takes single 
+\emcomment{what does REPL stand for?} 
+is another easy way to get acquainted \emcomment{to interact with Clojure?} with Clojure. A REPL is an interactive shell program that takes single 
 expressions, evaluates them, and returns the result to the user. The REPL allows users to see immediate results
  and respond easily and quickly. For any programmer, the use of the REPL 
-is highly advised and can make programming in Clojure much simpler.
+is highly advised and can make programming in Clojure much simpler. 
+\emcomment{explain why?}
 %\emcomment{This wouldn't make any sense to the target audience and is
   %not needed (perhaps with the exception of multithreading:}
 %including optional type hints
@@ -161,16 +163,16 @@ is highly advised and can make programming in Clojure much simpler.
 Because Clojure is a functional language, it puts strong emphasis on
 immutable data types. An immutable data type means data cannot 
 %\emcomment{data cannot be changed, not data types}
-be changed, unlike %\emcomment{in? Also, why ``many'' and not all of
+be changed, unlike in %\emcomment{in? Also, why ``many'' and not all of
   %them?}
   imperative programming languages. When using
-Clojure, in order to change a data type, an entirely new data item
+Clojure, in order to change a data item, an entirely new data item
 must be made. Immutable data types help prevent side effects in the program. 
 A side effect is when a function alters memory
-or interacts outside of its scope instead of returning a value. Side
+or interacts outside of its scope instead of \emcomment{or in addition to} returning a value. Side
 effects can make debugging or resolving errors or failures more
 difficult. This is because when a function interacts with other
-functions, when it is not supposed to, any issues in the 
+functions \emcomment{with other parts of a program}, when it is not supposed to, any issues in the 
 code can be spread out throughout the program. The reduction of side
 effects means problems with the code are easier to find and fix.
 Because of this, immutable data types are practical for novice
