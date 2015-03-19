@@ -371,9 +371,47 @@ IllegalArgumentException Parameter declaration * should be a vector
 clojure.core/assert-valid-fdecl (core.clj:6842)
 \end{verbatim}
 
+When writing functions in Clojure, a vector of arguments should immediately follow the name of the new function. 
+Here is an example of the code above after corrections:
+
+Corrected Code:
+
+\begin{verbatim}
+(defn squareThis [input] (* input input))
+\end{verbatim}
+
+In this next example, the programmer is attempting to return a new hashmap with an added key-value pair.
+The function \texttt{assoc} is generally used to make this happen.
+
+Code Sample:
+\begin{verbatim}
+(assoc :a 3 {:a 5, :b 8, :c 9})
+\end{verbatim}
+
+In this attempt, the programmer did not put the arguments for \texttt{assoc} in the correct order.
+When using the function \texttt{assoc}, the hashmap should go before the new key and value.
+The error message that results follows:
+
+\begin{verbatim}
+ClassCastException clojure.lang.Keyword 
+cannot be cast to clojure.lang.Associative
+clojure.lang.RT.assoc (RT.java:702)
+\end{verbatim}
+
+Since Clojure expects the first argument to be a hashmap and it is not, it unsuccessfully tries to cast the keyword \texttt{:a} into a hashmap.
+This error message refers to \texttt{clojure.lang.Associative}, which is actually a Java interface.
+Referring to that interface may not be useful for Clojure programmers if they have little to no experience with Java or type hierarchies.
+The error message is ineffective at explaining to the programmer that the underlying problem with their code was a misordering of arguments. Here is an example of the code above after corrections:
+ 
+\begin{verbatim}
+(assoc {:a 5, :b 8, :c 9} :a 3)
+-> {:c 9, :b 8, :a 3}
+\end{verbatim}
 
 
 \subsection{User scenarios}\label{sec:scenarios}
+
+In order to better understand what users of our software might encounter, we develop user scenarios detailing typical coding problems a new programmer might face. 
 
 \subsection{Error message transformations}\label{sec:transform}
 
