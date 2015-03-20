@@ -351,15 +351,17 @@ variable name:
 
 \subsection{Current error messages in Clojure}\label{sec:currentem}
 Error messages are an important part of programming since they are the main source of communication between a user and the system when an error occurs in the program.
-Error messages are especially important for introductory programmers who have had little to no experience with troubleshooting problems.
+Error messages are especially important for introductory programmers who have had little to no experience with troubleshooting problems \emcomment{programs?}.
 These error messages need to be user friendly to provide value to the introductory students.
 For error messages to be useful, they should provide helpful and easy to understand information that can be used to resolve issues. 
+\emcomment{The two sentences are very similar and should be merged}
 
 Error messages in Clojure are not particularly useful for introductory programmers because they do not provide information that can help lead a student to fixing the error.
-Also, Clojure’s error messages are typically complex because they originate from the underlying Java interpreter, which many novice programmers will be unfamiliar with.
+Also, Clojure error messages are typically complex because they originate from the underlying Java interpreter (the JVM), which many \emcomment{most} novice programmers will be unfamiliar with.
 Below is an example of an error message in Clojure that might be unhelpful or unintuitive for an introductory student:
 
 Code Sample:
+\emcomment{Consider the following (erroenous) code fragment:}
 \begin{verbatim}
 (defn squareThis (* input input))
 \end{verbatim}
@@ -367,29 +369,30 @@ Code Sample:
 In this code sample, the programmer is attempting to create a function \texttt{squareThis} which will take a number and return the square of its value.
 However, the programmer forgot to declare that \texttt{input} should be a parameter.
 In Clojure, function declarations typically require a vector containing the declared parameter names.
-The error message that results does provide key words that could lead the programmer to fixing the issue such as \texttt{Parameter} and \texttt{vector}.
-However, the error message also includes information that a new programmer might find intimidating or confusing such as \texttt{clojure.core/assert-valid-fdecl (core.clj:6842)}.
-
-Error Message:
-
+The resulting error message is: 
 \begin{verbatim}
-IllegalArgumentException Parameter declaration * should be a vector 
+IllegalArgumentException Parameter declaration * should be 
+a vector 
 clojure.core/assert-valid-fdecl (core.clj:6842)
 \end{verbatim}
+It does provide key words that could lead the programmer to fixing the issue such as \texttt{Parameter} and \texttt{vector}.
+However, the error message also includes information that a new programmer might find intimidating or confusing such as 
+
+\noindent
+\texttt{clojure.core/assert-valid-fdecl (core.clj:6842)}.
+
+
 
 When writing functions in Clojure, a vector of arguments should immediately follow the name of the new function. 
+\emcomment{The previous sentence creates an awkward flow. Maybe "the error can be corrected by placing a vector of inputs, in this case containing a single input, right after the function name"?}
 Here is an example of the code above after corrections:
-
-Corrected Code:
-
+%Corrected Code:
 \begin{verbatim}
 (defn squareThis [input] (* input input))
 \end{verbatim}
 
-In this next example, the programmer is attempting to return a new hashmap with an added key-value pair.
+In the next example, the programmer is attempting to return a new hashmap with an added key-value pair.
 The function \texttt{assoc} is generally used to make this happen.
-
-Code Sample:
 \begin{verbatim}
 (assoc :a 3 {:a 5, :b 8, :c 9})
 \end{verbatim}
@@ -406,6 +409,7 @@ clojure.lang.RT.assoc (RT.java:702)
 
 Since Clojure expects the first argument to be a hashmap and it is not, it unsuccessfully tries to cast the keyword \texttt{:a} into a hashmap.
 This error message refers to \texttt{clojure.lang.Associative}, which is actually a Java interface.
+\emcomment{it also refers to typecasting which is unfamiliar to Clojure users since Clojure is dynamically typed with no explicit type declarations.}
 Referring to that interface may not be useful for Clojure programmers if they have little to no experience with Java or type hierarchies.
 The error message is ineffective at explaining to the programmer that the underlying problem with their code was a misordering of arguments. Here is an example of the code above after corrections:
  
@@ -414,6 +418,7 @@ The error message is ineffective at explaining to the programmer that the underl
 -> {:c 9, :b 8, :a 3}
 \end{verbatim}
 
+\emcomment{You might want to talk about the message transformations first, and then user scenarios used to test how well it works} 
 
 \subsection{User scenarios}\label{sec:scenarios}
 
