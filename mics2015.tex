@@ -467,20 +467,29 @@ Explain interaction with REPL and whole code compiling. \emcomment{be consistent
 
 Explain lazyness and its problem in error handling.
 
-Diagram of how error handling works now, and how error handling works in our system.
-
-Describe our process of error handling.
-
 \emcomment{make it clear what's done and what's work in progress}
 
 \subsection{Leiningen}
 \emcomment{reference, mention who developed it (or that it is an open source project)}
-Leiningen is an open source project under active development that is the primary tool for project managing in the Clojure community. Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
+Leiningen is an open source project under active development that is the primary tool for project managing in the Clojure community\cite{LeinGitHub}. Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
 
 While Leiningen is a very helpful tool, there are still some aspects that are challenging for introductory students. The most difficult of which is the interface. Leiningen uses the command line as its primary interface. The command line is both a distraction and a barrier to teaching the material in an introductory course. Therefore, we would like to abstract over the command line by using a graphical interface. This graphical interface would extend the simplicity of Leiningen while still providing the same functionality needed by students.
 
 \subsection{IDEs}
-Currently we are looking into LightTable and NightCode as IDEs for the introductory course. 
+Choosing the right IDE is important, especially for an introductory class, because it is the environment in which students will develop their code. We have looked into the IDEs available for Clojure, and we have decided that the most promising choices are LightTable and Nightcode. Both IDEs offer intuitive interfaces, syntax checking, built-in REPLs, and easy project management. They each use Leiningen to build projects. They are also both maintained are both maintained by open source communities, and they are under active development.
+
+Notes:
+LightTable
+	requires a separate Leiningen installation
+	REPL is constant
+	Context menu may be less familiar and/or more daunting to intro students
+	
+Nightcode
+	packaged distribution of Leiningen
+	REPL is more traditional
+	UI is more familiar
+
+Currently we are looking into LightTable and Nightcode as IDEs for the introductory course. 
 \emcomment{references, a bit about each, a bit about why we are considering both}
 Outline for the Section:
 We are looking at LightTable or NightCode for our primary IDE.
@@ -489,6 +498,14 @@ Ideally we would like our system to be IDE independent. But we need to be mindfu
 
 We would like to use an IDE that will be actively developed because that means there is less for us to maintain.
 
+\subsection{Other Approaches we tried}
+\mmcomment{Describing the journey to nREPL}
+\mmcomment{Is this section necessary?}
+We attempted to use IDE-specific plugins to handle error messages.
+
+Then we tried Leiningen, and that didn't work out.
+
+Now we are pretty sure that NRepl and its middleware is the key. Explain NRepl and middleware.
 \subsection{Implementing Error Handling}
 
 \begin{figure}[h]
@@ -498,7 +515,9 @@ We would like to use an IDE that will be actively developed because that means t
  \label{fig:CurrentError}
 \end{figure}
 
-Stuff about figure \ref{fig:CurrentError}.
+The way error handling is currently handled while using Leiningen is described by figure \ref{fig:CurrentError}. First, the student runs their project through Leiningen using the console by calling \texttt{lein run}. Then, Leiningen will take the dependencies defined in the student code and resolve them. After the dependencies have been resolved, Leiningen then sends the code to nREPL to be evaluate. nREPL uses the Clojure compiler to evaluate the student code. Here any errors that may arise in the student code will been thrown. The errors will then be handed back to Leiningen, so that the stacktrace can be printed out to the console.
+
+In our approach, we would like to catch those errors before they make their way back to Leiningen. Once we catch those errors we will clean them up as described in the section \ref{sec:transform}. After being cleaned up, the error will then be rethrown to Leiningen, so that it can be printed out for the student to see.
 
 \begin{figure}[h]
  \includegraphics[width=12cm]{OurErrorHandlingSystem.pdf}
@@ -507,14 +526,7 @@ Stuff about figure \ref{fig:CurrentError}.
  \label{fig:OurSystem}
 \end{figure}
 
-Stuff about figure \ref{fig:OurSystem}.
-
-Outline for the Section:
-We attempted to use IDE-specific plugins to handle error messages.
-
-Then we tried Leiningen, and that didn't work out.
-
-Now we are pretty sure that NRepl and its middleware is the key. Explain NRepl and middleware.
+Our plan for error handling is laid out in figure \ref{fig:OurSystem}. First, the student will use our graphical user interface(GUI) to run their project. The GUI abstracts over the command line interactions by providing a way of interacting that is more familiar to students. Next, the Leiningen plugin will inject any dependencies into the student's code required by our system. For example, one of the dependencies may be a graphical library that the student may need in the introductory course. After being processed by the Leiningen plugin, the student code is then given to nREPL by Leiningen to be evaluated. nREPL then uses the Clojure compiler to evaluate the code. If any errors are thrown they will be given to the middleware. The middleware will then clean up those error messages before they are sent back to Leiningen to be displayed by the GUI.
 
 \section{Conclusions}\label{sec:conclusion}
 
