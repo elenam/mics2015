@@ -463,7 +463,7 @@ Stuff to include:
 
 Explain the difference between compilation and runtime and how that affects error messages.
 
-Explain interaction with Repl and whole code compiling. \emcomment{be consistent with capitalization of REPL} 
+Explain interaction with REPL and whole code compiling. \emcomment{be consistent with capitalization of REPL} 
 
 Explain lazyness and its problem in error handling.
 
@@ -474,11 +474,10 @@ Describe our process of error handling.
 \emcomment{make it clear what's done and what's work in progress}
 
 \subsection{Leiningen}
-Leiningen \emcomment{reference, mention who developed it (or that it is an open source project)}  is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
+\emcomment{reference, mention who developed it (or that it is an open source project)}
+Leiningen is an open source project under active development that is the primary tool for project managing in the Clojure community. Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
 
 While Leiningen is a very helpful tool, there are still some aspects that are challenging for introductory students. The most difficult of which is the interface. Leiningen uses the command line as its primary interface. The command line is both a distraction and a barrier to teaching the material in an introductory course. Therefore, we would like to abstract over the command line by using a graphical interface. This graphical interface would extend the simplicity of Leiningen while still providing the same functionality needed by students.
-
-Leiningen is the primary tool in the Clojure community for handling Clojure projects.
 
 \subsection{IDEs}
 Currently we are looking into LightTable and NightCode as IDEs for the introductory course. 
@@ -495,6 +494,7 @@ We would like to use an IDE that will be actively developed because that means t
 \begin{figure}[h]
  \includegraphics[width=12cm]{CurrentErrorHandling.pdf}
  \centering
+ \caption{Workflow diagram of running a Clojure project in Leiningen}
  \label{fig:CurrentError}
 \end{figure}
 
@@ -503,6 +503,7 @@ Stuff about figure \ref{fig:CurrentError}.
 \begin{figure}[h]
  \includegraphics[width=12cm]{OurErrorHandlingSystem.pdf}
  \centering
+  \caption{Planned workflow for our error handling system}
  \label{fig:OurSystem}
 \end{figure}
 
