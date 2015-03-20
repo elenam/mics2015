@@ -59,13 +59,14 @@
 %% Elena's favorite green (thanks, Fernando!)
 \definecolor{ForestGreen}{RGB}{34,139,34}
 \definecolor{BlueViolet}{RGB}{138,43,226}
+\definecolor{Coquelicot}{RGB}{255, 56, 0}
 %Uncomment this if you want to show work-in-progress comments
 \newcommand{\comment}[1]{{\bf \tt  {#1}}}
 % Uncomment this if you don't want to show comments
 %\newcommand{\comment}[1]{}
 \newcommand{\emcomment}[1]{\textcolor{ForestGreen}{\comment{Elena: {#1}}}}
 \newcommand{\todo}[1]{\textcolor{blue}{\comment{To Do: {#1}}}}
-\newcommand{\pscomment}[1]{\textcolor{orange}{\comment{Paul: {#1}}}}
+\newcommand{\pscomment}[1]{\textcolor{Coquelicot}{\comment{Paul: {#1}}}}
 \newcommand{\mmcomment}[1]{\textcolor{magenta}{\comment{Max: {#1}}}}
 \newcommand{\escomment}[1]{\textcolor{BlueViolet}{\comment{Emma: {#1}}}}
 \newcommand{\alcomment}[1]{\textcolor{red}{\comment{Lemmon: {#1}}}}
@@ -422,12 +423,39 @@ The error message is ineffective at explaining to the programmer that the underl
 
 \subsection{User scenarios}\label{sec:scenarios}
 
-In order to better understand what users of our software might encounter, we develop user scenarios detailing typical coding problems a new programmer might face. 
+In order to better understand what our software users might encounter, we develop user scenarios detailing typical coding problems a new programmer might face.
+To create these user scenarios, we developed solutions to common beginner programming exercises and purposefully introduced errors that a new programmer might make.
+We then recorded the error messages that these solutions produced.
+We also took note of the underlying cause of the errors so that we have a better idea of how to improve upon the error messages for our program.
+We then took the same solution and ran it within our program to compare the error message our system produces against the one Clojure produces.  
+
+These user scenarios showed us what the typical errors are a student will be running into when learning programming in Clojure for the first time.
+For example, when a student first starts writing basic operations in Clojure, a typical mistake might be forgetting to put the function in front of the arguments, such as \texttt{(5 - 5)}, where it should be \texttt{(- 5 5)}. 
+This produces a rather unhelpful error message: 
+
+\begin{verbatim}
+ClassCastException java.lang.Long cannot be cast to clojure.lang.IFn
+user/eval769 (NO_SOURCE_FILE:1)
+\end{verbatim}
+
+\pscomment{What we learned from them scenarios}
+
+\pscomment{Work in progress...}
 
 \subsection{Error message transformations}\label{sec:transform}
 
-\subsection{Hints}\label{sec:hints}
+Since standard Clojure error messages are generally unhelpful, we aim to replace many Clojure error messages with improved ones.
+One way to accomplish this is to define functions with the same name as standard Clojure functions.
+Within these definitions, we can do type checking on arguments passed in.
+If the type checks find an error, our system displays a customized error message.
+If no type errors are found, the arguments are passed on to the actual corresponding Clojure function.
 
+Another way to replace Clojure error messages is to capture the thrown errors and rethrow our replacement messages.
+We have a large collection of regular expressions that are checked against any Clojure error messages.
+If a regular expression matches, important details from the original error message are captured and passed on to our replacement messages.
+
+
+\subsection{Hints}\label{sec:hints}
 \section{Technical Setup}\label{sec:technical}
 In approaching error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we need to figure out how to integrate that system with the tools for managing Clojure projects. Throughout this process it is important to keep in mind the usability for introductory students. Therefore, we would like to abstract over as much as we can, while still providing a robust system for students to develop their Clojure projects.
 
