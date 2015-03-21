@@ -360,7 +360,9 @@ These error messages need to provide helpful and easy-to-understand information 
 Error messages in Clojure are not particularly useful for introductory programmers because they do not provide information that can help lead a student to fixing the error.
 Also, Clojure error messages are typically complex because they originate from the underlying Java interpreter (the JVM), which most %\emcomment{most} 
 novice programmers will be unfamiliar with.
-Below is an example of an error message in Clojure that might be unhelpful or unintuitive for an introductory student:
+Below are some examples of error messages in Clojure that might be unhelpful or unintuitive for an introductory student.
+
+\subsubsection{Example 1}\label{sec:ex1}
 
 Consider the following (erroneous) code fragment:
 %\emcomment{Consider the following (erroneous) code fragment:}
@@ -393,6 +395,8 @@ Here is an example of the code above after corrections have been made:
 (defn squareThis [input] (* input input))
 \end{verbatim}
 
+\subsubsection{Example 2}\label{sec:ex2}
+
 In the next example, the programmer is attempting to return a new hashmap with an added key-value pair.
 The function \texttt{assoc} is generally used to make this happen.
 \begin{verbatim}
@@ -411,8 +415,9 @@ clojure.lang.RT.assoc (RT.java:702)
 
 Since Clojure expects the first argument to be a hashmap and it is not, it unsuccessfully tries to cast the keyword \texttt{:a} into a hashmap.
 This error message refers to \texttt{clojure.lang.Associative}, which is actually a Java interface.
-\emcomment{it also refers to typecasting which is unfamiliar to Clojure users since Clojure is dynamically typed with no explicit type declarations.}
+%\emcomment{it also refers to typecasting which is unfamiliar to Clojure users since Clojure is dynamically typed with no explicit type declarations.}
 Referring to that interface may not be useful for Clojure programmers if they have little to no experience with Java or type hierarchies.
+Furthermore, the error message refers to typecasting, which is unfamiliar to Clojure users since Clojure is dynamically typed with no explicit type declarations.
 The error message is ineffective at explaining to the programmer that the underlying problem with their code was a misordering of arguments.
 Here is an example of the code above after corrections:
  
@@ -421,7 +426,7 @@ Here is an example of the code above after corrections:
 -> {:c 9, :b 8, :a 3}
 \end{verbatim}
 
-\emcomment{You might want to talk about the message transformations first, and then user scenarios used to test how well it works} 
+\emcomment{You might want to talk about the message transformations first, and then user scenarios used to test how well it works}
 
 \subsection{User scenarios}\label{sec:scenarios}
 
