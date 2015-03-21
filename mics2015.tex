@@ -469,6 +469,19 @@ If a regular expression matches, important details from the original error messa
 
 
 \subsection{Hints}\label{sec:hints}
+
+User scen
+While error messages are helpful in resolving issues, hints can offer additional guidance in figuring out why the error occurred. 
+
+introduce hints
+user scenarios will help us make hints
+what hints will be in our system
+Since there is no sure way of telling what went wrong, we will offer a handful of hints so that...
+When programmers mix up arguments, sometimes ClassCastExceptions are thrown. But CCE are also thrown in other cases. This make it difficult. Thus, we offer several suggestions. Hopefully, one of the suggestions will be helpful in solving the real issue.
+it's hard to make hints for every scenario
+how they will be helpful
+hopefully linking to Clojure documentation
+
 \section{Technical Setup}\label{sec:technical}
 In approaching error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we need to figure out how to integrate that system with the tools for managing Clojure projects. Throughout this process it is important to keep in mind the usability for introductory students. Therefore, we would like to abstract over as much as we can, while still providing a robust system for students to develop their Clojure projects.
 
