@@ -139,20 +139,18 @@ The abstract
   
   
 Clojure, developed in 2007 by Rich Hickey~\cite{Hickey:2008}, is a dynamic, functional
-programming language in the Lisp family. Dynamic typing means that Clojure does not 
-associate types with
-variables, but rather with values that they contain. When a type of a value is inconsistent with one expected in a given context, a runtime error occurs. 
-Functional means
-that Clojure functions are first-class values that can be passed as parameters and returned
+programming language in the Lisp family. Dynamic typing means that Clojure does not specifically
+associate
+values with a type, but rather determines a value's type at runtime. Functional means
+that Clojure contains a variety of first-class functions that can be passed as parameters and returned
 as values. Also, Clojure code does not change state.
-\emcomment{This is technically incorrect: there are variables in Clojure that are mutable. -- or do you even need to say it here since you are saying it later?}
 %\emcomment{need to be more precise here; also probably need to explain what ``functional'' means.}
 %\emcomment{``dynamic'' refers to ``dynamically typed''} 
 %\emcomment{Use simpler, more concrete terminology: there are many ways
   %in which JVM can be utilized. Probably need to explain that the JVM
   %is Clojure interpreter, mention and explain REPL somewhere in this paragraph.}
 %\emcomment{Need to explain what you mean by dynamic}
-Clojure utilizes the Java Virtual Machine (JVM) as a runtime environment. Clojure compiles into Java bytecode
+Clojure utilizes the Java Virtual Machine (JVM) as a runtime environment. Clojure bytecode is compiled
 and runs on the JVM, which abstracts over the specifics of the hardware.
 %\hfcomment{It's a runtime enviroment - the bytecode is compiled and it runs on the JVM, which
 %abstracts over the specifics of the hardware.}
@@ -166,7 +164,7 @@ is another easy way to interact
 expressions, evaluates them, and returns the result to the user. The REPL allows users to see 
 immediate results and respond easily and quickly. For any programmer, the use of the REPL 
 is highly advised and can make programming in Clojure much simpler. Use of the REPL allows users
-to break down their code, test specific pieces, and experiment with new functions and uses.
+to break down their code, test specific pieces, and experiment with new functions and uses~\cite{clojure-REPL}.
 %\emcomment{explain why?}
 %\emcomment{This wouldn't make any sense to the target audience and is
   %not needed (perhaps with the exception of multithreading:}
@@ -194,7 +192,6 @@ Because of this, immutable data types are practical for novice programmers.
 %\emcomment{I would first explain what side
   %effects are, and only then why they complicate things for novice
   %programmers}
-
 Clojure, like other Lisp languages, uses prefix notation. This means
 that function calls use parenthesis, followed by the function name,
 and then any parameters: 
@@ -300,7 +297,7 @@ to the collection:
 
 %Now, the program can call this function any time by using the name \texttt{increment-number}.
 
-Clojure also has a variety of different types of data structures, or collections. All 
+Clojure also has a variety of different types of data structures. All 
 of Clojure's collections are immutable, which means that the data within the structures cannot be
 modified. 
 %\emcomment{I wouldn't go into persistent, just talk about immutable.}
@@ -373,10 +370,10 @@ variable name:
 \end{verbatim}
 
 Laziness is another common feature of Clojure. Laziness is when the evaluation of an expression is
-postponed until the return value is needed. An example is the Fibonacci sequence. It would be
-impossible to store all of the infinite numbers in the Fibonacci sequence. By making a lazy function,
-Clojure can
-evaluate only as much of the Fibonacci sequence as necessary. The next example \emcomment{illustrating laziness?} will use the functions 
+postponed until the return value is needed. An example is the Fibonacci sequence.
+It would be impossible to store all of the infinite numbers in the Fibonacci sequence. By making a lazy
+function, Clojure can
+evaluate only as much of the Fibonacci sequence as necessary. The next example will use the functions 
 \texttt{take} and \texttt{range}. \texttt{take} takes the first $n$ elements of a collection, both of
 which are taken in as parameters. \texttt{range} returns an infinite sequence of non-negative
 integers, beginning at 0:
@@ -608,8 +605,7 @@ Some of these problems have not been resolved. Finding the origin of errors caus
 
  
 \subsection{Leiningen}
-Leiningen is an open source project under active development that is the primary tool for project managing in the Clojure community~\cite{LeinGitHub}.
-Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
+Leiningen is an open source project under active development that is the primary tool for project managing in the Clojure community\cite{LeinGitHub}. Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
 
 While Leiningen is a very helpful tool, there are still some aspects that are challenging for introductory students. The most difficult of which is the interface. Leiningen uses the command line as its primary interface. The command line is both a distraction and a barrier to teaching the material in an introductory course. Therefore, we would like to abstract over the command line by using a graphical interface, ideally integrated with the IDE used by students. This graphical interface would extend the simplicity of Leiningen while still providing the same functionality needed by students.
 
@@ -672,6 +668,7 @@ In our approach, we would like to catch the errors from nREPL by using nREPL mid
 
 Our plan for error handling is laid out in figure \ref{fig:OurSystem}. First, the student will use our graphical user interface(GUI) to run their project. The GUI abstracts over the command line interactions by providing a way of interacting that is more familiar to students. Next, the Leiningen plugin will inject any dependencies into the student's code required by our system. This includes our library of functions for the student or a graphical library that the student may need. After being processed by the Leiningen plugin, the student code is then given to nREPL by Leiningen to be evaluated. nREPL then uses the Clojure compiler to compile the code. If any errors are thrown they will be given to the middleware. The middleware will then clean up those error messages before they are sent back to Leiningen to be displayed by the GUI.
 \emcomment{This doesn't seem to mention loading substituted functions (map, etc)}
+
 
 \section{Conclusions}\label{sec:conclusion}
 
