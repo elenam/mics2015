@@ -383,10 +383,10 @@ Below are some examples of error messages in Clojure that might be unhelpful or 
 Consider the following (erroneous) code fragment:
 %\emcomment{Consider the following (erroneous) code fragment:}
 \begin{verbatim}
-(defn squareThis (* input input))
+(defn square-this (* input input))
 \end{verbatim}
 
-In this code sample, the programmer is attempting to create a function \texttt{squareThis} which will take a number and return the square of its value.
+In this code sample, the programmer is attempting to create a function \texttt{square-this} which will take a number and return the square of its value.
 However, the programmer forgot to declare that \texttt{input} should be a parameter.
 In Clojure, function declarations typically require a vector containing the declared parameter names.
 The resulting error message is: 
@@ -408,7 +408,7 @@ The error can be corrected by placing a vector of inputs, in this case containin
 Here is an example of the code above after corrections have been made:
 %Corrected Code:
 \begin{verbatim}
-(defn squareThis [input] (* input input))
+(defn square-this [input] (* input input))
 \end{verbatim}
 
 \subsubsection{Example 2}\label{sec:ex2}
@@ -508,29 +508,42 @@ intro.core/-main (core.clj line 675)
 
 \subsection{Hints}\label{sec:hints}
 
-While the error message our system produced above says what the core problem is, it does nothing to suggest to the user to check that the arguments are in the correct order, which is the fundamental issue. 
+While the error message our system produced above says what the core problem is, it does nothing to suggest to the user to check that the arguments are in the correct order, which is the fundamental issue.
+Our system provides hints that offer additional guidance in figuring out why errors have occurred.
+Hints are suggestions shown to the user along with an error message.
+Since there is no sure way of telling exactly what went wrong, we will offer several hints that may be applicable to the situation.
 
+For example, when programmers place arguments in an incorrect order, a \texttt{ClassCastException} is usually thrown.
+However, a \texttt{ClassCastException} can be thrown in many other cases as well, which can make providing a specific hint difficult.
+Thus, our system provides several hints in order to cover a variety of situations.
+Hopefully, one of the suggestions will be helpful in solving the real issue.
 
-does nothing to suggest that the user may have just 
-User scenarios
+Developing user scenarios was a helpful exercise because it allowed us to immediately know the root cause of an error even before seeing the error message.
+This allowed us to easily record a human interpretation of the problem and relate it to the error. This process gave us a useful rubric for creating hints. As an example, the following user scenario involves a hypothetical attempt to write a program that would print "Hello World":
 
-While error messages are helpful in resolving issues, hints can offer additional guidance in figuring out why the error occurred. 
+\begin{verbatim}
+(print Hello World)
+\end{verbatim}
 
-introduce hints
+This results in the Clojure error message:
+\begin{verbatim}
+CompilerException java.lang.RuntimeException:
+Unable to resolve symbol: Hello in this context
+\end{verbatim}
 
-user scenarios will help us make hints
+Our hint for this may be more informative and educational for a new programmer than the error message above:
 
-what hints will be in our system
+\begin{verbatim}
+It looks like Clojure is expecting that Hello is something
+named in your program. If you wanted Hello and any following
+words to be plain text, try surrounding them with double
+quotes. If Hello is referring to something named in your program,
+make sure it is spelled correctly.
+\end{verbatim}
 
-Since there is no sure way of telling what went wrong, we will offer a handful of hints so that...
-
-When programmers mix up arguments, sometimes ClassCastExceptions are thrown. But CCE are also thrown in other cases. This make it difficult. Thus, we offer several suggestions. Hopefully, one of the suggestions will be helpful in solving the real issue.
-
-it's hard to make hints for every scenario
-
-how they will be helpful
-
-hopefully linking to Clojure documentation
+While we have created a useful rubric for creating hints, we still have many more to develop.
+We also hope to provide links to Clojure documentation when appropriate in the hints.
+Since new Clojure programmers will be unfamiliar with much of the terminology and functions in Clojure, directing them to the documentation will provide them with a more concrete understanding of the language.
 
 \section{Technical Setup}\label{sec:technical}
 In approaching error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we need to figure out how to integrate that system with the tools for managing Clojure projects. Throughout this process it is important to keep in mind the usability for introductory students. Therefore, we would like to abstract over as much as we can, while still providing a robust system for students to develop their Clojure projects.
