@@ -440,6 +440,8 @@ This produces a rather unhelpful error message:
 ClassCastException java.lang.Long cannot be cast to clojure.lang.IFn
 user/eval769 (NO_SOURCE_FILE:1)
 \end{verbatim}
+\emcomment{Perhaps explain that clojure.lang.IFn is a Java type for Clojure functions, thus the error message is saying that 5 is a number, not a function}
+\emcomment{I am still thinking of user scenarios as ways of evaluating our new messages compared to the Clojure standard messages, so 2.2 and 2.3 should be switched}
 
 \pscomment{What we learned from them scenarios}
 
@@ -448,14 +450,17 @@ user/eval769 (NO_SOURCE_FILE:1)
 \subsection{Error message transformations}\label{sec:transform}
 
 Since standard Clojure error messages are generally unhelpful, we aim to replace many Clojure error messages with improved ones.
+\emcomment{I would start by describing the try/catch/replace approach, and only then talk about replacements. Replacements are there to determine specific arguments (5, "hello", etc) and report those to the user.}
 One way to accomplish this is to define functions with the same name as standard Clojure functions.
 Within these definitions, we can do type checking on arguments passed in.
 If the type checks find an error, our system displays a customized error message.
 If no type errors are found, the arguments are passed on to the actual corresponding Clojure function.
 
-Another way to replace Clojure error messages is to capture the thrown errors and rethrow our replacement messages.
+Another way to replace Clojure error messages is to capture the thrown errors \emcomment{via a {\tt try/catch} statement} and rethrow \emcomment{substitute them with?} our replacement messages.
+\emcomment{Need to mention that in a simple case this approach means surrounding student code with  a {\tt try/catch}. However, this simple approach is not sufficient for Clojure. Section~\ref{sec:technical} discusses the implementation details and challenges.}
 We have a large collection of regular expressions that are checked against any Clojure error messages.
 If a regular expression matches, important details from the original error message are captured and passed on to our replacement messages.
+
 
 
 \subsection{Hints}\label{sec:hints}
