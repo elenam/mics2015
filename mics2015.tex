@@ -399,6 +399,8 @@ parameters collection upon runtime.
 
 \subsection{Overview of ClojurEd project}\label{sec:project}
 
+
+
 \section{Error Messages}\label{sec:errors}
 
 \subsection{Current error messages in Clojure}\label{sec:currentem}
@@ -567,7 +569,8 @@ how they will be helpful
 hopefully linking to Clojure documentation
 
 \section{Technical Setup}\label{sec:technical}
-In approaching error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we need to figure out how to integrate that system with the tools for managing Clojure projects. Throughout this process it is important to keep in mind the usability for introductory students. Therefore, we would like to abstract over as much as we can \emcomment{not sure what you are abstracting over, and do you mean anything different from hiding tools from students?}, while still providing a robust system for students to develop their Clojure projects.
+In error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we need to figure out how to integrate that system with the tools for managing Clojure projects. Throughout this process it is important to be mindful of usability for introductory students. Therefore we would like to synthesize the error handling system and the tools used by the student in a way that is both usable and robust.
+
 
 \subsection{On the Nature of Errors in Clojure}
 
@@ -597,10 +600,13 @@ requires a separate installation of Leiningen. %in order to run projects.
 This adds another layer of difficulty for the student since installing Leiningen can be non-trivial. Nightcode comes packaged with its own distribution of Leiningen. This makes Nightcode easier to install and use. The REPL in each IDE is slightly different. In LightTable, the user opens up REPL using a context menu, and the REPL constantly evaluates each line of code in it. This ultimately provides more information, but it may be a little confusing for introductory students. In Nightcode, the REPL is always up in a separate frame, and each line is only evaluated when the user hits enter. LightTable uses hot keys and a context menu to do a lot of the tasks in LightTable such as running the project or starting a REPL. This is less familiar to introductory students, and it may be a little daunting at first. LightTable does provide a nice easy reference for searching for the appropriate hot keys to lessen the learning curve. Alternatively, Nightcode uses a lot of clearly labeled buttons and tabs that are intuitive for the user to perform tasks. \mmcomment{Do we have a preference for either or which one will likely be used in the introductory course?} 
 \emcomment{You kind of made the case for Nightcode here. Perhaps make it more clear what the advantages of LightTable are? Ultimately, however, we are trying to target both because wer don't know where the community will go a few years down the road (see my comment above)}
 
+\subsection{Approaches}
+
 \subsection{Other Approaches we tried}
 \emcomment{Use consistent capitalization in section titles}
 %\mmcomment{Describing the journey to nREPL}
 %\mmcomment{Is this section necessary?}
+
 Our first approach was to develop a IDE-specific plugin to intercept the error messages going to the console of the IDE. We found that the IDE was not handling the errors, and it was just printing out what was coming from Leiningen.
 
 Our next approach was to use a Leiningen plugin to try and intercept error messages. We searched through the Leiningen source code, and attempted various methods of interacting with Leiningen. None of these approaches allowed us to intercept the error messages that were being printed to the console. We now think that Leiningen uses nREPL, which is an evaluation tool, to handle compilation and error messages.
