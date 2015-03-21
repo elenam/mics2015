@@ -413,7 +413,8 @@ Since Clojure expects the first argument to be a hashmap and it is not, it unsuc
 This error message refers to \texttt{clojure.lang.Associative}, which is actually a Java interface.
 \emcomment{it also refers to typecasting which is unfamiliar to Clojure users since Clojure is dynamically typed with no explicit type declarations.}
 Referring to that interface may not be useful for Clojure programmers if they have little to no experience with Java or type hierarchies.
-The error message is ineffective at explaining to the programmer that the underlying problem with their code was a misordering of arguments. Here is an example of the code above after corrections:
+The error message is ineffective at explaining to the programmer that the underlying problem with their code was a misordering of arguments.
+Here is an example of the code above after corrections:
  
 \begin{verbatim}
 (assoc {:a 5, :b 8, :c 9} :a 3)
@@ -431,7 +432,8 @@ We also took note of the underlying cause of the errors so that we have a better
 We then took the same solution and ran it within our program to compare the error message our system produces against the one Clojure produces.  
 
 These user scenarios showed us what the typical errors are a student will be running into when learning programming in Clojure for the first time.
-For example, when a student first starts writing basic operations in Clojure, a typical mistake might be forgetting to put the function in front of the arguments, such as \texttt{(5 - 5)}, where it should be \texttt{(- 5 5)}. 
+For example, when a student first starts writing basic operations in Clojure, a typical mistake might be forgetting to put the function in front of the arguments,
+such as \texttt{(5 - 5)}, where it should be \texttt{(- 5 5)}. 
 This produces a rather unhelpful error message: 
 
 \begin{verbatim}
