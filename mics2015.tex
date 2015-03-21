@@ -143,7 +143,7 @@ programming language in the Lisp family.
 Dynamic typing means that Clojure does not associate types with variables, but rather with values that they contain.
 When a type of a value is inconsistent with one expected in a given context, a runtime error occurs.
 Functional means
-that Clojure functions are first-class values that can be passed as parameters and returned
+that Clojure functions are first-class values that can be passed as arguments and returned
 as values.
 %Also, Clojure code does not change state.
 %\emcomment{need to be more precise here; also probably need to explain what ``functional'' means.}
@@ -234,7 +234,7 @@ like normal Clojure functions.
 
 %\emcomment{before we get into anonymous functions, we need to show how
 %to define regular functions (general syntax and a couple of examples)}
-Clojure users can also define functions.
+Clojure users can also define functions and variables.
 %\emcomment{I don't think we need to explain why people name functions}
 Using the command \texttt{def}, we can define variables:
 %\emcomment{this is a confusing way of saying it, especially because what you are showing is not a
@@ -377,7 +377,7 @@ It would be impossible to store all of the infinite numbers in the Fibonacci seq
 function, Clojure can
 evaluate only as much of the Fibonacci sequence as necessary. The next example illustrating laziness uses the functions 
 \texttt{take} and \texttt{range}. \texttt{take} takes the first $n$ elements of a collection, both of
-which are taken in as parameters. \texttt{range} returns an infinite sequence of non-negative
+which are given as arguments. \texttt{range} returns an infinite sequence of non-negative
 integers, beginning at 0:
 \begin{verbatim}
 	(take 10 (range))
