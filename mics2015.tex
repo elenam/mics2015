@@ -462,7 +462,7 @@ We then recorded the error messages that these solutions produced.
 We also took note of the underlying cause of the errors so that we have a better idea of how to improve upon the error messages for our program.
 We then took the same solution and ran it within our program to compare the error message our system produces against the one Clojure produces.  
 
-These user scenarios showed us what the typical errors are a student will be running into when learning programming in Clojure for the first time.
+These user scenarios showed us what the typical errors a student will be experiencing when learning to program in Clojure.
 For example, when a student first starts writing basic operations in Clojure, a typical mistake might be forgetting to put the function in front of the arguments,
 such as \texttt{(5 - 5)}, where it should be \texttt{(- 5 5)}. 
 This produces a rather unhelpful error message: 
@@ -504,7 +504,10 @@ Explain interaction with REPL and whole code compiling. \emcomment{be consistent
 Explain lazyness and its problem in error handling.
 
 \emcomment{make it clear what's done and what's work in progress}
+\subsection{On the Nature Errors in Clojure}
 
+In Clojure, error messages can be divided into two different categories, runtime and compilation time. As their names imply, runtime errors occur when the code is run, and compilation errors occur when the code is compiled. Handling runtime errors is relatively simple with the exception of handling errors from lazyness. Since lazy sequences are evaluated when needed, an error in a lazy sequence will not occur until    
+the sequence needs to be evaluated. This means that the error will often not occur where it originated. When this is the case, the user will be provided with unhelpful or often misleading error messages about the nature of the problem. These types of errors can be very frustrating to troubleshoot especially for introductory students.
 \subsection{Leiningen}
 \emcomment{reference, mention who developed it (or that it is an open source project)}
 Leiningen is an open source project under active development that is the primary tool for project managing in the Clojure community\cite{LeinGitHub}. Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
@@ -538,7 +541,7 @@ Now we are pretty sure that NRepl and its middleware is the key. Explain NRepl a
 
 The way error handling is currently handled while using Leiningen is described by figure \ref{fig:CurrentError}. First, the student runs their project through Leiningen using the console by calling \texttt{lein run}. Then, Leiningen will take the dependencies defined in the student code and resolve them. After the dependencies have been resolved, Leiningen then sends the code to nREPL to be evaluate. nREPL uses the Clojure compiler to evaluate the student code. Here any errors that may arise in the student code will been thrown. The errors will then be handed back to Leiningen, so that the stacktrace can be printed out to the console.
 
-In our approach, we would like to catch those errors before they make their way back to Leiningen. Once we catch those errors we will clean them up as described in section \ref{sec:transform}. After being cleaned up, the error will then be rethrown to Leiningen, so that it can be printed out for the student to see.
+In our approach, we would like to catch those errors before they make their way back to Leiningen. Once we catch those errors we will clean them up as described in section \ref{sec:errors}. After being cleaned up, the error will then be rethrown to Leiningen, so that it can be printed out for the student to see.
 
 \begin{figure}[h]
  \includegraphics[width=12cm]{OurErrorHandlingSystem.pdf}
