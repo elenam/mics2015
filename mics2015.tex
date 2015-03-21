@@ -434,9 +434,8 @@ Since standard Clojure error messages are generally unhelpful, we aim to replace
 %\emcomment{via a {\tt try/catch} statement}
 %\emcomment{substitute them with?} our replacement messages.
 Our system does this by reading in a user's code and wrapping it in a try/catch block.
-Then any errors thrown by the user's code will be caught and replaced with our custom messages.
-We have a large collection of regular expressions that are checked against any Clojure error messages.
-If a regular expression matches, important details from the original error message are captured and passed on to our replacement messages.
+Then any errors thrown by the user's code will be checked against a large collection of regular expressions.
+If a regular expression matches, important details from the original error message are captured and used to insert details into our replacement message.
 However, this try/catch approach does not work well in all situations.
 Additional technical challenges arise when dealing with compiler exceptions, the REPL, and lazy sequences.
 Section~\ref{sec:technical} discusses the implementation details and difficulties in more detail.
