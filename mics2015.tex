@@ -450,9 +450,8 @@ Since standard Clojure error messages are generally unhelpful, we aim to replace
 %\emcomment{via a {\tt try/catch} statement}
 %\emcomment{substitute them with?} our replacement messages.
 Our system does this by reading in a user's code and wrapping it in a try/catch block.
-Then any errors thrown by the user's code will be caught and replaced with our custom messages.
-We have a large collection of regular expressions that are checked against any Clojure error messages.
-If a regular expression matches, important details from the original error message are captured and passed on to our replacement messages.
+Then any errors thrown by the user's code will be checked against a large collection of regular expressions.
+If a regular expression matches, important details from the original error message are captured and used to insert details into our replacement message.
 However, this try/catch approach does not work well in all situations.
 Additional technical challenges arise when dealing with compiler exceptions, the REPL, and lazy sequences.
 Section~\ref{sec:technical} discusses the implementation details and difficulties in more detail.
@@ -513,17 +512,15 @@ In approaching error handling, there are many technical issues. First we need to
 
 Stuff to include:
 
-Explain the difference between compilation and runtime and how that affects error messages.
-
 Explain interaction with REPL and whole code compiling. \emcomment{be consistent with capitalization of REPL} 
 
-Explain lazyness and its problem in error handling.
-
 \emcomment{make it clear what's done and what's work in progress}
-\subsection{On the Nature Errors in Clojure}
+\subsection{On the Nature of Errors in Clojure}
 
-In Clojure, error messages can be divided into two different categories, runtime and compilation time. As their names imply, runtime errors occur when the code is run, and compilation errors occur when the code is compiled. Handling runtime errors is relatively simple with the exception of handling errors from lazyness. Since lazy sequences are evaluated when needed, an error in a lazy sequence will not occur until    
-the sequence needs to be evaluated. This means that the error will often not occur where it originated. When this is the case, the user will be provided with unhelpful or often misleading error messages about the nature of the problem. These types of errors can be very frustrating to troubleshoot especially for introductory students.
+In Clojure, error messages are divided into two different categories, runtime and compilation time. As their names imply, runtime errors occur when the code is run, and compilation errors occur when the code is compiled. Handling runtime errors is relatively simple with the exception of handling errors that stem from lazyness. Since lazy sequences are evaluated when they are needed, an error in a lazy sequence will not occur until the sequence needs to be evaluated. This means that the error will often not occur where it originated. When this is the case, the user will be provided with unhelpful or often misleading error messages about the nature of the problem. These errors can be very frustrating to troubleshoot especially for introductory students. Compilation errors are much more difficult to handle than runtime errors. Compilation errors cannot be handled by a simple try catch because they originate in the compiler before the code is even evaluated. Therefore, we need to catch the errors from the compiler so that we can handle them.
+
+There are two different environments in which to evaluate code in Clojure. A user can evaluate all of their code by running it, or they can evaluate code snippets using REPL. When developing code, it is common practice for a user to use REPL to test pieces of their code. Using this incremental process is less error prone since a user knows that pieces of their code work before implementing them. Because of this interaction, it is essential for the errors in both environments to be consistent. Therefore, we need to make sure that our error handling system is capable of addressing the errors from both whole code compiling and from the REPL.
+ 
 \subsection{Leiningen}
 \emcomment{reference, mention who developed it (or that it is an open source project)}
 Leiningen is an open source project under active development that is the primary tool for project managing in the Clojure community\cite{LeinGitHub}. Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
