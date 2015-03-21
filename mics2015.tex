@@ -441,54 +441,79 @@ Additional technical challenges arise when dealing with compiler exceptions, the
 Section~\ref{sec:technical} discusses the implementation details and difficulties in more detail.
 %\emcomment{Need to mention that in a simple case this approach means surrounding student code with  a {\tt try/catch}. However, this simple approach is not sufficient for Clojure. Section~\ref{sec:technical} discusses the implementation details and challenges.}
 
-function substitutions only catch runtime
 
-try catch allow us to evaluate both
+%\emcomment{I would start by describing the try/catch/replace approach, and only then talk about replacements. Replacements are there to determine specific arguments (5, "hello", etc) and report those to the user.}
 
-\emcomment{I would start by describing the try/catch/replace approach, and only then talk about replacements. Replacements are there to determine specific arguments (5, "hello", etc) and report those to the user.}
-One way to accomplish this is to define functions with the same name as standard Clojure functions.
+An alternate way we replace Clojure error messages is through function substitution.
+This involves defining functions with the same name as standard Clojure functions.
 Within these definitions, we can do type checking on arguments passed in.
 If the type checks find an error, our system displays a customized error message.
 If no type errors are found, the arguments are passed on to the actual corresponding Clojure function.
+Although this method can only handle runtime exceptions, it is advantageous because we can capture the actual values of the arguments passed in to the redefined functions and use them to provide a detailed error message.
 
-\alcomment{add a paragraph explaining that this does not handle every possible case. For example, complexities arise when students define their own functions, especially if they are anonymous functions. However, we hope that our system will be helpful in the majority of cases that it does handle.}
+Both methods together, unfortunately, do not handle all possible cases.
+For example, complexities arise when students define their own functions, especially if they are anonymous functions.
+We are unable to anticipate the function definitions that users of our system create, so we cannot rely on function substitution for those cases.
+The try/catch approach must handle those scenarios.
+Replacement error messages are even harder to make for anonymous functions since they have no name by which we can refer to them.
+Although our system does not handle all cases, we hope that it will be helpful in the majority of cases that a Clojure programmer will encounter.
+
+%\alcomment{add a paragraph explaining that this does not handle every possible case. For example, complexities arise when students define their own functions, especially if they are anonymous functions. However, we hope that our system will be helpful in the majority of cases that it does handle.}
+
+\pscomment{Should we include an image of the error popup of our system?}
 
 \subsection{User scenarios}\label{sec:scenarios}
 
-In order to better understand what our software users might encounter, we develop user scenarios detailing typical coding problems a new programmer might face.
-To create these user scenarios, we developed solutions to common beginner programming exercises and purposefully introduced errors that a new programmer might make.
+In order to better understand what our software users might encounter, we developed user scenarios detailing typical coding problems a new programmer might face.
+To create these user scenarios, we created solutions to common beginner programming exercises and purposefully introduced errors that a new programmer might make.
 We then recorded the error messages that these solutions produced.
 We also took note of the underlying cause of the errors so that we have a better idea of how to improve upon the error messages for our program.
-We then took the same solution and ran it within our program to compare the error message our system produces against the one Clojure produces.  
+We then took the same solution and ran it within our program to compare the error message our system produces against the one Clojure produces.
 
-These user scenarios showed us what the typical errors a student will be experiencing when learning to program in Clojure.
+These user scenarios showed us typical errors a student will be experiencing when learning to program in Clojure for the first time.
 For example, when a student first starts writing basic operations in Clojure, a typical mistake might be forgetting to put the function in front of the arguments,
 such as \texttt{(5 - 5)}, where it should be \texttt{(- 5 5)}. 
-This produces a rather unhelpful error message: 
+This produces a message that would be unhelpful for introductory programmers: 
 
 \begin{verbatim}
 ClassCastException java.lang.Long cannot be cast to clojure.lang.IFn
 user/eval769 (NO_SOURCE_FILE:1)
 \end{verbatim}
-\emcomment{Perhaps explain that clojure.lang.IFn is a Java type for Clojure functions, thus the error message is saying that 5 is a number, not a function}
-\emcomment{I am still thinking of user scenarios as ways of evaluating our new messages compared to the Clojure standard messages, so 2.2 and 2.3 should be switched}
 
-\pscomment{What we learned from them scenarios}
+In this error message, \texttt{clojure.lang.IFn} is a Java type representing Clojure functions. So, the error message is actually saying that 5 is a number, not a function, since Clojure expected the function name to be listed first. Our system produces the following error message to replace the one above:
 
-\pscomment{Work in progress...}
+\begin{verbatim}
+ERROR: Attempted to use a number, but a function was expected.
+intro.core/-main (core.clj line 675)
+\end{verbatim}
+
+%\emcomment{Perhaps explain that clojure.lang.IFn is a Java type for Clojure functions, thus the error message is saying that 5 is a number, not a function}
+%\emcomment{I am still thinking of user scenarios as ways of evaluating our new messages compared to the Clojure standard messages, so 2.2 and 2.3 should be switched}
 
 \subsection{Hints}\label{sec:hints}
 
-User scen
+While the error message our system produced above says what the core problem is, it does nothing to suggest to the user to check that the arguments are in the correct order, which is the fundamental issue. 
+
+
+does nothing to suggest that the user may have just 
+User scenarios
+
 While error messages are helpful in resolving issues, hints can offer additional guidance in figuring out why the error occurred. 
 
 introduce hints
+
 user scenarios will help us make hints
+
 what hints will be in our system
+
 Since there is no sure way of telling what went wrong, we will offer a handful of hints so that...
+
 When programmers mix up arguments, sometimes ClassCastExceptions are thrown. But CCE are also thrown in other cases. This make it difficult. Thus, we offer several suggestions. Hopefully, one of the suggestions will be helpful in solving the real issue.
+
 it's hard to make hints for every scenario
+
 how they will be helpful
+
 hopefully linking to Clojure documentation
 
 \section{Technical Setup}\label{sec:technical}
