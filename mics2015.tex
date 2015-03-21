@@ -113,6 +113,7 @@ fello056@umn.edu, lemmo031@umn.edu, magnu401@umn.edu, \\
 \date{}
 \maketitle
 \thispagestyle{empty}
+\alcomment{Should these say @morris.umn.edu?}
 
 \section*{\centering Abstract}
 The abstract
@@ -352,17 +353,17 @@ variable name:
 
 \subsection{Current error messages in Clojure}\label{sec:currentem}
 Error messages are an important part of programming since they are the main source of communication between a user and the system when an error occurs in the program.
-Error messages are especially important for introductory programmers who have had little to no experience with troubleshooting problems \emcomment{programs?}.
-These error messages need to be user friendly to provide value to the introductory students.
-For error messages to be useful, they should provide helpful and easy to understand information that can be used to resolve issues. 
-\emcomment{The two sentences are very similar and should be merged}
+Error messages are especially important for introductory programmers who have had little to no experience with troubleshooting programs. %\emcomment{programs?}
+These error messages need to provide helpful and easy-to-understand information that can be used to resolve issues.
+%\emcomment{The two sentences are very similar and should be merged}
 
 Error messages in Clojure are not particularly useful for introductory programmers because they do not provide information that can help lead a student to fixing the error.
-Also, Clojure error messages are typically complex because they originate from the underlying Java interpreter (the JVM), which many \emcomment{most} novice programmers will be unfamiliar with.
+Also, Clojure error messages are typically complex because they originate from the underlying Java interpreter (the JVM), which most %\emcomment{most} 
+novice programmers will be unfamiliar with.
 Below is an example of an error message in Clojure that might be unhelpful or unintuitive for an introductory student:
 
-Code Sample:
-\emcomment{Consider the following (erroenous) code fragment:}
+Consider the following (erroneous) code fragment:
+%\emcomment{Consider the following (erroneous) code fragment:}
 \begin{verbatim}
 (defn squareThis (* input input))
 \end{verbatim}
@@ -384,9 +385,9 @@ However, the error message also includes information that a new programmer might
 
 
 
-When writing functions in Clojure, a vector of arguments should immediately follow the name of the new function. 
-\emcomment{The previous sentence creates an awkward flow. Maybe "the error can be corrected by placing a vector of inputs, in this case containing a single input, right after the function name"?}
-Here is an example of the code above after corrections:
+The error can be corrected by placing a vector of inputs, in this case containing a single input, right after the function name.
+%\emcomment{The previous sentence creates an awkward flow. Maybe "the error can be corrected by placing a vector of inputs, in this case containing a single input, right after the function name"?}
+Here is an example of the code above after corrections have been made:
 %Corrected Code:
 \begin{verbatim}
 (defn squareThis [input] (* input input))
