@@ -60,6 +60,7 @@
 \definecolor{ForestGreen}{RGB}{34,139,34}
 \definecolor{BlueViolet}{RGB}{138,43,226}
 \definecolor{Coquelicot}{RGB}{255, 56, 0}
+\definecolor{Teal}{RGB}{2,132,130}
 %Uncomment this if you want to show work-in-progress comments
 \newcommand{\comment}[1]{{\bf \tt  {#1}}}
 % Uncomment this if you don't want to show comments
@@ -70,7 +71,7 @@
 \newcommand{\mmcomment}[1]{\textcolor{magenta}{\comment{Max: {#1}}}}
 \newcommand{\escomment}[1]{\textcolor{BlueViolet}{\comment{Emma: {#1}}}}
 \newcommand{\alcomment}[1]{\textcolor{red}{\comment{Lemmon: {#1}}}}
-
+\newcommand{\hfcomment}[1]{\textcolor{Teal}{\comment{Henry: {#1}}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
@@ -107,13 +108,13 @@ Henry Fellows, Aaron Lemmon, Max Magnuson, \\
 Computer Science Discipline \\
 University of Minnesota Morris\\
 Morris, MN 56267\\
-fello056@umn.edu, lemmo031@umn.edu, magnu401@umn.edu, \\
-	saxxx027@umn.edu, schli202@umn.edu, elenam@umn.edu
+fello056@morris.umn.edu, lemmo031@morris.umn.edu, magnu401@morris.umn.edu, \\
+	saxxx027@morris.umn.edu, schli202@morris.umn.edu, elenam@morris.umn.edu
 }
 \date{}
 \maketitle
 \thispagestyle{empty}
-\alcomment{Should these say @morris.umn.edu?}
+%\alcomment{Should these say @morris.umn.edu?}
 
 \section*{\centering Abstract}
 The abstract
@@ -144,7 +145,7 @@ values with a type, but rather tries to figure out what type a value is at runti
   %in which JVM can be utilized. Probably need to explain that the JVM
   %is Clojure interpreter, mention and explain REPL somewhere in this paragraph.}
 %\emcomment{Need to explain what you mean by dynamic}
-Clojure utilizes the Java Virtual Machine (JVM) as an interpreter, and Clojure code compiles to JVM bytecode.
+Clojure utilizes the Java Virtual Machine (JVM) as an interpreter \hfcomment{It's a runtime enviroment - the bytecode is compiled and it runs on the JVM, which abstracts over the specifics of the hardware.}
 This setup offers easy 
 %\emcomment{accessibilty?} 
 accessibility of Java frameworks. The Clojure REPL
@@ -192,6 +193,8 @@ and then any parameters:
 
 An example of this can be seen through a built-in mathematical function, addition:
 % \emcomment{All functions, including built-in mathematical functions, use this form? ``Even'' implies that somehow this is unexpected.} built-in functions, such as mathematical functions, use this form:
+
+\hfcomment{I'd explicitly note that + is not an operation, as in C or Java. It's implied, but it's just easier to bludgeon your reader into submission.}
 \begin{verbatim}
 	(+ 5 5)
 	-> 10
@@ -342,6 +345,19 @@ variable name:
 	myhashmap
 	-> {:a 1, :b 2, :c 3}
 \end{verbatim}
+
+\hfcomment{Add a section on lazyness: I'll add my section from my last MICS paper as an example:}
+
+Another common feature in Clojure is {\it  laziness}. Laziness is the concept of delaying evaluation of an expression until the value it returns is needed. For example, \texttt{if} statements in many languages are lazy. In pseudocode, \texttt{if a then b else c} is an example of lazy evaluation. Normally, \texttt{b} and \texttt{c} are only evaluated depending on the value of \texttt{a}, and the \texttt{if} wouldn't work if both \texttt{b} and \texttt{c} were evaluated. 
+In Clojure, the most common example of laziness, other than \texttt{if}, is sequences. For example, if you have a sequence that has a hundred expressions but only retrieve the first 50, only the first 50 are evaluated. More interestingly, you can have infinite sequences: the function \texttt{range}, called with no arguments, returns the infinite sequence of non-negative integers, starting at 0:
+\begin{verbatim}
+(take 10 (range))
+=> (0 1 2 3 4 5 6 7 8 9)
+\end{verbatim}
+Of course, these values only exist after they are requested by \texttt{take}, which is a function that takes the first $n$ elements of a collection. 
+Most of higher-order functions that produce collections are lazy. However, functions that compute a single value when given a collection, such as \texttt{reduce}, perform what is referred to as {\it  eager} evaluation, i.e. they fully evaluate their parameter collection.
+
+\hfcomment{end example}
 
 %This enables the data structures to be called, traversed, etc by the
 %use of a single name. \emcomment{I am not sure this addds anything; an
@@ -521,17 +537,15 @@ In approaching error handling, there are many technical issues. First we need to
 
 Stuff to include:
 
-Explain the difference between compilation and runtime and how that affects error messages.
-
 Explain interaction with REPL and whole code compiling. \emcomment{be consistent with capitalization of REPL} 
 
-Explain lazyness and its problem in error handling.
-
 \emcomment{make it clear what's done and what's work in progress}
-\subsection{On the Nature Errors in Clojure}
+\subsection{On the Nature of Errors in Clojure}
 
-In Clojure, error messages can be divided into two different categories, runtime and compilation time. As their names imply, runtime errors occur when the code is run, and compilation errors occur when the code is compiled. Handling runtime errors is relatively simple with the exception of handling errors from lazyness. Since lazy sequences are evaluated when needed, an error in a lazy sequence will not occur until    
-the sequence needs to be evaluated. This means that the error will often not occur where it originated. When this is the case, the user will be provided with unhelpful or often misleading error messages about the nature of the problem. These types of errors can be very frustrating to troubleshoot especially for introductory students.
+In Clojure, error messages are divided into two different categories, runtime and compilation time. As their names imply, runtime errors occur when the code is run, and compilation errors occur when the code is compiled. Handling runtime errors is relatively simple with the exception of handling errors that stem from lazyness. Since lazy sequences are evaluated when they are needed, an error in a lazy sequence will not occur until the sequence needs to be evaluated. This means that the error will often not occur where it originated. When this is the case, the user will be provided with unhelpful or often misleading error messages about the nature of the problem. These errors can be very frustrating to troubleshoot especially for introductory students. Compilation errors are much more difficult to handle than runtime errors. Compilation errors cannot be handled by a simple try catch because they originate in the compiler before the code is even evaluated. Therefore, we need to catch the errors from the compiler so that we can handle them.
+
+There are two different environments in which to evaluate code in Clojure. A user can evaluate all of their code by running it, or they can evaluate code snippets using REPL. When developing code, it is common practice for a user to use REPL to test pieces of their code. Using this incremental process is less error prone since a user knows that pieces of their code work before implementing them. Because of this interaction, it is essential for the errors in both environments to be consistent. Therefore, we need to make sure that our error handling system is capable of addressing the errors from both whole code compiling and from the REPL.
+ 
 \subsection{Leiningen}
 \emcomment{reference, mention who developed it (or that it is an open source project)}
 Leiningen is an open source project under active development that is the primary tool for project managing in the Clojure community\cite{LeinGitHub}. Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
