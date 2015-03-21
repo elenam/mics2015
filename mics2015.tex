@@ -139,9 +139,9 @@ The abstract
   
   
 Clojure, developed in 2007 by Rich Hickey~\cite{Hickey:2008}, is a dynamic, functional
-programming language in the Lisp family. Dynamic typing means that Clojure does not try to specifically
+programming language in the Lisp family. Dynamic typing means that Clojure does not specifically
 associate
-values with a type, but rather tries to figure out what type a value is at runtime. Functional means
+values with a type, but rather determines a value's type at runtime. Functional means
 that Clojure contains a variety of first-class functions that can be passed as parameters and returned
 as values. Also, Clojure code does not change state.
 %\emcomment{need to be more precise here; also probably need to explain what ``functional'' means.}
@@ -204,7 +204,8 @@ languages where \texttt{+} is an operation: %a built-in mathematical function, a
 % \emcomment{All functions, including built-in mathematical functions, use this form? ``Even'' implies
 %that somehow this is unexpected.} built-in functions, such as mathematical functions, use this form:
 
-%\hfcomment{I'd explicitly note that + is not an operation, as in C or Java. It's implied, but it's just easier to bludgeon your reader into submission.}
+%\hfcomment{I'd explicitly note that + is not an operation, as in C or Java. It's implied, but it's
+%just easier to bludgeon your reader into submission.}
 \begin{verbatim}
 	(+ 5 5)
 	-> 10
@@ -231,7 +232,7 @@ like normal Clojure functions.
 
 %\emcomment{before we get into anonymous functions, we need to show how
 %to define regular functions (general syntax and a couple of examples)}
-Clojure users can also name functions.
+Clojure users can also define functions.
 %\emcomment{I don't think we need to explain why people name functions}
 Using the command \texttt{def}, we can define variables:
 %\emcomment{this is a confusing way of saying it, especially because what you are showing is not a
@@ -243,7 +244,7 @@ Using the command \texttt{def}, we can define variables:
 	-> "Hello World"
 \end{verbatim}
 
-In the above example, we define a string to be \texttt{"Hello World"}. This way, whenever we utilize 
+In the above example, we define a string to be \texttt{"Hello World"}. This way, whenever we reference 
 %\emcomment{I would avoid ``call'' here since calling is for functions} 
 \texttt{mystring}, the string we bound to the variable name will be returned. We can also use
 \texttt{defn} to define functions:
@@ -349,9 +350,9 @@ An example of a hashmap using keywords would look something like:
 %\emcomment{I would first introduce keywords and then explain that they are typically used as keys}
 %\emcomment{Introduce keywords as a datatype before you first use them in an example (perhaps before
 % collections)}
-The keywords in the above hashmap: \texttt{:a}, \texttt{:b}, and \texttt{:c}. Keywords, such as the
-ones above, are often used as keys within hashmaps. The value is the second piece of key-value pair,
-and each value is bound to each key. In the above example, \texttt{:a} is bound to \texttt{1},
+The keywords in the above hashmap are: \texttt{:a}, \texttt{:b}, and \texttt{:c}. Keywords, such as the
+ones above, are often used as keys within hashmaps. The value is the second piece of a key-value pair,
+and each value is bound to a key. In the above example, \texttt{:a} is bound to \texttt{1},
 \texttt{:b} is bound to \texttt{2}, and \texttt{:c} is bound to \texttt{3}.
 %.  Keywords, such 
 %In hashmaps, usually keywords, indicated by a colon in front of a
@@ -368,12 +369,13 @@ variable name:
 	-> {:a 1, :b 2, :c 3}
 \end{verbatim}
 
-Laziness is another common feature of Clojure. Laziness is where the evaluation of an expression is
-postponed until the return value is needed. An example is the Fibonacci sequence. It would impossible
-to store all infinite numbers of the Fibonacci sequence. By making a lazy function, Clojure can
+Laziness is another common feature of Clojure. Laziness is when the evaluation of an expression is
+postponed until the return value is needed. An example is the Fibonacci sequence. It would be
+impossible to store all of the infinite numbers in the Fibonacci sequence. By making a lazy function,
+Clojure can
 evaluate only as much of the Fibonacci sequence as necessary. The next example will use the functions 
 \texttt{take} and \texttt{range}. \texttt{take} takes the first $n$ elements of a collection, both of
-which are taken in as parameters. \texttt{range} returns the infinite sequence of non-negative
+which are taken in as parameters. \texttt{range} returns an infinite sequence of non-negative
 integers, beginning at 0:
 \begin{verbatim}
 	(take 10 (range))
@@ -389,7 +391,7 @@ Another common example of laziness are \texttt{if} statements:
 In the above example, the \texttt{(+ number 1)} or \texttt{(- number 1)} only evaluates depending on
 whether the \texttt{(< number 10)} evaluates to true or false.
 
-The opposite of a lazy evaluation is an eager evaluation. Eager evaluations fully evaluation their
+The opposite of a lazy evaluation is an eager evaluation. Eager evaluations fully evaluate their
 parameters collection upon runtime.
 
 %This enables the data structures to be called, traversed, etc by the
@@ -397,8 +399,6 @@ parameters collection upon runtime.
 %example would be better.}
 
 \subsection{Overview of ClojurEd project}\label{sec:project}
-
-
 
 \section{Error Messages}\label{sec:errors}
 
@@ -592,6 +592,8 @@ In error handling, there are many technical issues. First we need to figure out 
 %\emcomment{A side note: and when running expectations}
 There are two different environments in which to evaluate code in Clojure. A user can evaluate all of their code by running it, or they can evaluate code snippets using REPL. When developing code, it is common practice for a user to use REPL to test pieces of their code. This is practice is described in depth in section \ref{sec:clojure}. Due to the importance of REPL interactions for code development and debugging, it is essential for the errors in both environments to be consistent. Therefore, we need to make sure that our error handling system is capable of addressing the errors from compilation, runtime,  REPL, and the testing library \hfcomment{add ref to testing library?}.
 
+\section{Technical Setup}\label{sec:technical}
+In approaching error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we need to figure out how to integrate that system with the tools for managing Clojure projects. Throughout this process it is important to keep in mind the usability for introductory students. Therefore, we would like to abstract over as much as we can \emcomment{not sure what you are abstracting over, and do you mean anything different from hiding tools from students?}, while still providing a robust system for students to develop their Clojure projects.
 
 %\emcomment{a minor note: since compilation errors happen first, mention them first? Also mention that due to a dynamic nature of Clojure many type errors that would've been compilation errors in Java are runtime errors in Clojure}
 %\emcomment{they don't stem from laziness, their timing is affected by laziness; also note that running code in REPL also presents challenges even for runtime errors}
@@ -619,6 +621,11 @@ Choosing the right IDE is important, especially for an introductory class, becau
 
 Both IDEs have a lot of functionality that we are looking for, but they do have some notable differences. LightTable %still
 requires a separate installation of Leiningen. %in order to run projects. 
+This adds another layer of difficulty for the student since installing Leiningen can be non-trivial. Nightcode comes packaged with its own distribution of Leiningen. This makes Nightcode easier to install and use. The REPL in each IDE is slightly different. In LightTable, the user opens up REPL using a context menu, and the REPL constantly evaluates each line of code in it. This ultimately provides more information, but it may be a little confusing for introductory students. In Nightcode, the REPL is always up in a separate frame, and each line is only evaluated when the user hits enter. LightTable uses hot keys and a context menu to do a lot of the tasks in LightTable such as running the project or starting a REPL. This is less familiar to introductory students, and it may be a little daunting at first. LightTable does provide a nice easy reference for searching for the appropriate hot keys to lessen the learning curve. Alternatively, Nightcode uses a lot of clearly labeled buttons and tabs that are intuitive for the user to perform tasks. \mmcomment{Do we have a preference for either or which one will likely be used in the introductory course?} 
+\emcomment{You kind of made the case for Nightcode here. Perhaps make it more clear what the advantages of LightTable are? Ultimately, however, we are trying to target both because wer don't know where the community will go a few years down the road (see my comment above)}
+
+\subsection{Other Approaches we tried}
+\emcomment{Use consistent capitalization in section titles}
 This adds another layer of difficulty for the student since installing Leiningen can be non-trivial. Nightcode comes packaged with its own distribution of Leiningen. This makes Nightcode easier to install and use. The REPL in each IDE is slightly different. In LightTable, the user opens up REPL
 using a context menu, and the REPL constantly evaluates each line of code in it. This ultimately provides more information, but it may be a little confusing for introductory students. In Nightcode, the REPL is always up in a
 separate frame, and each line is only evaluated when the user hits enter. LightTable uses hot keys and a context menu to do a lot of the tasks in LightTable such as running the project or starting a REPL. This is less
@@ -631,7 +638,6 @@ to perform tasks. While we prefer Nightcode at the moment, it is unclear which I
 %\emcomment{Use consistent capitalization in section titles}
 %\mmcomment{Describing the journey to nREPL}
 %\mmcomment{Is this section necessary?}
-
 Our first approach was to develop a IDE-specific plugin to intercept the error messages going to the console of the IDE. We found that the IDE was not handling the errors, and it was just printing out what was coming from Leiningen.
 
 Our next approach was to use a Leiningen plugin to try and intercept error messages. We searched through the Leiningen source code, and attempted various methods of interacting with Leiningen. None of these approaches allowed us to intercept the error messages that were being printed to the console. We now think that Leiningen uses nREPL, which is an evaluation tool, to handle compilation and error messages.
