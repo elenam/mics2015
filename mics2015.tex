@@ -139,18 +139,20 @@ The abstract
   
   
 Clojure, developed in 2007 by Rich Hickey~\cite{Hickey:2008}, is a dynamic, functional
-programming language in the Lisp family. Dynamic typing means that Clojure does not specifically
-associate
-values with a type, but rather determines a value's type at runtime. Functional means
-that Clojure contains a variety of first-class functions that can be passed as parameters and returned
-as values. Also, Clojure code does not change state.
+programming language in the Lisp family.
+Dynamic typing means that Clojure does not associate types with variables, but rather with values that they contain.
+When a type of a value is inconsistent with one expected in a given context, a runtime error occurs.
+Functional means
+that Clojure functions are first-class values that can be passed as arguments and returned
+as values.
+%Also, Clojure code does not change state.
 %\emcomment{need to be more precise here; also probably need to explain what ``functional'' means.}
 %\emcomment{``dynamic'' refers to ``dynamically typed''} 
 %\emcomment{Use simpler, more concrete terminology: there are many ways
   %in which JVM can be utilized. Probably need to explain that the JVM
   %is Clojure interpreter, mention and explain REPL somewhere in this paragraph.}
 %\emcomment{Need to explain what you mean by dynamic}
-Clojure utilizes the Java Virtual Machine (JVM) as a runtime environment. Clojure bytecode is compiled
+Clojure utilizes the Java Virtual Machine (JVM) as a runtime environment. Clojure compiles into Java bytecode
 and runs on the JVM, which abstracts over the specifics of the hardware.
 %\hfcomment{It's a runtime enviroment - the bytecode is compiled and it runs on the JVM, which
 %abstracts over the specifics of the hardware.}
@@ -232,7 +234,7 @@ like normal Clojure functions.
 
 %\emcomment{before we get into anonymous functions, we need to show how
 %to define regular functions (general syntax and a couple of examples)}
-Clojure users can also define functions.
+Clojure users can also define functions and variables.
 %\emcomment{I don't think we need to explain why people name functions}
 Using the command \texttt{def}, we can define variables:
 %\emcomment{this is a confusing way of saying it, especially because what you are showing is not a
@@ -297,7 +299,7 @@ to the collection:
 
 %Now, the program can call this function any time by using the name \texttt{increment-number}.
 
-Clojure also has a variety of different types of data structures. All 
+Clojure also has a variety of different types of data structures, also referred to as collections. All 
 of Clojure's collections are immutable, which means that the data within the structures cannot be
 modified. 
 %\emcomment{I wouldn't go into persistent, just talk about immutable.}
@@ -373,9 +375,9 @@ Laziness is another common feature of Clojure. Laziness is when the evaluation o
 postponed until the return value is needed. An example is the Fibonacci sequence.
 It would be impossible to store all of the infinite numbers in the Fibonacci sequence. By making a lazy
 function, Clojure can
-evaluate only as much of the Fibonacci sequence as necessary. The next example will use the functions 
+evaluate only as much of the Fibonacci sequence as necessary. The next example illustrating laziness uses the functions 
 \texttt{take} and \texttt{range}. \texttt{take} takes the first $n$ elements of a collection, both of
-which are taken in as parameters. \texttt{range} returns an infinite sequence of non-negative
+which are given as arguments. \texttt{range} returns an infinite sequence of non-negative
 integers, beginning at 0:
 \begin{verbatim}
 	(take 10 (range))
