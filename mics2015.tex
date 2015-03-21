@@ -476,27 +476,12 @@ Leiningen is an open source project under active development that is the primary
 While Leiningen is a very helpful tool, there are still some aspects that are challenging for introductory students. The most difficult of which is the interface. Leiningen uses the command line as its primary interface. The command line is both a distraction and a barrier to teaching the material in an introductory course. Therefore, we would like to abstract over the command line by using a graphical interface. This graphical interface would extend the simplicity of Leiningen while still providing the same functionality needed by students.
 
 \subsection{IDEs}
-Choosing the right IDE is important, especially for an introductory class, because it is the environment in which students will develop their code. We have looked into the IDEs available for Clojure, and we have decided that the most promising choices are LightTable and Nightcode. Both IDEs offer intuitive interfaces, syntax checking, built-in REPLs, and easy project management. They each use Leiningen to build projects. They are also both maintained are both maintained by open source communities, and they are under active development.
+\mmcomment{We still need references for this section.}
+Choosing the right IDE is important, especially for an introductory class, because it is the environment in which students will develop their code. We have looked into many of the IDEs available for Clojure, and we have decided that the most promising choices are LightTable and Nightcode. Both IDEs offer intuitive interfaces, syntax checking, built-in REPLs, and easy project management. They each use Leiningen to build projects. They are also both maintained by open source communities, and they are both under active development. It is important to note that both are under active development since that means there will be less for us to maintain ourselves. \mmcomment{I am tempted to add something about it is questionable whether or not LightTable will continue to be actively developed, but I'm not sure if we can easily verify that or support that statement.}
 
-Notes:
-LightTable
-	requires a separate Leiningen installation
-	REPL is constant
-	Context menu may be less familiar and/or more daunting to intro students
-	
-Nightcode
-	packaged distribution of Leiningen
-	REPL is more traditional
-	UI is more familiar
+Both IDEs have a lot of functionality that we are looking for, but they do have some notable differences. LightTable still requires a separate installation of Leiningen in order to run projects. This would add another layer of difficulty for the student since installing Leiningen can be non-trivial. Nightcode comes packaged with its own distribution of Leiningen. This makes Nightcode easier to install and use. The REPL in each IDE is slightly different. In LightTable, the user opens up REPL using a context menu, and the REPL constantly evaluates each line of code in it. This ultimately provides more information, but it may be a little confusing for introductory students. In Nightcode, the REPL is always up in a separate frame, and each line is only evaluated when the user hits enter. LightTable uses hot keys and a context menu to do a lot of the tasks in LightTable such as running the project or starting a REPL. This is less familiar to introductory students, and it may be a little daunting at first. LightTable does provide a nice easy reference for searching for the appropriate hot keys to lessen the learning curve. Alternatively, Nightcode uses a lot of clearly labeled buttons and tabs that are intuitive for the user to perform tasks. \mmcomment{Do we have a preference for either or which one will likely be used in the introductory course?} 
 
-Currently we are looking into LightTable and Nightcode as IDEs for the introductory course. 
-\emcomment{references, a bit about each, a bit about why we are considering both}
-Outline for the Section:
-We are looking at LightTable or NightCode for our primary IDE.
-
-Ideally we would like our system to be IDE independent. But we need to be mindful of the usability of the IDE.
-
-We would like to use an IDE that will be actively developed because that means there is less for us to maintain.
+Ideally we would like our system to be IDE independent. But we need to be mindful of the usability of the IDE. \mmcomment{This should probably find its way in somewhere, but I'm not sure where.}
 
 \subsection{Other Approaches we tried}
 \mmcomment{Describing the journey to nREPL}
@@ -517,7 +502,7 @@ Now we are pretty sure that NRepl and its middleware is the key. Explain NRepl a
 
 The way error handling is currently handled while using Leiningen is described by figure \ref{fig:CurrentError}. First, the student runs their project through Leiningen using the console by calling \texttt{lein run}. Then, Leiningen will take the dependencies defined in the student code and resolve them. After the dependencies have been resolved, Leiningen then sends the code to nREPL to be evaluate. nREPL uses the Clojure compiler to evaluate the student code. Here any errors that may arise in the student code will been thrown. The errors will then be handed back to Leiningen, so that the stacktrace can be printed out to the console.
 
-In our approach, we would like to catch those errors before they make their way back to Leiningen. Once we catch those errors we will clean them up as described in the section \ref{sec:transform}. After being cleaned up, the error will then be rethrown to Leiningen, so that it can be printed out for the student to see.
+In our approach, we would like to catch those errors before they make their way back to Leiningen. Once we catch those errors we will clean them up as described in section \ref{sec:transform}. After being cleaned up, the error will then be rethrown to Leiningen, so that it can be printed out for the student to see.
 
 \begin{figure}[h]
  \includegraphics[width=12cm]{OurErrorHandlingSystem.pdf}
