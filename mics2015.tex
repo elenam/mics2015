@@ -60,6 +60,7 @@
 \definecolor{ForestGreen}{RGB}{34,139,34}
 \definecolor{BlueViolet}{RGB}{138,43,226}
 \definecolor{Coquelicot}{RGB}{255, 56, 0}
+\definecolor{Teal}{RGB}{2,132,130}
 %Uncomment this if you want to show work-in-progress comments
 \newcommand{\comment}[1]{{\bf \tt  {#1}}}
 % Uncomment this if you don't want to show comments
@@ -70,7 +71,7 @@
 \newcommand{\mmcomment}[1]{\textcolor{magenta}{\comment{Max: {#1}}}}
 \newcommand{\escomment}[1]{\textcolor{BlueViolet}{\comment{Emma: {#1}}}}
 \newcommand{\alcomment}[1]{\textcolor{red}{\comment{Lemmon: {#1}}}}
-
+\newcommand{\hfcomment}[1]{\textcolor{Teal}{\comment{Henry: {#1}}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
@@ -107,13 +108,13 @@ Henry Fellows, Aaron Lemmon, Max Magnuson, \\
 Computer Science Discipline \\
 University of Minnesota Morris\\
 Morris, MN 56267\\
-fello056@umn.edu, lemmo031@umn.edu, magnu401@umn.edu, \\
-	saxxx027@umn.edu, schli202@umn.edu, elenam@umn.edu
+fello056@morris.umn.edu, lemmo031@morris.umn.edu, magnu401@morris.umn.edu, \\
+	saxxx027@morris.umn.edu, schli202@morris.umn.edu, elenam@morris.umn.edu
 }
 \date{}
 \maketitle
 \thispagestyle{empty}
-\alcomment{Should these say @morris.umn.edu?}
+%\alcomment{Should these say @morris.umn.edu?}
 
 \section*{\centering Abstract}
 The abstract
@@ -144,7 +145,7 @@ values with a type, but rather tries to figure out what type a value is at runti
   %in which JVM can be utilized. Probably need to explain that the JVM
   %is Clojure interpreter, mention and explain REPL somewhere in this paragraph.}
 %\emcomment{Need to explain what you mean by dynamic}
-Clojure utilizes the Java Virtual Machine (JVM) as an interpreter, and Clojure code compiles to JVM bytecode.
+Clojure utilizes the Java Virtual Machine (JVM) as an interpreter \hfcomment{It's a runtime enviroment - the bytecode is compiled and it runs on the JVM, which abstracts over the specifics of the hardware.}
 This setup offers easy 
 %\emcomment{accessibilty?} 
 accessibility of Java frameworks. The Clojure REPL
@@ -192,6 +193,8 @@ and then any parameters:
 
 An example of this can be seen through a built-in mathematical function, addition:
 % \emcomment{All functions, including built-in mathematical functions, use this form? ``Even'' implies that somehow this is unexpected.} built-in functions, such as mathematical functions, use this form:
+
+\hfcomment{I'd explicitly note that + is not an operation, as in C or Java. It's implied, but it's just easier to bludgeon your reader into submission.}
 \begin{verbatim}
 	(+ 5 5)
 	-> 10
@@ -342,6 +345,19 @@ variable name:
 	myhashmap
 	-> {:a 1, :b 2, :c 3}
 \end{verbatim}
+
+\hfcomment{Add a section on lazyness: I'll add my section from my last MICS paper as an example:}
+
+Another common feature in Clojure is {\it  laziness}. Laziness is the concept of delaying evaluation of an expression until the value it returns is needed. For example, \texttt{if} statements in many languages are lazy. In pseudocode, \texttt{if a then b else c} is an example of lazy evaluation. Normally, \texttt{b} and \texttt{c} are only evaluated depending on the value of \texttt{a}, and the \texttt{if} wouldn't work if both \texttt{b} and \texttt{c} were evaluated. 
+In Clojure, the most common example of laziness, other than \texttt{if}, is sequences. For example, if you have a sequence that has a hundred expressions but only retrieve the first 50, only the first 50 are evaluated. More interestingly, you can have infinite sequences: the function \texttt{range}, called with no arguments, returns the infinite sequence of non-negative integers, starting at 0:
+\begin{verbatim}
+(take 10 (range))
+=> (0 1 2 3 4 5 6 7 8 9)
+\end{verbatim}
+Of course, these values only exist after they are requested by \texttt{take}, which is a function that takes the first $n$ elements of a collection. 
+Most of higher-order functions that produce collections are lazy. However, functions that compute a single value when given a collection, such as \texttt{reduce}, perform what is referred to as {\it  eager} evaluation, i.e. they fully evaluate their parameter collection.
+
+\hfcomment{end example}
 
 %This enables the data structures to be called, traversed, etc by the
 %use of a single name. \emcomment{I am not sure this addds anything; an
