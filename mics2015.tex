@@ -3,7 +3,8 @@
 %
 % It is an example file showing how to use the 'acm_proc_article-sp.cls' V2.6SP
 % LaTeX2e document class file for Conference Proceedings submissions.
-% ----------------------------------------------------------------------------------------------------------------
+% 
+%----------------------------------------------------------------------------------------------------------------
 % This .tex file (and associated .cls V2.6SP) *DOES NOT* produce:
 %       1) The Permission Statement
 %       2) The Conference (location) Info information
@@ -17,7 +18,8 @@
 % \CopyrightYear{2003} will cause 2003 to appear in the copyright line.
 % \crdata{0-12345-67-8/90/12} will cause 0-12345-67-8/90/12 to appear in the copyright line.
 %
-% ---------------------------------------------------------------------------------------------------------------
+%
+%---------------------------------------------------------------------------------------------------------------
 % It is an example which *does* use the .bib file (from which the .bbl file
 % is produced).
 % REMEMBER HOWEVER: After having produced the .bbl file,
@@ -137,24 +139,33 @@ The abstract
   
   
 Clojure, developed in 2007 by Rich Hickey~\cite{Hickey:2008}, is a dynamic, functional
-programming language in the Lisp family. Dynamic typing means that Clojure does not try to specifically associate
-values with a type, but rather tries to figure out what type a value is at runtime.
-\emcomment{need to be more precise here; also probably need to explain what ``functional'' means.}
+programming language in the Lisp family. Dynamic typing means that Clojure does not try to specifically
+associate
+values with a type, but rather tries to figure out what type a value is at runtime. Functional means
+that Clojure contains a variety of first-class functions that can be passed as parameters and returned
+as values. Also, Clojure code does not change state.
+%\emcomment{need to be more precise here; also probably need to explain what ``functional'' means.}
 %\emcomment{``dynamic'' refers to ``dynamically typed''} 
 %\emcomment{Use simpler, more concrete terminology: there are many ways
   %in which JVM can be utilized. Probably need to explain that the JVM
   %is Clojure interpreter, mention and explain REPL somewhere in this paragraph.}
 %\emcomment{Need to explain what you mean by dynamic}
-Clojure utilizes the Java Virtual Machine (JVM) as an interpreter \hfcomment{It's a runtime enviroment - the bytecode is compiled and it runs on the JVM, which abstracts over the specifics of the hardware.}
+Clojure utilizes the Java Virtual Machine (JVM) as a runtime environment. Clojure bytecode is compiled
+and runs on the JVM, which abstracts over the specifics of the hardware.
+%\hfcomment{It's a runtime enviroment - the bytecode is compiled and it runs on the JVM, which
+%abstracts over the specifics of the hardware.}
 This setup offers easy 
 %\emcomment{accessibilty?} 
-accessibility of Java frameworks. The Clojure REPL
-\emcomment{what does REPL stand for?} 
-is another easy way to get acquainted \emcomment{to interact with Clojure?} with Clojure. A REPL is an interactive shell program that takes single 
-expressions, evaluates them, and returns the result to the user. The REPL allows users to see immediate results
- and respond easily and quickly. For any programmer, the use of the REPL 
-is highly advised and can make programming in Clojure much simpler. 
-\emcomment{explain why?}
+accessibility of Java frameworks. The Clojure read-eval-print loop (REPL)
+%\emcomment{what does REPL stand for?} 
+is another easy way to interact 
+%\emcomment{to interact with Clojure?}
+ with Clojure. A REPL is an interactive shell program that takes single 
+expressions, evaluates them, and returns the result to the user. The REPL allows users to see 
+immediate results and respond easily and quickly. For any programmer, the use of the REPL 
+is highly advised and can make programming in Clojure much simpler. Use of the REPL allows users
+to break down their code, test specific pieces, and experiment with new functions and uses.
+%\emcomment{explain why?}
 %\emcomment{This wouldn't make any sense to the target audience and is
   %not needed (perhaps with the exception of multithreading:}
 %including optional type hints
@@ -168,18 +179,16 @@ immutable data types. An immutable data type means data cannot
 %\emcomment{data cannot be changed, not data types}
 be changed, unlike in %\emcomment{in? Also, why ``many'' and not all of
   %them?}
-  imperative programming languages. When using
-Clojure, in order to change a data item, an entirely new data item
-must be made. Immutable data types help prevent side effects in the program. 
-A side effect is when a function alters memory
-or interacts outside of its scope instead of \emcomment{or in addition to} returning a value. Side
-effects can make debugging or resolving errors or failures more
-difficult. This is because when a function interacts with other
-functions \emcomment{with other parts of a program}, when it is not supposed to, any issues in the 
-code can be spread out throughout the program. The reduction of side
-effects means problems with the code are easier to find and fix.
-Because of this, immutable data types are practical for novice
-programmers.
+imperative programming languages. When using Clojure, in order to change a data item, an entirely 
+new data item must be made. Immutable data types help prevent side effects in the program. 
+A side effect is when a function alters memory or interacts outside of its scope in addition to 
+%\emcomment{or in addition to} 
+returning a value. Side effects can make debugging or resolving errors or failures more
+difficult. This is because when a function interacts with other parts of a program,
+%\emcomment{with other parts of a program} 
+when it is not supposed to, any issues in the code can be spread out throughout the program. The
+reduction of side effects means problems with the code are easier to find and fix.
+Because of this, immutable data types are practical for novice programmers.
 %\emcomment{I would first explain what side
   %effects are, and only then why they complicate things for novice
   %programmers}
@@ -190,10 +199,12 @@ and then any parameters:
 	(<function-name> <argument 1> <argument 2>)
 \end{verbatim}
 
-An example of this can be seen through a built-in mathematical function, addition:
-% \emcomment{All functions, including built-in mathematical functions, use this form? ``Even'' implies that somehow this is unexpected.} built-in functions, such as mathematical functions, use this form:
+An example of this can be seen through addition, which is a built-in function, unlike traditional
+languages where \texttt{+} is an operation: %a built-in mathematical function, addition:
+% \emcomment{All functions, including built-in mathematical functions, use this form? ``Even'' implies
+%that somehow this is unexpected.} built-in functions, such as mathematical functions, use this form:
 
-\hfcomment{I'd explicitly note that + is not an operation, as in C or Java. It's implied, but it's just easier to bludgeon your reader into submission.}
+%\hfcomment{I'd explicitly note that + is not an operation, as in C or Java. It's implied, but it's just easier to bludgeon your reader into submission.}
 \begin{verbatim}
 	(+ 5 5)
 	-> 10
@@ -220,11 +231,12 @@ like normal Clojure functions.
 
 %\emcomment{before we get into anonymous functions, we need to show how
 %to define regular functions (general syntax and a couple of examples)}
-When a program needs to use a single value or function, it can be helpful to define it under a variable name
-so that it's easier to access throughout the program. 
-\emcomment{I don't think we need to explain why people name functions} 
-Using the command \texttt{def} or \texttt{defn}, we
-can define functions and variables \emcomment{this is a confusing way of saying it, especially because what you are showing is not a function. How about just talking about defining variables? (and technically functions are values anyway, just liek numbers and strings }:
+Clojure users can also name functions.
+%\emcomment{I don't think we need to explain why people name functions}
+Using the command \texttt{def}, we can define variables:
+%\emcomment{this is a confusing way of saying it, especially because what you are showing is not a
+%function. How about just talking about defining variables? (and technically functions are values
+%anyway, just like numbers and strings }
 \begin{verbatim}
 	(def mystring "Hello World")
 	mystring
@@ -233,31 +245,41 @@ can define functions and variables \emcomment{this is a confusing way of saying 
 
 In the above example, we define a string to be \texttt{"Hello World"}. This way, whenever we utilize 
 %\emcomment{I would avoid ``call'' here since calling is for functions} 
-\texttt{mystring}, the string we bound to the variable name will be returned. Here is an example of using \texttt{defn} \emcomment{need to say that defn is used for defining functions} :
+\texttt{mystring}, the string we bound to the variable name will be returned. We can also use
+\texttt{defn} to define functions:
+%\emcomment{need to say that defn is used for defining functions}
 \begin{verbatim}
 	(defn increment-number [number] (+ number 1))
 	(increment-number 2)
 	-> 3
 \end{verbatim}
 
-In this example, we saved \emcomment{define} a function that takes a number and increments it by adding 1 to it \emcomment{returns that number incremented by 1}. 
-In any function, the 
-function name is the word after the \texttt{defn}, the pieces in the square brackets after the function name indicate 
-the arguments that the function takes in, and what follows is the body, or what the action of the function is \emcomment{the expression that the function returns ("action" sounds imperative)}. 
+In this example, we defined
+%\emcomment{define} 
+a function that takes a number and returns that number incremented by 1.
+%\emcomment{returns that number incremented by 1}. 
+In any function, the function name is the word after the \texttt{defn}, the pieces in the square
+brackets after the function name indicate 
+the arguments that the function takes in, and what follows is the body, or what the function does.
+%\emcomment{the expression that the function returns ("action" sounds imperative)}. 
 %\emcomment{the expression returned by the function? ``does'' has imperative flavor}
 
-Now let us say that we have a program where we want to use a function, but only once. This means that we do not
-necessarily need to define it with a name because Clojure supports anonymous functions. Anonymous functions allow 
-programmers to quickly make
+Now let us say that we have a program where we want to use a function, but only once. This means that
+we do not necessarily need to define it with a name because Clojure supports anonymous functions.
+Anonymous functions allow programmers to quickly make
 % \emcomment{not sure what you mean by``rare'' here. Those that aren't predefined?}  
 functions when needed. 
-However, since these functions are not  stored, the program would not be able to use them more than once. 
+However, since these functions are not  stored, the program would not be able to use them more than
+once. 
 %\emcomment{call them?} by name after the usage. 
-The following example is of the same increment-number function as above, but implemented anonymously: 
+The following example is of the same increment-number function as above, but implemented anonymously.
+The \texttt{map} function takes in a function and a collection as arguments, and applies the function
+to the collection: 
 \begin{verbatim}
-	(fn [number] (+ number 1))
+	(map (fn [number] (+ number 1)) [0 1 2 3])
+	-> (1 2 3 4)
 \end{verbatim}
-\emcomment{Give an example of using an anonymous function}
+%\emcomment{Give an example of using an anonymous function}
 
 %In anonymous functions, anything in the brackets that is following the
 %\texttt{fn} is arguments. 
@@ -275,19 +297,21 @@ The following example is of the same increment-number function as above, but imp
 %Now, the program can call this function any time by using the name \texttt{increment-number}.
 
 Clojure also has a variety of different types of data structures. All 
-of Clojure's collections are immutable, which means that the data within the structures cannot be modified. 
+of Clojure's collections are immutable, which means that the data within the structures cannot be
+modified. 
 %\emcomment{I wouldn't go into persistent, just talk about immutable.}
 %This means that the data in the structures cannot be modified, and that each
 %structure preserves the previous version of itself. 
-The different types of structures Clojure uses are lists (denoted by \texttt{()}),
-sets (denoted by \texttt{\#\{\}}), vectors (denoted by \texttt{[]}),
-and hashmaps (denoted by \texttt{\{\}}). The first three types of data
-structures listed can contain any number, including \texttt{nil} (Clojure's equivalent of \texttt{null} or nothing), of 
-values of any type (a data structure is untyped, which means values of different types can be  
+The different types of structures Clojure uses are lists (denoted by \texttt{()}), sets (denoted by
+\texttt{\#\{\}}), vectors (denoted by \texttt{[]}), and hashmaps (denoted by \texttt{\{\}}). The first
+three types of data structures listed can contain any number of values of any data type.
+%, including \texttt{nil} (Clojure's equivalent of \texttt{null} or nothing), of values. Data
+%structures are untyped. This means that a collection may contain any data type. 
 %\emcomment{too informal, rephrase} if types of values in one structure
-mismatched):
-\mmcomment{I think that the above sentence should make it more clear that a collection may contain any data type. Maybe, don't mention numbers and stick to data types?}
-\emcomment{agree}
+%mismatched):
+%\mmcomment{I think that the above sentence should make it more clear that a collection may contain any
+%data type. Maybe, don't mention numbers and stick to data types?}
+%\emcomment{agree}
 %\emcomment{don't use the word ``normal'' in a research paper} data structures: 
 \begin{verbatim}
 	(1 2 "foo" :a 9 "bar")
@@ -313,9 +337,9 @@ However, hashmaps are unique in the fact that a hashmap is a collection of key-v
 	{key value, key value, key value}
 \end{verbatim}
 
-An example 
+Hashmaps commonly use keywords. Keywords are a simple indicating word that have a colon in front.
+An example of a hashmap using keywords would look something like: 
 %\emcomment{why ``realistic''? Just an example. What you are showing above is abstract syntax} 
- would look something like:
 \begin{verbatim}
 	{:a 1, :b 2, :c 3}
 \end{verbatim}
@@ -323,19 +347,18 @@ An example
 %  collection of key/value pairs.}
 
 %\emcomment{I would first introduce keywords and then explain that they are typically used as keys}
-\emcomment{Introduce keywords as a datatype before you first use them in an example (perhaps before collections)}
-Keywords are a simple indicating word that have a colon in front. Examples of keywords can be seen in the
-above hashmap: \texttt{:a}, \texttt{:b}, and \texttt{:c}. Keywords, such as the ones above,
-are often used as keys within hashmaps. The value is the second piece of key-value pair,
-and each value is bound to each key. In the above example, \texttt{:a} is bound to \texttt{1}, \texttt{:b}
-is bound to \texttt{2}, and \texttt{:c} is bound to \texttt{3}.
+%\emcomment{Introduce keywords as a datatype before you first use them in an example (perhaps before
+% collections)}
+The keywords in the above hashmap: \texttt{:a}, \texttt{:b}, and \texttt{:c}. Keywords, such as the
+ones above, are often used as keys within hashmaps. The value is the second piece of key-value pair,
+and each value is bound to each key. In the above example, \texttt{:a} is bound to \texttt{1},
+\texttt{:b} is bound to \texttt{2}, and \texttt{:c} is bound to \texttt{3}.
 %.  Keywords, such 
 %In hashmaps, usually keywords, indicated by a colon in front of a
 %simple indicating word, are used as keys, and the value is what the
 %key is bound to. 
 %\emcomment{keys aren't pointing to anything, they are bound to something}
 %In the hashmap above, the keywords are
-
 
 Just like variables and values, data structures can also be bound to a
 variable name: 
@@ -345,18 +368,29 @@ variable name:
 	-> {:a 1, :b 2, :c 3}
 \end{verbatim}
 
-\hfcomment{Add a section on laziness: I'll add my section from my last MICS paper as an example:}
-
-Another common feature in Clojure is {\it  laziness}. Laziness is the concept of delaying evaluation of an expression until the value it returns is needed. For example, \texttt{if} statements in many languages are lazy. In pseudocode, \texttt{if a then b else c} is an example of lazy evaluation. Normally, \texttt{b} and \texttt{c} are only evaluated depending on the value of \texttt{a}, and the \texttt{if} wouldn't work if both \texttt{b} and \texttt{c} were evaluated. 
-In Clojure, the most common example of laziness, other than \texttt{if}, is sequences. For example, if you have a sequence that has a hundred expressions but only retrieve the first 50, only the first 50 are evaluated. More interestingly, you can have infinite sequences: the function \texttt{range}, called with no arguments, returns the infinite sequence of non-negative integers, starting at 0:
+Laziness is another common feature of Clojure. Laziness is where the evaluation of an expression is
+postponed until the return value is needed. An example is the Fibonacci sequence. It would impossible
+to store all infinite numbers of the Fibonacci sequence. By making a lazy function, Clojure can
+evaluate only as much of the Fibonacci sequence as necessary. The next example will use the functions 
+\texttt{take} and \texttt{range}. \texttt{take} takes the first $n$ elements of a collection, both of
+which are taken in as parameters. \texttt{range} returns the infinite sequence of non-negative
+integers, beginning at 0:
 \begin{verbatim}
-(take 10 (range))
-=> (0 1 2 3 4 5 6 7 8 9)
+	(take 10 (range))
+	-> (0 1 2 3 4 5 6 7 8 9)
 \end{verbatim}
-Of course, these values only exist after they are requested by \texttt{take}, which is a function that takes the first $n$ elements of a collection. 
-Most of higher-order functions that produce collections are lazy. However, functions that compute a single value when given a collection, such as \texttt{reduce}, perform what is referred to as {\it  eager} evaluation, i.e. they fully evaluate their parameter collection.
 
-\hfcomment{end example}
+Another common example of laziness are \texttt{if} statements:
+
+\begin{verbatim}
+	(if (< number 10) (+ number 1) (- number 1))
+\end{verbatim}
+
+In the above example, the \texttt{(+ number 1)} or \texttt{(- number 1)} only evaluates depending on
+whether the \texttt{(< number 10)} evaluates to true or false.
+
+The opposite of a lazy evaluation is an eager evaluation. Eager evaluations fully evaluation their
+parameters collection upon runtime.
 
 %This enables the data structures to be called, traversed, etc by the
 %use of a single name. \emcomment{I am not sure this addds anything; an
