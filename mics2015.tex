@@ -595,9 +595,6 @@ In error handling, there are many technical issues. First we need to figure out 
 %\emcomment{A side note: and when running expectations}
 There are two different environments in which to evaluate code in Clojure. A user can evaluate all of their code by running it, or they can evaluate code snippets using REPL. When developing code, it is common practice for a user to use REPL to test pieces of their code. This is practice is described in depth in section \ref{sec:clojure}. Due to the importance of REPL interactions for code development and debugging, it is essential for the errors in both environments to be consistent. Therefore, we need to make sure that our error handling system is capable of addressing the errors from compilation, runtime,  REPL, and the testing library \hfcomment{add ref to testing library?}.
 
-\section{Technical Setup}\label{sec:technical}
-In approaching error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we need to figure out how to integrate that system with the tools for managing Clojure projects. Throughout this process it is important to keep in mind the usability for introductory students. Therefore, we would like to abstract over as much as we can \emcomment{not sure what you are abstracting over, and do you mean anything different from hiding tools from students?}, while still providing a robust system for students to develop their Clojure projects.
-
 %\emcomment{a minor note: since compilation errors happen first, mention them first? Also mention that due to a dynamic nature of Clojure many type errors that would've been compilation errors in Java are runtime errors in Clojure}
 %\emcomment{they don't stem from laziness, their timing is affected by laziness; also note that running code in REPL also presents challenges even for runtime errors}
 %\emcomment{laziness seems to be spelled with an i}
