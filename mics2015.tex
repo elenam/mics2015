@@ -139,18 +139,20 @@ The abstract
   
   
 Clojure, developed in 2007 by Rich Hickey~\cite{Hickey:2008}, is a dynamic, functional
-programming language in the Lisp family. Dynamic typing means that Clojure does not specifically
-associate
-values with a type, but rather determines a value's type at runtime. Functional means
-that Clojure contains a variety of first-class functions that can be passed as parameters and returned
+programming language in the Lisp family. Dynamic typing means that Clojure does not 
+associate types with
+variables, but rather with values that they contain. When a type of a value is inconsistent with one expected in a given context, a runtime error occurs. 
+Functional means
+that Clojure functions are first-class values that can be passed as parameters and returned
 as values. Also, Clojure code does not change state.
+\emcomment{This is technically incorrect: there are variables in Clojure that are mutable. -- or do you even need to say it here since you are saying it later?}
 %\emcomment{need to be more precise here; also probably need to explain what ``functional'' means.}
 %\emcomment{``dynamic'' refers to ``dynamically typed''} 
 %\emcomment{Use simpler, more concrete terminology: there are many ways
   %in which JVM can be utilized. Probably need to explain that the JVM
   %is Clojure interpreter, mention and explain REPL somewhere in this paragraph.}
 %\emcomment{Need to explain what you mean by dynamic}
-Clojure utilizes the Java Virtual Machine (JVM) as a runtime environment. Clojure bytecode is compiled
+Clojure utilizes the Java Virtual Machine (JVM) as a runtime environment. Clojure compiles into Java bytecode
 and runs on the JVM, which abstracts over the specifics of the hardware.
 %\hfcomment{It's a runtime enviroment - the bytecode is compiled and it runs on the JVM, which
 %abstracts over the specifics of the hardware.}
@@ -192,6 +194,7 @@ Because of this, immutable data types are practical for novice programmers.
 %\emcomment{I would first explain what side
   %effects are, and only then why they complicate things for novice
   %programmers}
+
 Clojure, like other Lisp languages, uses prefix notation. This means
 that function calls use parenthesis, followed by the function name,
 and then any parameters: 
@@ -297,7 +300,7 @@ to the collection:
 
 %Now, the program can call this function any time by using the name \texttt{increment-number}.
 
-Clojure also has a variety of different types of data structures. All 
+Clojure also has a variety of different types of data structures, or collections. All 
 of Clojure's collections are immutable, which means that the data within the structures cannot be
 modified. 
 %\emcomment{I wouldn't go into persistent, just talk about immutable.}
@@ -373,7 +376,7 @@ Laziness is another common feature of Clojure. Laziness is when the evaluation o
 postponed until the return value is needed. An example is the Fibonacci sequence. It would be
 impossible to store all of the infinite numbers in the Fibonacci sequence. By making a lazy function,
 Clojure can
-evaluate only as much of the Fibonacci sequence as necessary. The next example will use the functions 
+evaluate only as much of the Fibonacci sequence as necessary. The next example \emcomment{illustrating laziness?} will use the functions 
 \texttt{take} and \texttt{range}. \texttt{take} takes the first $n$ elements of a collection, both of
 which are taken in as parameters. \texttt{range} returns an infinite sequence of non-negative
 integers, beginning at 0:
