@@ -158,7 +158,7 @@ and runs on the JVM, which abstracts over the specifics of the hardware.
 %abstracts over the specifics of the hardware.}
 This setup offers easy 
 %\emcomment{accessibilty?} 
-accessibility of Java frameworks. The Clojure read-eval-print loop (REPL)
+access to Java frameworks. The Clojure read-eval-print loop (REPL)
 %\emcomment{what does REPL stand for?} 
 is another easy way to interact 
 %\emcomment{to interact with Clojure?}
@@ -410,8 +410,8 @@ Error messages are especially important for introductory programmers who have ha
 These error messages need to provide helpful and easy-to-understand information that can be used to resolve issues.
 %\emcomment{The two sentences are very similar and should be merged}
 
-Error messages in Clojure are not particularly useful for introductory programmers because they do not provide information that can help lead a student to fixing the error.
-Also, Clojure error messages are typically complex because they originate from the underlying Java interpreter (the JVM), which most %\emcomment{most} 
+Error messages in Clojure are not particularly useful for introductory programmers because they do not provide information that can help guide a student in fixing the error.
+Also, Clojure error messages are typically complex because they originate from the underlying Java interpreter (JVM), which most %\emcomment{most} 
 novice programmers will be unfamiliar with.
 Below are some examples of error messages in Clojure that might be unhelpful or unintuitive for an introductory student.
 
@@ -425,7 +425,7 @@ Consider the following (erroneous) code fragment:
 
 In this code sample, the programmer is attempting to create a function \texttt{square-this} which will take a number and return the square of its value.
 However, the programmer forgot to declare that \texttt{input} should be a parameter.
-In Clojure, function declarations typically require a vector containing the declared parameter names.
+In Clojure, function declarations always require a vector containing the declared parameter names.
 The resulting error message is: 
 \begin{verbatim}
 IllegalArgumentException Parameter declaration * should be 
@@ -486,7 +486,7 @@ Here is an example of the code above after corrections:
 Since standard Clojure error messages are generally unhelpful, we aim to replace many Clojure error messages with improved ones.
 %\emcomment{via a {\tt try/catch} statement}
 %\emcomment{substitute them with?} our replacement messages.
-Our system does this by reading in a user's code and wrapping it in a try/catch block.
+Our system does this by reading in a user's code and wrapping it in a \texttt{try/catch} block.
 Then any errors thrown by the user's code will be checked against a large collection of regular expressions.
 If a regular expression matches, important details from the original error message are captured and used to insert details into our replacement message.
 However, this try/catch approach does not work well in all situations.
@@ -556,7 +556,7 @@ Thus, our system provides several hints in order to cover a variety of situation
 Hopefully, one of the suggestions will be helpful in solving the real issue.
 
 Developing user scenarios was a helpful exercise because it allowed us to immediately know the root cause of an error even before seeing the error message.
-This allowed us to easily record a human interpretation of the problem and relate it to the error. This process gave us a useful rubric for creating hints. As an example, the following user scenario involves a hypothetical attempt to write a program that would print "Hello World":
+This allowed us to easily record a human interpretation of the problem and relate it to the error. This process gave us a useful rubric for creating hints. As an example, the following user scenario involves a hypothetical attempt to write a program that would print ``Hello World":
 
 \begin{verbatim}
 (print Hello World)
@@ -586,7 +586,7 @@ Since new Clojure programmers will be unfamiliar with much of the terminology an
 In error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we need to figure out how to integrate that system with the tools for managing Clojure projects. Throughout this process it is important to be mindful of usability for introductory students. Therefore we would like to synthesize the error handling system and the tools used by the student in a way that is both usable and robust.
 
 
-\subsection{On the Nature of Errors in Clojure}
+\subsection{On the nature of errors in Clojure}
 
 
 %\emcomment{Move to beginning, then talk about errors}
@@ -607,18 +607,17 @@ Some of these problems have not been resolved. Finding the origin of errors caus
 
  
 \subsection{Leiningen}
-Leiningen is an open source project under active development that is the primary tool for project managing in the Clojure community\cite{LeinGitHub}. Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
+Leiningen is an open source project under active development that is the primary tool for project management in the Clojure community\cite{LeinGitHub}. Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
 
 While Leiningen is a very helpful tool, there are still some aspects that are challenging for introductory students. The most difficult of which is the interface. Leiningen uses the command line as its primary interface. The command line is both a distraction and a barrier to teaching the material in an introductory course. Therefore, we would like to abstract over the command line by using a graphical interface, ideally integrated with the IDE used by students. This graphical interface would extend the simplicity of Leiningen while still providing the same functionality needed by students.
 
 \subsection{IDEs}
 \mmcomment{We still need references for this section.}
-Choosing the right IDE is important, especially for an introductory class, because it is the environment in which students will develop their code. We have looked into many of the IDEs available for Clojure, and we have decided that the most promising choices are LightTable and Nightcode. Both IDEs offer intuitive interfaces, syntax checking, built-in REPLs, and easy project management. They each use Leiningen to build projects. They are also both maintained by open source communities, and they are both under active development. It is important to note that both are under active development since that means there will be less for us to maintain ourselves. 
+Choosing the right IDE is important, especially for an introductory class, because it is the environment in which students will develop their code. We have looked into many of the IDEs available for Clojure, and we have decided that the most promising choices are LightTable and Nightcode. Both IDEs offer intuitive interfaces, syntax checking, built-in REPLs, and easy project management. They each use Leiningen to build projects. They are also both maintained by open source communities and are under active development.  
 
 Both IDEs have a lot of functionality that we are looking for, but they do have some notable differences. For instance,  LightTable requires a separate installation of Leiningen. 
 This adds another layer of difficulty for the student since installing Leiningen is non-trivial. Nightcode comes packaged with its own distribution of Leiningen. This makes Nightcode easier to install and use. The REPL in each IDE is slightly different. In LightTable, the user opens up REPL
-using a context menu, and the REPL constantly evaluates each line of code in it. This ultimately provides more information, but it may be a little confusing for introductory students. In Nightcode, the REPL is always up in a
-separate frame, and each line is only evaluated when the user hits enter. LightTable uses hot keys and a context menu to do a lot of the tasks in LightTable such as running the project or starting a REPL. This is less
+using a context menu, and the REPL constantly evaluates each line of code in it. This ultimately provides more information, but it is very different from the traditional REPL in ways that may be a little confusing for introductory students. In Nightcode, the REPL will always up in a separate frame, and each line is only evaluated when the user hits enter. LightTable uses hot keys and a context menu to do a lot of the tasks in LightTable such as running the project or starting a REPL. This is less
 familiar to introductory students, and it may be a little daunting at first. LightTable does provide a nice easy reference for searching for the appropriate hot keys to lessen the learning curve. Alternatively, Nightcode uses a lot of clearly labeled buttons and tabs that are intuitive for the user
 to perform tasks. While we prefer Nightcode at the moment, it is unclear which IDE will be preferable in the future.
 %\mmcomment{Do we have a preference for either or which one will likely be used in the introductory course?} 
@@ -636,7 +635,7 @@ nREPL is a client and server system for evaluating user code. nREPL middleware c
 
 Now, our planned approach is to write an nREPL middleware to intercept the error messages handled by nREPL and clean them up. This approach is also preferable to our initial IDE specific approach because it allows for our system to be IDE indepependent. 
 
-\subsection{Implementing Error Handling}
+\subsection{Implementing error handling}
 
 \begin{figure}[h]
  \includegraphics[width=12cm]{CurrentErrorHandling.pdf}
@@ -646,13 +645,14 @@ Now, our planned approach is to write an nREPL middleware to intercept the error
 \end{figure}
 
 \emcomment{I see a compiler here, but I don't see an interpreter. Is nREPL an interpreter? Make it clear} \hfcomment{There are no interpreters in canonical Clojure.}
-The way error handling is currently performed while using Leiningen is described in figure \ref{fig:CurrentError}. First, the student runs their project through Leiningen using the console by calling \texttt{lein run}. Then, Leiningen will take the dependencies defined in the student code and resolve them. After the dependencies have been resolved, Leiningen then sends the code to nREPL to be evaluate. nREPL uses the Clojure compiler to compile the student code. Here any errors that may arise in the student code will been thrown. The errors will then be handed back to Leiningen, so that the stacktrace can be printed out to the console.
+The way error handling is currently performed while using Leiningen is described in figure \ref{fig:CurrentError}. First, the student runs their project through Leiningen using the console by calling \texttt{lein run}. Then, Leiningen will take the dependencies defined in the student code and resolve them. After the dependencies have been resolved, Leiningen then sends the code to nREPL to be compiled and evaluated. Any errors are passed back to the current output device, which is the terminal by default. 
 
 %\emcomment{where? can you show it in the diagram?}
 %\emcomment{replace? Transform?}
 %\emcomment{address the difference between compilation errors and runtime errors since you mentioned those earlier; also mention where REPL interactions happen in this setup.}
-In our approach, we would like to catch the errors from nREPL by using nREPL middleware. Once we catch those errors we will transform them as described in section \ref{sec:errors}. After being cleaned up, the error will then be rethrown to Leiningen, so that it can be printed out for the student to see. We believe that nREPL handles all errors thrown by the compiler, runtime, and the REPL. The middleware will handle all of these cases in a consistent manner.
+In our approach, we would like to catch the errors from nREPL by using nREPL middleware. Once we catch those errors we will transform them as described in section \ref{sec:errors}. After being cleaned up, the error will then be rethrown to Leiningen, so that it can be printed out for the student to see. We believe that nREPL handles all errors thrown by the compiler, runtime, and the REPL. The middleware will then handle all of these cases in a consistent manner.
 
+\hfcomment{Fig 2 goes here.}
 \begin{figure}[h]
  \includegraphics[width=12cm]{OurErrorHandlingSystem.pdf}
  \centering
