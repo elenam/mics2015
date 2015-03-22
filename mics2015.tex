@@ -776,7 +776,7 @@ transform them as described in section \ref{sec:errors}. After being cleaned up,
 that it can be printed out for the student to see. We believe that nREPL handles all errors thrown by the compiler, runtime, and 
 the REPL. The middleware will then handle all of these cases in a consistent manner.
 
-\hfcomment{Fig 2 goes here.}
+%\hfcomment{Fig 2 goes here.}
 \begin{figure}[h]
  \includegraphics[width=12cm]{OurErrorHandlingSystem.pdf}
  \centering
@@ -794,6 +794,9 @@ clean up those error messages before they are sent back to Leiningen to be displ
 
 
 \section{Conclusions}\label{sec:conclusion}
+Currently we have a framework for taking Clojure error messages, and making them more accessible for an introductory student. On top of that, we have plans for more improvements on that process and other potential solutions to that problem. We have determined an approach to integrating that framework into the current Clojure project management system.
+
+Future work would involve polishing the error messaging framework, developing the error handling system, and performing usability studies to test that framework and system.
 
 \bibliographystyle{acm}
 \bibliography{mics2015}
