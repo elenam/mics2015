@@ -474,7 +474,7 @@ cannot be cast to clojure.lang.Associative
 clojure.lang.RT.assoc (RT.java:702)
 \end{verbatim}
 
-Since Clojure expects the first argument to be a hashmap and it is not, it unsuccessfully tries to cast 
+Since Clojure expects the first argument to be a hashmap and it is not, it tries to cast 
 the keyword \texttt{:a} into a hashmap.
 This error message refers to \texttt{clojure.lang.Associative}, which is actually a Java interface.
 %\emcomment{it also refers to typecasting which is unfamiliar to Clojure users since Clojure is 
@@ -499,31 +499,52 @@ Here is an example of the code above after corrections:
 Since standard Clojure error messages are generally unhelpful, we aim to replace many Clojure error messages with improved ones.
 %\emcomment{via a {\tt try/catch} statement}
 %\emcomment{substitute them with?} our replacement messages.
-Our system does this by reading in a user's code and wrapping it in a \texttt{try/catch} block.
+A way of accomplishing this is by reading in a user's code and wrapping it in a \texttt{try/catch} block.
 Then any errors thrown by the user's code will be checked against a large collection of regular expressions.
 If a regular expression matches, important details from the original error message are captured and used to insert details into our replacement message.
-However, this try/catch approach does not work well in all situations.
+However, this \texttt{try/catch} approach does not work well in all situations.
 Additional technical challenges arise when dealing with compiler exceptions, the REPL, and lazy sequences.
-Section~\ref{sec:technical} discusses the implementation details and difficulties in more detail.
+Section~\ref{sec:technical} discusses the implementation details and current progress in more detail.
 %\emcomment{Need to mention that in a simple case this approach means surrounding student code with  a {\tt try/catch}. However, this simple approach is not sufficient for Clojure. Section~\ref{sec:technical} discusses the implementation details and challenges.}
 
 
 %\emcomment{I would start by describing the try/catch/replace approach, and only then talk about replacements. Replacements are 
 %there to determine specific arguments (5, "hello", etc) and report those to the user.}
 
-An alternate way we replace Clojure error messages is through function substitution.
+%An alternate way we replace Clojure error messages is through function substitution.
+In the case of predefined functions, such as \texttt{map}, we achieve more informative error messages through function substitution.
 This involves defining functions with the same name as standard Clojure functions.
 Within these definitions, we can do type checking on arguments passed in.
 If the type checks find an error, our system displays a customized error message.
 If no type errors are found, the arguments are passed on to the actual corresponding Clojure function.
 Although this method can only handle runtime exceptions, it is advantageous because we can capture the actual values of the 
-arguments passed in to the redefined functions and use them to provide a detailed error message.
+arguments passed in to the redefined functions and use them to provide a detailed error message. As an example, consider the following erroneous code:
 
-Both methods together, unfortunately, do not handle all possible cases.
+\begin{verbatim}
+(map "add one" [1 2 3])
+\end{verbatim}
+
+Clojure provides the following error message:
+
+\begin{verbatim}
+ClassCastException java.lang.String cannot be cast to
+clojure.lang.IFn  clojure.core/map/fn--4245 (core.clj:2557)
+\end{verbatim}
+
+Our function substitution error handling displays a more informative message:
+\begin{verbatim}
+ERROR: In function map, the first argument "add one" must be
+a function but is a string.
+\end{verbatim}
+
+This message provides information that the problem occurred in the first argument, the offending argument's value was ``add one", and that the argument was a string instead of a function. While function substitution is cumbersome because it involves redefining each function individually, it is the only way to provide the user with specific information about which arguments are causing the problem.
+
+
+Both the \texttt{try/catch} and function substitution methods together, unfortunately, do not handle all possible cases.
 For example, complexities arise when students define their own functions, especially if they are anonymous functions.
 We are unable to anticipate the function definitions that users of our system create, so we cannot rely on function substitution 
 for those cases.
-The try/catch approach must handle those scenarios.
+The \texttt{try/catch} approach must handle those scenarios.
 Replacement error messages are even harder to make for anonymous functions since they have no name by which we can refer to them.
 Although our system does not handle all cases, we hope that it will be helpful in the majority of cases that a Clojure programmer 
 will encounter.
@@ -554,8 +575,8 @@ such as \texttt{(5 - 5)}, where it should be \texttt{(- 5 5)}.
 This produces a message that would be unhelpful for introductory programmers: 
 
 \begin{verbatim}
-ClassCastException java.lang.Long cannot be cast to clojure.lang.IFn
-user/eval769 (NO_SOURCE_FILE:1)
+ClassCastException java.lang.Long cannot be cast to
+clojure.lang.IFn user/eval769 (core.clj line 675)
 \end{verbatim}
 
 In this error message, \texttt{clojure.lang.IFn} is a Java type representing Clojure functions. So, the error message is 
@@ -563,33 +584,32 @@ actually saying that 5 is a number, not a function, since Clojure expected the f
 produces the following error message to replace the one above:
 
 \begin{verbatim}
-ERROR: Attempted to use a number, but a function was expected.
-intro.core/-main (core.clj line 675)
+ERROR: Attempted to use a number, but a function was
+expected. intro.core/-main (core.clj line 675)
 \end{verbatim}
 
 %\emcomment{Perhaps explain that clojure.lang.IFn is a Java type for Clojure functions, thus the error message is saying that 5 
 %is a number, not a function}
 %\emcomment{I am still thinking of user scenarios as ways of evaluating our new messages compared to the Clojure standard messages, so 2.2 and 2.3 should be switched}
 
-\subsection{Hints}\label{sec:hints}
+\subsection{Future work: hints}\label{sec:hints}
 
 While the error message our system produced above says what the core problem is, it does nothing to suggest to the user to check 
 that the arguments are in the correct order, which is the fundamental issue.
-Our system provides hints that offer additional guidance in figuring out why errors have occurred.
+We are developing a system of hints that offer additional guidance in figuring out why errors have occurred.
 Hints are suggestions shown to the user along with an error message.
 Since there is no sure way of telling exactly what went wrong, we will offer several hints that may be applicable to the 
 situation.
 
-For example, when programmers place arguments in an incorrect order, a \texttt{ClassCastException} is usually thrown.
-However, a \texttt{ClassCastException} can be thrown in many other cases as well, which can make providing a specific hint 
-difficult.
+For example, a \texttt{ClassCastException} is usually thrown when programmers place arguments in an incorrect order.
+However, a \texttt{ClassCastException} can be thrown in many other cases as well, which can make providing a specific hint challenging.
 Thus, our system provides several hints in order to cover a variety of situations.
 Hopefully, one of the suggestions will be helpful in solving the real issue.
 
 Developing user scenarios was a helpful exercise because it allowed us to immediately know the root cause of an error even before 
 seeing the error message.
 This allowed us to easily record a human interpretation of the problem and relate it to the error. This process gave us a useful 
-rubric for creating hints. As an example, the following user scenario involves a hypothetical attempt to write a program that 
+methodology for creating hints. As an example, the following user scenario involves a hypothetical attempt to write a program that 
 would print ``Hello World":
 
 \begin{verbatim}
@@ -608,14 +628,15 @@ Our hint for this may be more informative and educational for a new programmer t
 It looks like Clojure is expecting that Hello is something
 named in your program. If you wanted Hello and any following
 words to be plain text, try surrounding them with double
-quotes. If Hello is referring to something named in your program,
-make sure it is spelled correctly.
+quotes. If Hello is referring to something named in your
+program, make sure it is spelled correctly.
 \end{verbatim}
 
-While we have created a useful rubric for creating hints, we still have many more to develop.
-We also hope to provide links to Clojure documentation when appropriate in the hints.
-Since new Clojure programmers will be unfamiliar with much of the terminology and functions in Clojure, directing them to the 
-documentation will provide them with a more concrete understanding of the language.
+User scenarios provide a useful methodology for generating hints, which we will continue to use to extend the system.
+We plan to work with Clojure beginners interactively to improve the hints in the system.
+We also plan to provide links to Clojure documentation when appropriate in the hints.
+Once beginner programmers are comfortable with the terminology used on the documentation pages, directing them to the documentation will provide them with a more concrete understanding of the language.
+
 
 \section{Technical Setup}\label{sec:technical}
 In error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we 
