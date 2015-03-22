@@ -130,6 +130,40 @@ The abstract
 \setcounter{page}{1}
 
 \section{Introduction and Background}\label{sec:intro}
+Felleisen et al~\cite{Felleisen:2004} have made an excellent case for
+using a Lisp as a programming language in an introductory CS class:
+the first language new programmers will use. Lisp offers a simple
+syntax and introduces students to modularity, abstraction, and
+data-driven program design while developing good programming
+practices being explicit about program design principles.
+Essential concepts taught in such an
+introductory class have been shown to be effective in building a
+strong foundation that allows students to
+build upon in later classes that introduce imperative features and 
+object-oriented paradigm~\cite{Bieniusa:2008}. 
+
+Clojure is a relatively new language in the Lisp family that is
+rapidly gaining popularity in industry and in open source
+community. Clojure provides a functional easy-to-use approach to
+developing robust multi-threaded programs. 
+ 
+Clojure offers a variety of built-in datatypes and
+functions that, when introduced rigorously systematically in an
+introductory CS class, would allow students to practice data-focused program
+development. The abundance of open
+source libraries and projects allow students to continue development
+in Clojure after finishing the introductory course, both for their own
+purposes (such as data processing for other courses) and as
+contributions to projects of others.  
+
+This paper describes our work in progress in making Clojure and its
+environment usable for introductory level students. Our efforts
+include transforming Clojure error messages into more
+beginner-friendly ones and developing tools that would allow students
+seamlessly run their program code integrated with our
+modifications without having to deal with Clojure tools that require
+more advanced knowledge. 
+
 \subsection{Overview of Clojure}\label{sec:clojure}
 %\emcomment{Emma - many thanks for getting things started! Below are
 %  comments. The majority of them refer to making this material
@@ -725,7 +759,7 @@ evaluation operation, then the functions specified in the middleware will be app
 evaluation function, then nothing will be changed.
 
 Now, our planned approach is to write an nREPL middleware to intercept the error messages handled by nREPL and clean them up. 
-This approach is also preferable to our initial IDE specific approach because it allows for our system to be IDE indepependent. 
+This approach is also preferable to our initial IDE specific approach because it allows for our system to be IDE independent. 
 
 \subsection{Implementing error handling}
 
