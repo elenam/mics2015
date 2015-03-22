@@ -177,21 +177,18 @@ to break down their code, test specific pieces, and experiment with new function
  % in this context? And you already said it was dynamic.}
 
 Because Clojure is a functional language, it puts strong emphasis on
-immutable data types. An immutable data type cannot have its value
+immutable data types. An immutable data type means data cannot 
 %\emcomment{data cannot be changed, not data types}
-changed. %\emcomment{in? Also, why ``many'' and not all of
+be changed, unlike in %\emcomment{in? Also, why ``many'' and not all of
   %them?}
-When using Clojure, in order to change a data item, an entirely 
-new data item must be made. Immutable data types help prevent side effects in the 
-program. 
-A side effect is when a function alters memory or interacts outside of its scope in 
-addition to 
+imperative programming languages. When using Clojure, in order to change a data item, an entirely 
+new data item must be made. Immutable data types help prevent side effects in the program. 
+A side effect is when a function alters memory or interacts outside of its scope in addition to 
 %\emcomment{or in addition to} 
 returning a value. Side effects can make debugging or resolving errors or failures more
 difficult. This is because when a function interacts with other parts of a program,
 %\emcomment{with other parts of a program} 
-when it is not supposed to, any issues in the code can be spread out throughout the 
-program. The
+when it is not supposed to, any issues in the code can be spread out throughout the program. The
 reduction of side effects means problems with the code are easier to find and fix.
 Because of this, immutable data types are practical for novice programmers.
 %\emcomment{I would first explain what side
@@ -204,16 +201,12 @@ and then any parameters:
 	(<function-name> <argument 1> <argument 2>)
 \end{verbatim}
 
-An example of this can be seen through addition, which is a built-in function, unlike 
-traditional
+An example of this can be seen through addition, which is a built-in function, unlike traditional
 languages where \texttt{+} is an operation: %a built-in mathematical function, addition:
-% \emcomment{All functions, including built-in mathematical functions, use this form? 
-%``Even'' implies
-%that somehow this is unexpected.} built-in functions, such as mathematical functions, 
-%use this form:
+% \emcomment{All functions, including built-in mathematical functions, use this form? ``Even'' implies
+%that somehow this is unexpected.} built-in functions, such as mathematical functions, use this form:
 
-%\hfcomment{I'd explicitly note that + is not an operation, as in C or Java. It's 
-%implied, but it's
+%\hfcomment{I'd explicitly note that + is not an operation, as in C or Java. It's implied, but it's
 %just easier to bludgeon your reader into submission.}
 \begin{verbatim}
 	(+ 5 5)
@@ -244,10 +237,8 @@ like normal Clojure functions.
 Clojure users can also define functions and variables.
 %\emcomment{I don't think we need to explain why people name functions}
 Using the command \texttt{def}, we can define variables:
-%\emcomment{this is a confusing way of saying it, especially because what you are 
-%showing is not a
-%function. How about just talking about defining variables? (and technically functions 
-%are values
+%\emcomment{this is a confusing way of saying it, especially because what you are showing is not a
+%function. How about just talking about defining variables? (and technically functions are values
 %anyway, just like numbers and strings }
 \begin{verbatim}
 	(def mystring "Hello World")
@@ -255,11 +246,9 @@ Using the command \texttt{def}, we can define variables:
 	-> "Hello World"
 \end{verbatim}
 
-In the above example, we define a string to be \texttt{"Hello World"}. This way, 
-whenever we reference 
+In the above example, we define a string to be \texttt{"Hello World"}. This way, whenever we reference 
 %\emcomment{I would avoid ``call'' here since calling is for functions} 
-\texttt{mystring}, the string we bound to the variable name will be returned. We can 
-also use
+\texttt{mystring}, the string we bound to the variable name will be returned. We can also use
 \texttt{defn} to define functions:
 %\emcomment{need to say that defn is used for defining functions}
 \begin{verbatim}
@@ -272,29 +261,22 @@ In this example, we defined
 %\emcomment{define} 
 a function that takes a number and returns that number incremented by 1.
 %\emcomment{returns that number incremented by 1}. 
-In any function, the function name is the word after the \texttt{defn}, the pieces in 
-the square
+In any function, the function name is the word after the \texttt{defn}, the pieces in the square
 brackets after the function name indicate 
-the arguments that the function takes in, and what follows is the body, or what the 
-function does.
+the arguments that the function takes in, and what follows is the body, or what the function does.
 %\emcomment{the expression that the function returns ("action" sounds imperative)}. 
 %\emcomment{the expression returned by the function? ``does'' has imperative flavor}
 
-Now let us say that we have a program where we want to use a function, but only once. 
-This means that
-we do not necessarily need to define it with a name because Clojure supports anonymous 
-functions.
+Now let us say that we have a program where we want to use a function, but only once. This means that
+we do not necessarily need to define it with a name because Clojure supports anonymous functions.
 Anonymous functions allow programmers to quickly make
 % \emcomment{not sure what you mean by``rare'' here. Those that aren't predefined?}  
 functions when needed. 
-However, since these functions are not  stored, the program would not be able to use 
-them more than
+However, since these functions are not  stored, the program would not be able to use them more than
 once. 
 %\emcomment{call them?} by name after the usage. 
-The following example is of the same increment-number function as above, but implemented 
-anonymously.
-The \texttt{map} function takes in a function and a collection as arguments, and applies 
-the function
+The following example is of the same increment-number function as above, but implemented anonymously.
+The \texttt{map} function takes in a function and a collection as arguments, and applies the function
 to the collection: 
 \begin{verbatim}
 	(map (fn [number] (+ number 1)) [0 1 2 3])
@@ -315,28 +297,22 @@ to the collection:
 %	(def increment-number [number] (+ number 1))
 %\end{verbatim}
 
-%Now, the program can call this function any time by using the name \texttt{increment-
-%number}.
+%Now, the program can call this function any time by using the name \texttt{increment-number}.
 
-Clojure also has a variety of different types of data structures, also referred to as 
-collections. All 
-of Clojure's collections are immutable, which means that the data within the structures 
-cannot be modified. 
+Clojure also has a variety of different types of data structures, also referred to as collections. All 
+of Clojure's collections are immutable, which means that the data within the structures cannot be
+modified. 
 %\emcomment{I wouldn't go into persistent, just talk about immutable.}
 %This means that the data in the structures cannot be modified, and that each
 %structure preserves the previous version of itself. 
-The different types of structures Clojure uses are lists (denoted by \texttt{()}), sets 
-(denoted by
-\texttt{\#\{\}}), vectors (denoted by \texttt{[]}), and hashmaps (denoted by 
-\texttt{\{\}}). The first
+The different types of structures Clojure uses are lists (denoted by \texttt{()}), sets (denoted by
+\texttt{\#\{\}}), vectors (denoted by \texttt{[]}), and hashmaps (denoted by \texttt{\{\}}). The first
 three types of data structures listed can contain any number of values of any data type.
-%, including \texttt{nil} (Clojure's equivalent of \texttt{null} or nothing), of values. 
-%Data
+%, including \texttt{nil} (Clojure's equivalent of \texttt{null} or nothing), of values. Data
 %structures are untyped. This means that a collection may contain any data type. 
 %\emcomment{too informal, rephrase} if types of values in one structure
 %mismatched):
-%\mmcomment{I think that the above sentence should make it more clear that a collection 
-%may contain any
+%\mmcomment{I think that the above sentence should make it more clear that a collection may contain any
 %data type. Maybe, don't mention numbers and stick to data types?}
 %\emcomment{agree}
 %\emcomment{don't use the word ``normal'' in a research paper} data structures: 
@@ -359,34 +335,26 @@ three types of data structures listed can contain any number of values of any da
 %(a data structure is untyped, which means it does not care if
 %types of values in one structure as mismatched).
 
-However, hashmaps are unique in the fact that a hashmap is a collection of key-value 
-pairs: 
+However, hashmaps are unique in the fact that a hashmap is a collection of key-value pairs: 
 \begin{verbatim}
 	{key value, key value, key value}
 \end{verbatim}
 
-Hashmaps commonly use keywords. Keywords are a simple indicating word that have a colon 
-in front.
+Hashmaps commonly use keywords. Keywords are a simple indicating word that have a colon in front.
 An example of a hashmap using keywords would look something like: 
-%\emcomment{why ``realistic''? Just an example. What you are showing above is abstract 
-%syntax} 
+%\emcomment{why ``realistic''? Just an example. What you are showing above is abstract syntax} 
 \begin{verbatim}
 	{:a 1, :b 2, :c 3}
 \end{verbatim}
 %\emcomment{It's unclear from just the syntax what it means to be a
 %  collection of key/value pairs.}
 
-%\emcomment{I would first introduce keywords and then explain that they are typically 
-used as keys}
-%\emcomment{Introduce keywords as a datatype before you first use them in an example 
-%(perhaps before
+%\emcomment{I would first introduce keywords and then explain that they are typically used as keys}
+%\emcomment{Introduce keywords as a datatype before you first use them in an example (perhaps before
 % collections)}
-The keywords in the above hashmap are: \texttt{:a}, \texttt{:b}, and \texttt{:c}. 
-Keywords, such as the
-ones above, are often used as keys within hashmaps. The value is the second piece of a 
-key-value pair,
-and each value is bound to a key. In the above example, \texttt{:a} is bound to 
-\texttt{1},
+The keywords in the above hashmap are: \texttt{:a}, \texttt{:b}, and \texttt{:c}. Keywords, such as the
+ones above, are often used as keys within hashmaps. The value is the second piece of a key-value pair,
+and each value is bound to a key. In the above example, \texttt{:a} is bound to \texttt{1},
 \texttt{:b} is bound to \texttt{2}, and \texttt{:c} is bound to \texttt{3}.
 %.  Keywords, such 
 %In hashmaps, usually keywords, indicated by a colon in front of a
@@ -403,18 +371,13 @@ variable name:
 	-> {:a 1, :b 2, :c 3}
 \end{verbatim}
 
-Laziness is another common feature of Clojure. Laziness is when the evaluation of an 
-expression is
+Laziness is another common feature of Clojure. Laziness is when the evaluation of an expression is
 postponed until the return value is needed. An example is the Fibonacci sequence.
-It would be impossible to store all of the infinite numbers in the Fibonacci sequence. 
-By making a lazy
+It would be impossible to store all of the infinite numbers in the Fibonacci sequence. By making a lazy
 function, Clojure can
-evaluate only as much of the Fibonacci sequence as necessary. The next example 
-illustrating laziness uses the functions 
-\texttt{take} and \texttt{range}. \texttt{take} takes the first $n$ elements of a 
-collection, both of
-which are given as arguments. \texttt{range} returns an infinite sequence of non-
-negative
+evaluate only as much of the Fibonacci sequence as necessary. The next example illustrating laziness uses the functions 
+\texttt{take} and \texttt{range}. \texttt{take} takes the first $n$ elements of a collection, both of
+which are given as arguments. \texttt{range} returns an infinite sequence of non-negative
 integers, beginning at 0:
 \begin{verbatim}
 	(take 10 (range))
@@ -427,12 +390,10 @@ Another common example of laziness are \texttt{if} statements:
 	(if (< number 10) (+ number 1) (- number 1))
 \end{verbatim}
 
-In the above example, the \texttt{(+ number 1)} or \texttt{(- number 1)} only evaluates 
-depending on
+In the above example, the \texttt{(+ number 1)} or \texttt{(- number 1)} only evaluates depending on
 whether the \texttt{(< number 10)} evaluates to true or false.
 
-The opposite of a lazy evaluation is an eager evaluation. Eager evaluations fully 
-evaluate their
+The opposite of a lazy evaluation is an eager evaluation. Eager evaluations fully evaluate their
 parameters collection upon runtime.
 
 %This enables the data structures to be called, traversed, etc by the
@@ -444,22 +405,15 @@ parameters collection upon runtime.
 \section{Error Messages}\label{sec:errors}
 
 \subsection{Current error messages in Clojure}\label{sec:currentem}
-Error messages are an important part of programming since they are the main source of 
-communication between a user and the system when an error occurs in the program.
-Error messages are especially important for introductory programmers who have had little 
-to no experience with troubleshooting programs. %\emcomment{programs?}
-These error messages need to provide helpful and easy-to-understand information that can 
-be used to resolve issues.
+Error messages are an important part of programming since they are the main source of communication between a user and the system when an error occurs in the program.
+Error messages are especially important for introductory programmers who have had little to no experience with troubleshooting programs. %\emcomment{programs?}
+These error messages need to provide helpful and easy-to-understand information that can be used to resolve issues.
 %\emcomment{The two sentences are very similar and should be merged}
 
-Error messages in Clojure are not particularly useful for introductory programmers 
-because they do not provide information that can help guide a student in fixing the 
-error.
-Also, Clojure error messages are typically complex because they originate from the 
-underlying Java interpreter (JVM), which most %\emcomment{most} 
+Error messages in Clojure are not particularly useful for introductory programmers because they do not provide information that can help guide a student in fixing the error.
+Also, Clojure error messages are typically complex because they originate from the underlying Java interpreter (JVM), which most %\emcomment{most} 
 novice programmers will be unfamiliar with.
-Below are some examples of error messages in Clojure that might be unhelpful or 
-unintuitive for an introductory student.
+Below are some examples of error messages in Clojure that might be unhelpful or unintuitive for an introductory student.
 
 \subsubsection{Example 1}\label{sec:ex1}
 
@@ -469,32 +423,25 @@ Consider the following (erroneous) code fragment:
 (defn square-this (* input input))
 \end{verbatim}
 
-In this code sample, the programmer is attempting to create a function \texttt{square-
-this} which will take a number and return the square of its value.
+In this code sample, the programmer is attempting to create a function \texttt{square-this} which will take a number and return the square of its value.
 However, the programmer forgot to declare that \texttt{input} should be a parameter.
-In Clojure, function declarations always require a vector containing the declared 
-parameter names.
+In Clojure, function declarations always require a vector containing the declared parameter names.
 The resulting error message is: 
 \begin{verbatim}
 IllegalArgumentException Parameter declaration * should be 
 a vector 
 clojure.core/assert-valid-fdecl (core.clj:6842)
 \end{verbatim}
-It does provide key words that could lead the programmer to fixing the issue such as 
-\texttt{Parameter} and \texttt{vector}.
-However, the error message also includes information that a new programmer might find 
-intimidating or confusing such as 
+It does provide key words that could lead the programmer to fixing the issue such as \texttt{Parameter} and \texttt{vector}.
+However, the error message also includes information that a new programmer might find intimidating or confusing such as 
 
 \noindent
 \texttt{clojure.core/assert-valid-fdecl (core.clj:6842)}.
 
 
 
-The error can be corrected by placing a vector of inputs, in this case containing a 
-single input, right after the function name.
-%\emcomment{The previous sentence creates an awkward flow. Maybe "the error can be 
-%corrected by placing a vector of inputs, in this case containing a single input, right 
-%after the function name"?}
+The error can be corrected by placing a vector of inputs, in this case containing a single input, right after the function name.
+%\emcomment{The previous sentence creates an awkward flow. Maybe "the error can be corrected by placing a vector of inputs, in this case containing a single input, right after the function name"?}
 Here is an example of the code above after corrections have been made:
 %Corrected Code:
 \begin{verbatim}
@@ -503,17 +450,14 @@ Here is an example of the code above after corrections have been made:
 
 \subsubsection{Example 2}\label{sec:ex2}
 
-In the next example, the programmer is attempting to return a new hashmap with an added 
-key-value pair.
+In the next example, the programmer is attempting to return a new hashmap with an added key-value pair.
 The function \texttt{assoc} is generally used to make this happen.
 \begin{verbatim}
 (assoc :a 3 {:a 5, :b 8, :c 9})
 \end{verbatim}
 
-In this attempt, the programmer did not put the arguments for \texttt{assoc} in the 
-correct order.
-When using the function \texttt{assoc}, the hashmap should go before the new key and 
-value.
+In this attempt, the programmer did not put the arguments for \texttt{assoc} in the correct order.
+When using the function \texttt{assoc}, the hashmap should go before the new key and value.
 The error message that results follows:
 
 \begin{verbatim}
@@ -522,18 +466,12 @@ cannot be cast to clojure.lang.Associative
 clojure.lang.RT.assoc (RT.java:702)
 \end{verbatim}
 
-Since Clojure expects the first argument to be a hashmap and it is not, it 
-unsuccessfully tries to cast the keyword \texttt{:a} into a hashmap.
-This error message refers to \texttt{clojure.lang.Associative}, which is actually a Java 
-interface.
-%\emcomment{it also refers to typecasting which is unfamiliar to Clojure users since 
-%Clojure is dynamically typed with no explicit type declarations.}
-Referring to that interface may not be useful for Clojure programmers if they have 
-little to no experience with Java or type hierarchies.
-Furthermore, the error message refers to typecasting, which is unfamiliar to Clojure 
-users since Clojure is dynamically typed with no explicit type declarations.
-The error message is ineffective at explaining to the programmer that the underlying 
-problem with their code was a misordering of arguments.
+Since Clojure expects the first argument to be a hashmap and it is not, it unsuccessfully tries to cast the keyword \texttt{:a} into a hashmap.
+This error message refers to \texttt{clojure.lang.Associative}, which is actually a Java interface.
+%\emcomment{it also refers to typecasting which is unfamiliar to Clojure users since Clojure is dynamically typed with no explicit type declarations.}
+Referring to that interface may not be useful for Clojure programmers if they have little to no experience with Java or type hierarchies.
+Furthermore, the error message refers to typecasting, which is unfamiliar to Clojure users since Clojure is dynamically typed with no explicit type declarations.
+The error message is ineffective at explaining to the programmer that the underlying problem with their code was a misordering of arguments.
 Here is an example of the code above after corrections:
  
 \begin{verbatim}
@@ -541,80 +479,52 @@ Here is an example of the code above after corrections:
 -> {:c 9, :b 8, :a 3}
 \end{verbatim}
 
-%\emcomment{You might want to talk about the message transformations first, and then 
-user scenarios used to test how well it works}
+%\emcomment{You might want to talk about the message transformations first, and then user scenarios used to test how well it works}
 
 \subsection{Error message transformations}\label{sec:transform}
 
-Since standard Clojure error messages are generally unhelpful, we aim to replace many 
-Clojure error messages with improved ones.
+Since standard Clojure error messages are generally unhelpful, we aim to replace many Clojure error messages with improved ones.
 %\emcomment{via a {\tt try/catch} statement}
 %\emcomment{substitute them with?} our replacement messages.
-Our system does this by reading in a user's code and wrapping it in a \texttt{try/catch} 
-block.
-Then any errors thrown by the user's code will be checked against a large collection of 
-regular expressions.
-If a regular expression matches, important details from the original error message are 
-captured and used to insert details into our replacement message.
+Our system does this by reading in a user's code and wrapping it in a \texttt{try/catch} block.
+Then any errors thrown by the user's code will be checked against a large collection of regular expressions.
+If a regular expression matches, important details from the original error message are captured and used to insert details into our replacement message.
 However, this try/catch approach does not work well in all situations.
-Additional technical challenges arise when dealing with compiler exceptions, the REPL, 
-and lazy sequences.
-Section~\ref{sec:technical} discusses the implementation details and difficulties in 
-more detail.
-%\emcomment{Need to mention that in a simple case this approach means surrounding 
-%student code with  a {\tt try/catch}. However, this simple approach is not sufficient 
-%for Clojure. Section~\ref{sec:technical} discusses the implementation details and 
-%challenges.}
+Additional technical challenges arise when dealing with compiler exceptions, the REPL, and lazy sequences.
+Section~\ref{sec:technical} discusses the implementation details and difficulties in more detail.
+%\emcomment{Need to mention that in a simple case this approach means surrounding student code with  a {\tt try/catch}. However, this simple approach is not sufficient for Clojure. Section~\ref{sec:technical} discusses the implementation details and challenges.}
 
 
-%\emcomment{I would start by describing the try/catch/replace approach, and only then 
-%talk about replacements. Replacements are there to determine specific arguments (5, 
-%"hello", etc) and report those to the user.}
+%\emcomment{I would start by describing the try/catch/replace approach, and only then talk about replacements. Replacements are there to determine specific arguments (5, "hello", etc) and report those to the user.}
 
 An alternate way we replace Clojure error messages is through function substitution.
 This involves defining functions with the same name as standard Clojure functions.
 Within these definitions, we can do type checking on arguments passed in.
 If the type checks find an error, our system displays a customized error message.
-If no type errors are found, the arguments are passed on to the actual corresponding 
-Clojure function.
-Although this method can only handle runtime exceptions, it is advantageous because we 
-can capture the actual values of the arguments passed in to the redefined functions and 
-use them to provide a detailed error message.
+If no type errors are found, the arguments are passed on to the actual corresponding Clojure function.
+Although this method can only handle runtime exceptions, it is advantageous because we can capture the actual values of the arguments passed in to the redefined functions and use them to provide a detailed error message.
 
 Both methods together, unfortunately, do not handle all possible cases.
-For example, complexities arise when students define their own functions, especially if 
-they are anonymous functions.
-We are unable to anticipate the function definitions that users of our system create, so 
-we cannot rely on function substitution for those cases.
+For example, complexities arise when students define their own functions, especially if they are anonymous functions.
+We are unable to anticipate the function definitions that users of our system create, so we cannot rely on function substitution for those cases.
 The try/catch approach must handle those scenarios.
-Replacement error messages are even harder to make for anonymous functions since they 
-have no name by which we can refer to them.
-Although our system does not handle all cases, we hope that it will be helpful in the 
-majority of cases that a Clojure programmer will encounter.
+Replacement error messages are even harder to make for anonymous functions since they have no name by which we can refer to them.
+Although our system does not handle all cases, we hope that it will be helpful in the majority of cases that a Clojure programmer will encounter.
 
-%\alcomment{add a paragraph explaining that this does not handle every possible case. 
-%For example, complexities arise when students define their own functions, especially if 
-%they are anonymous functions. However, we hope that our system will be helpful in the 
-%majority of cases that it does handle.}
+%\alcomment{add a paragraph explaining that this does not handle every possible case. For example, complexities arise when students define their own functions, especially if they are anonymous functions. However, we hope that our system will be helpful in the majority of cases that it does handle.}
 
 \pscomment{Should we include an image of the error popup of our system?}
 
 \subsection{User scenarios}\label{sec:scenarios}
 
-In order to better understand what our software users might encounter, we developed user 
-scenarios detailing typical coding problems a new programmer might face.
-To create these user scenarios, we created solutions to common beginner programming 
-exercises and purposefully introduced errors that a new programmer might make.
+In order to better understand what our software users might encounter, we developed user scenarios detailing typical coding problems a new programmer might face.
+To create these user scenarios, we created solutions to common beginner programming exercises and purposefully introduced errors that a new programmer might make.
 We then recorded the error messages that these solutions produced.
-We also took note of the underlying cause of the errors so that we have a better idea of 
-how to improve upon the error messages for our program.
-We then took the same solution and ran it within our program to compare the error 
-message our system produces against the one Clojure produces.
+We also took note of the underlying cause of the errors so that we have a better idea of how to improve upon the error messages for our program.
+We then took the same solution and ran it within our program to compare the error message our system produces against the one Clojure produces.
 
-These user scenarios showed us typical errors a student will be experiencing when 
-learning to program in Clojure for the first time.
-For example, when a student first starts writing basic operations in Clojure, a typical 
-mistake might be forgetting to put the function in front of the arguments,
+These user scenarios showed us typical errors a student will be experiencing when learning to program in Clojure for the first time.
+For example, when a student first starts writing basic operations in Clojure, a typical mistake might be forgetting to put the function in front of the arguments,
 such as \texttt{(5 - 5)}, where it should be \texttt{(- 5 5)}. 
 This produces a message that would be unhelpful for introductory programmers: 
 
@@ -623,45 +533,30 @@ ClassCastException java.lang.Long cannot be cast to clojure.lang.IFn
 user/eval769 (NO_SOURCE_FILE:1)
 \end{verbatim}
 
-In this error message, \texttt{clojure.lang.IFn} is a Java type representing Clojure 
-functions. So, the error message is actually saying that 5 is a number, not a function, 
-since Clojure expected the function name to be listed first. Our system produces the 
-following error message to replace the one above:
+In this error message, \texttt{clojure.lang.IFn} is a Java type representing Clojure functions. So, the error message is actually saying that 5 is a number, not a function, since Clojure expected the function name to be listed first. Our system produces the following error message to replace the one above:
 
 \begin{verbatim}
 ERROR: Attempted to use a number, but a function was expected.
 intro.core/-main (core.clj line 675)
 \end{verbatim}
 
-%\emcomment{Perhaps explain that clojure.lang.IFn is a Java type for Clojure functions, 
-%thus the error message is saying that 5 is a number, not a function}
-%\emcomment{I am still thinking of user scenarios as ways of evaluating our new messages 
-%compared to the Clojure standard messages, so 2.2 and 2.3 should be switched}
+%\emcomment{Perhaps explain that clojure.lang.IFn is a Java type for Clojure functions, thus the error message is saying that 5 is a number, not a function}
+%\emcomment{I am still thinking of user scenarios as ways of evaluating our new messages compared to the Clojure standard messages, so 2.2 and 2.3 should be switched}
 
 \subsection{Hints}\label{sec:hints}
 
-While the error message our system produced above says what the core problem is, it does 
-nothing to suggest to the user to check that the arguments are in the correct order, 
-which is the fundamental issue.
-Our system provides hints that offer additional guidance in figuring out why errors have 
-occurred.
+While the error message our system produced above says what the core problem is, it does nothing to suggest to the user to check that the arguments are in the correct order, which is the fundamental issue.
+Our system provides hints that offer additional guidance in figuring out why errors have occurred.
 Hints are suggestions shown to the user along with an error message.
-Since there is no sure way of telling exactly what went wrong, we will offer several 
-hints that may be applicable to the situation.
+Since there is no sure way of telling exactly what went wrong, we will offer several hints that may be applicable to the situation.
 
-For example, when programmers place arguments in an incorrect order, a 
-\texttt{ClassCastException} is usually thrown.
-However, a \texttt{ClassCastException} can be thrown in many other cases as well, which 
-can make providing a specific hint difficult.
+For example, when programmers place arguments in an incorrect order, a \texttt{ClassCastException} is usually thrown.
+However, a \texttt{ClassCastException} can be thrown in many other cases as well, which can make providing a specific hint difficult.
 Thus, our system provides several hints in order to cover a variety of situations.
 Hopefully, one of the suggestions will be helpful in solving the real issue.
 
-Developing user scenarios was a helpful exercise because it allowed us to immediately 
-know the root cause of an error even before seeing the error message.
-This allowed us to easily record a human interpretation of the problem and relate it to 
-the error. This process gave us a useful rubric for creating hints. As an example, the 
-following user scenario involves a hypothetical attempt to write a program that would 
-print ``Hello World":
+Developing user scenarios was a helpful exercise because it allowed us to immediately know the root cause of an error even before seeing the error message.
+This allowed us to easily record a human interpretation of the problem and relate it to the error. This process gave us a useful rubric for creating hints. As an example, the following user scenario involves a hypothetical attempt to write a program that would print ``Hello World":
 
 \begin{verbatim}
 (print Hello World)
@@ -673,8 +568,7 @@ CompilerException java.lang.RuntimeException:
 Unable to resolve symbol: Hello in this context
 \end{verbatim}
 
-Our hint for this may be more informative and educational for a new programmer than the 
-error message above:
+Our hint for this may be more informative and educational for a new programmer than the error message above:
 
 \begin{verbatim}
 It looks like Clojure is expecting that Hello is something
@@ -684,157 +578,62 @@ quotes. If Hello is referring to something named in your program,
 make sure it is spelled correctly.
 \end{verbatim}
 
-While we have created a useful rubric for creating hints, we still have many more to 
-develop.
+While we have created a useful rubric for creating hints, we still have many more to develop.
 We also hope to provide links to Clojure documentation when appropriate in the hints.
-Since new Clojure programmers will be unfamiliar with much of the terminology and 
-functions in Clojure, directing them to the documentation will provide them with a more 
-concrete understanding of the language.
+Since new Clojure programmers will be unfamiliar with much of the terminology and functions in Clojure, directing them to the documentation will provide them with a more concrete understanding of the language.
 
 \section{Technical Setup}\label{sec:technical}
-In error handling, there are many technical issues. First we need to figure out how to 
-catch and process the errors. Then, we need to figure out how to integrate that system 
-with the tools for managing Clojure projects. Throughout this process it is important to 
-be mindful of usability for introductory students. Therefore we would like to synthesize 
-the error handling system and the tools used by the student in a way that is both usable 
-and robust.
+In error handling, there are many technical issues. First we need to figure out how to catch and process the errors. Then, we need to figure out how to integrate that system with the tools for managing Clojure projects. Throughout this process it is important to be mindful of usability for introductory students. Therefore we would like to synthesize the error handling system and the tools used by the student in a way that is both usable and robust.
 
 
 \subsection{On the nature of errors in Clojure}
 
 
 %\emcomment{Move to beginning, then talk about errors}
-%\emcomment{just make a reference back to 1.1 where we have introduced REPL: the 
-%explanation of why it is useful should be there, not here}
+%\emcomment{just make a reference back to 1.1 where we have introduced REPL: the explanation of why it is useful should be there, not here}
 %\emcomment{A side note: and when running expectations}
-There are two different environments in which to evaluate code in Clojure. A user can 
-evaluate all of their code by running it, or they can evaluate code snippets using REPL. 
-When developing code, it is common practice for a user to use REPL to test pieces of 
-their code. This is practice is described in depth in section \ref{sec:clojure}. Due to 
-the importance of REPL interactions for code development and debugging, it is essential 
-for the errors in both environments to be consistent. Therefore, we need to make sure 
-that our error handling system is capable of addressing the errors from compilation, 
-runtime,  REPL, and the testing library \hfcomment{add ref to testing library?}.
+There are two different environments in which to evaluate code in Clojure. A user can evaluate all of their code by running it, or they can evaluate code snippets using REPL. When developing code, it is common practice for a user to use REPL to test pieces of their code. This is practice is described in depth in section \ref{sec:clojure}. Due to the importance of REPL interactions for code development and debugging, it is essential for the errors in both environments to be consistent. Therefore, we need to make sure that our error handling system is capable of addressing the errors from compilation, runtime,  REPL, and the testing library \hfcomment{add ref to testing library?}.
 
-%\emcomment{a minor note: since compilation errors happen first, mention them first? 
-%Also mention that due to a dynamic nature of Clojure many type errors that would've 
-%been compilation errors in Java are runtime errors in Clojure}
-%\emcomment{they don't stem from laziness, their timing is affected by laziness; also 
-%note that running code in REPL also presents challenges even for runtime errors}
+%\emcomment{a minor note: since compilation errors happen first, mention them first? Also mention that due to a dynamic nature of Clojure many type errors that would've been compilation errors in Java are runtime errors in Clojure}
+%\emcomment{they don't stem from laziness, their timing is affected by laziness; also note that running code in REPL also presents challenges even for runtime errors}
 %\emcomment{laziness seems to be spelled with an i}
-In Clojure, error messages are divided into two different categories, compilation time 
-and runtime. As their names imply, compilation errors occur when the code is compiled, 
-and runtime errors occur when the code is run.
+In Clojure, error messages are divided into two different categories, compilation time and runtime. As their names imply, compilation errors occur when the code is compiled, and runtime errors occur when the code is run.
+Compilation errors cannot be handled by a simple {\tt try/catch} because they originate in the compiler before the code is even evaluated. Therefore, we need to catch the errors from the compiler so that we can handle them. Compiler errors are less common in Clojure, as compared to Java, because the types in Clojure are dynamic and thus checked at runtime.
+Handling runtime errors is made relatively simple by using a {\tt try/catch}  with the exception of handling errors that involve laziness. Since lazy sequences are evaluated when they are needed, an error in a lazy sequence will not occur until the sequence needs to be evaluated. This means that the error will often not occur where it originated. When this is the case, the user will be provided with unhelpful or often misleading error messages about the nature of the problem. These errors can be very frustrating to troubleshoot especially for introductory students. %Compilation errors are much more difficult to handle than runtime errors. 
+%\emcomment{I think you are going into a lot of technical details that should be explained on the diagram. Also make it clear that we have solved some of these challenges, but for many (most?) of them this is still a work in progress.}
 
-Compilation errors cannot be handled by a simple {\tt try/catch} because they originate 
-in the compiler before the code is even evaluated. Therefore, we need to catch the 
-errors from the compiler so that we can handle them. Compiler errors are less common in 
-Clojure, as compared to Java, because the types in Clojure are dynamic and thus checked 
-at runtime.
-Handling runtime errors is made relatively simple by using a {\tt try/catch}  with the 
-exception of handling errors that involve laziness. Since lazy sequences are evaluated 
-when they are needed, an error in a lazy sequence will not occur until the sequence 
-needs to be evaluated. This means that the error will often not occur where it 
-originated. When this is the case, the user will be provided with unhelpful or often 
-misleading error messages about the nature of the problem. These errors can be very 
-frustrating to troubleshoot especially for introductory students. %Compilation errors 
-are much more difficult to handle than runtime errors. 
-%\emcomment{I think you are going into a lot of technical details that should be 
-%explained on the diagram. Also make it clear that we have solved some of these 
-%challenges, but for many (most?) of them this is still a work in progress.}
-
-Some of these problems have not been resolved. Finding the origin of errors caused by 
-laziness has not been solved, but we have a potential solution that involves forcing 
-evaluation of lazy sequences in student code. Compilation errors are also problematic, 
-but we hope to resolve this by intercepting error messages as they are created, which is 
-detailed in section \ref{sec:approach}.
+Some of these problems have not been resolved. Finding the origin of errors caused by laziness has not been solved, but we have a potential solution that involves forcing evaluation of lazy sequences in student code. Compilation errors are also problematic, but we hope to resolve this by intercepting error messages as they are created, which is detailed in section \ref{sec:approach}.
 
 
  
 \subsection{Leiningen}
-Leiningen is an open source project under active development that is the primary tool 
-for project management in the Clojure community\cite{LeinGitHub}. Leiningen is a fully 
-featured project manager that cleanly deals with dependencies as well as provides useful 
-tools for developing projects. When a project is run in Leiningen, Leiningen will 
-resolve all dependencies. For example, if your project requires a plugin, Leiningen will 
-automatically retrieve, install, and apply that plugin to your code. After it has 
-resolved the dependencies, Leiningen uses other tools to build, compile, and run the 
-project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it 
-only takes one command to begin a new project, and it only takes one command to run a 
-project. Because of the level of abstraction that Leiningen offers, we have decided that 
-it is the best option for an introductory course.
+Leiningen is an open source project under active development that is the primary tool for project management in the Clojure community\cite{LeinGitHub}. Leiningen is a fully featured project manager that cleanly deals with dependencies as well as provides useful tools for developing projects. When a project is run in Leiningen, Leiningen will resolve all dependencies. For example, if your project requires a plugin, Leiningen will automatically retrieve, install, and apply that plugin to your code. After it has resolved the dependencies, Leiningen uses other tools to build, compile, and run the project. Leiningen makes running Clojure projects extremely simple. With Leiningen, it only takes one command to begin a new project, and it only takes one command to run a project. Because of the level of abstraction that Leiningen offers, we have decided that it is the best option for an introductory course.
 
-While Leiningen is a very helpful tool, there are still some aspects that are 
-challenging for introductory students. The most difficult of which is the interface. 
-Leiningen uses the command line as its primary interface. The command line is both a 
-distraction and a barrier to teaching the material in an introductory course. Therefore, 
-we would like to abstract over the command line by using a graphical interface, ideally 
-integrated with the IDE used by students. This graphical interface would extend the 
-simplicity of Leiningen while still providing the same functionality needed by students.
+While Leiningen is a very helpful tool, there are still some aspects that are challenging for introductory students. The most difficult of which is the interface. Leiningen uses the command line as its primary interface. The command line is both a distraction and a barrier to teaching the material in an introductory course. Therefore, we would like to abstract over the command line by using a graphical interface, ideally integrated with the IDE used by students. This graphical interface would extend the simplicity of Leiningen while still providing the same functionality needed by students.
 
 \subsection{IDEs}
 \mmcomment{We still need references for this section.}
+Choosing the right IDE is important, especially for an introductory class, because it is the environment in which students will develop their code. We have looked into many of the IDEs available for Clojure, and we have decided that the most promising choices are LightTable and Nightcode. Both IDEs offer intuitive interfaces, syntax checking, built-in REPLs, and easy project management. They each use Leiningen to build projects. They are also both maintained by open source communities and are under active development.  
 
-Choosing the right IDE is important, especially for an introductory class, because it is 
-the environment in which students will develop their code. We have looked into many of 
-the IDEs available for Clojure, and we have decided that the most promising choices are 
-LightTable and Nightcode. Both IDEs offer intuitive interfaces, syntax checking, built-
-in REPLs, and easy project management. They each use Leiningen to build projects. They 
-are also both maintained by open source communities and are under active development.  
-
-Both IDEs have a lot of functionality that we are looking for, but they do have some 
-notable differences. For instance,  LightTable requires a separate installation of 
-Leiningen. 
-This adds another layer of difficulty for the student since installing Leiningen is non-
-trivial. Nightcode comes packaged with its own distribution of Leiningen. This makes 
-Nightcode easier to install and use. The REPL in each IDE is slightly different. In 
-LightTable, the user opens up REPL
-using a context menu, and the REPL constantly evaluates each line of code in it. This 
-ultimately provides more information, but it is very different from the traditional REPL 
-in ways that may be a little confusing for introductory students. In Nightcode, the REPL 
-will always up in a separate frame, and each line is only evaluated when the user hits 
-enter. LightTable uses hot keys and a context menu to do a lot of the tasks in 
-LightTable such as running the project or starting a REPL. This is less
-familiar to introductory students, and it may be a little daunting at first. LightTable 
-does provide a nice easy reference for searching for the appropriate hot keys to lessen 
-the learning curve. Alternatively, Nightcode uses a lot of clearly labeled buttons and 
-tabs that are intuitive for the user
-to perform tasks. While we prefer Nightcode at the moment, it is unclear which IDE will 
-be preferable in the future.
-%\mmcomment{Do we have a preference for either or which one will likely be used in the 
-%introductory course?} 
-%\emcomment{You kind of made the case for Nightcode here. Perhaps make it more clear 
-%what the advantages of LightTable are? Ultimately, however, we are trying to target 
-%both because wer don't know where the community will go a few years down the road (see 
-%my comment above)}
+Both IDEs have a lot of functionality that we are looking for, but they do have some notable differences. For instance,  LightTable requires a separate installation of Leiningen. 
+This adds another layer of difficulty for the student since installing Leiningen is non-trivial. Nightcode comes packaged with its own distribution of Leiningen. This makes Nightcode easier to install and use. The REPL in each IDE is slightly different. In LightTable, the user opens up REPL
+using a context menu, and the REPL constantly evaluates each line of code in it. This ultimately provides more information, but it is very different from the traditional REPL in ways that may be a little confusing for introductory students. In Nightcode, the REPL will always up in a separate frame, and each line is only evaluated when the user hits enter. LightTable uses hot keys and a context menu to do a lot of the tasks in LightTable such as running the project or starting a REPL. This is less
+familiar to introductory students, and it may be a little daunting at first. LightTable does provide a nice easy reference for searching for the appropriate hot keys to lessen the learning curve. Alternatively, Nightcode uses a lot of clearly labeled buttons and tabs that are intuitive for the user
+to perform tasks. While we prefer Nightcode at the moment, it is unclear which IDE will be preferable in the future.
+%\mmcomment{Do we have a preference for either or which one will likely be used in the introductory course?} 
+%\emcomment{You kind of made the case for Nightcode here. Perhaps make it more clear what the advantages of LightTable are? Ultimately, however, we are trying to target both because wer don't know where the community will go a few years down the road (see my comment above)}
 
 \subsection{Approaches}\label{sec:approach}
 %\emcomment{Use consistent capitalization in section titles}
 %\mmcomment{Describing the journey to nREPL}
 %\mmcomment{Is this section necessary?}
-Our first approach was to develop a IDE-specific plugin to intercept the error messages 
-going to the console of the IDE. We found that the IDE was not handling the errors, and 
-it was just printing out what was coming from Leiningen.
+Our first approach was to develop a IDE-specific plugin to intercept the error messages going to the console of the IDE. We found that the IDE was not handling the errors, and it was just printing out what was coming from Leiningen.
 
-Our next approach was to use a Leiningen plugin to try and intercept error messages. We 
-searched through the Leiningen source code, and attempted various methods of interacting 
-with Leiningen. None of these approaches allowed us to intercept the error messages that 
-were being printed to the console. We now think that Leiningen uses nREPL, which is an 
-evaluation tool, to handle compilation and error messages.
+Our next approach was to use a Leiningen plugin to try and intercept error messages. We searched through the Leiningen source code, and attempted various methods of interacting with Leiningen. None of these approaches allowed us to intercept the error messages that were being printed to the console. We now think that Leiningen uses nREPL, which is an evaluation tool, to handle compilation and error messages.
 
-nREPL is a client and server system for evaluating user code. nREPL middleware can 
-intercept messages from the nREPL system and apply functions to those messages. nREPL 
-middleware uses handlers for interacting with the messages. These handlers look for 
-operations with certain keywords and only are applied to those specific operations. For 
-example, an nREPL middleware can specify a handler for evaluation operations. The 
-middleware will inspect every operation that passes through nREPL. If it is an 
-evaluation operation, then the functions specified in the middleware will be applied to 
-the operation. If the operation is not an evaluation function, then nothing will be 
-changed.
+nREPL is a client and server system for evaluating user code. nREPL middleware can intercept messages from the nREPL system and apply functions to those messages. nREPL middleware uses handlers for interacting with the messages. These handlers look for operations with certain keywords and only are applied to those specific operations. For example, an nREPL middleware can specify a handler for evaluation operations. The middleware will inspect every operation that passes through nREPL. If it is an evaluation operation, then the functions specified in the middleware will be applied to the operation. If the operation is not an evaluation function, then nothing will be changed.
 
-Now, our planned approach is to write an nREPL middleware to intercept the error 
-messages handled by nREPL and clean them up. This approach is also preferable to our 
-initial IDE specific approach because it allows for our system to be IDE indepependent. 
+Now, our planned approach is to write an nREPL middleware to intercept the error messages handled by nREPL and clean them up. This approach is also preferable to our initial IDE specific approach because it allows for our system to be IDE indepependent. 
 
 \subsection{Implementing error handling}
 
@@ -845,26 +644,13 @@ initial IDE specific approach because it allows for our system to be IDE indepep
  \label{fig:CurrentError}
 \end{figure}
 
-\emcomment{I see a compiler here, but I don't see an interpreter. Is nREPL an 
-interpreter? Make it clear} \hfcomment{There are no interpreters in canonical Clojure.}
-The way error handling is currently performed while using Leiningen is described in 
-figure \ref{fig:CurrentError}. First, the student runs their project through Leiningen 
-using the console by calling \texttt{lein run}. Then, Leiningen will take the 
-dependencies defined in the student code and resolve them. After the dependencies have 
-been resolved, Leiningen then sends the code to nREPL to be compiled and evaluated. Any 
-errors are passed back to the current output device, which is the terminal by default. 
+\emcomment{I see a compiler here, but I don't see an interpreter. Is nREPL an interpreter? Make it clear} \hfcomment{There are no interpreters in canonical Clojure.}
+The way error handling is currently performed while using Leiningen is described in figure \ref{fig:CurrentError}. First, the student runs their project through Leiningen using the console by calling \texttt{lein run}. Then, Leiningen will take the dependencies defined in the student code and resolve them. After the dependencies have been resolved, Leiningen then sends the code to nREPL to be compiled and evaluated. Any errors are passed back to the current output device, which is the terminal by default. 
 
 %\emcomment{where? can you show it in the diagram?}
 %\emcomment{replace? Transform?}
-%\emcomment{address the difference between compilation errors and runtime errors since 
-%you mentioned those earlier; also mention where REPL interactions happen in this 
-%setup.}
-In our approach, we would like to catch the errors from nREPL by using nREPL middleware. 
-Once we catch those errors we will transform them as described in section 
-\ref{sec:errors}. After being cleaned up, the error will then be rethrown to Leiningen, 
-so that it can be printed out for the student to see. We believe that nREPL handles all 
-errors thrown by the compiler, runtime, and the REPL. The middleware will then handle 
-all of these cases in a consistent manner.
+%\emcomment{address the difference between compilation errors and runtime errors since you mentioned those earlier; also mention where REPL interactions happen in this setup.}
+In our approach, we would like to catch the errors from nREPL by using nREPL middleware. Once we catch those errors we will transform them as described in section \ref{sec:errors}. After being cleaned up, the error will then be rethrown to Leiningen, so that it can be printed out for the student to see. We believe that nREPL handles all errors thrown by the compiler, runtime, and the REPL. The middleware will then handle all of these cases in a consistent manner.
 
 \hfcomment{Fig 2 goes here.}
 \begin{figure}[h]
@@ -874,16 +660,7 @@ all of these cases in a consistent manner.
  \label{fig:OurSystem}
 \end{figure}
 
-Our plan for error handling is laid out in figure \ref{fig:OurSystem}. First, the 
-student will use our graphical user interface(GUI) to run their project. The GUI 
-abstracts over the command line interactions by providing a way of interacting that is 
-more familiar to students. Next, the Leiningen plugin will inject any dependencies into 
-the student's code required by our system. This includes our library of functions for 
-the student or a graphical library that the student may need. After being processed by 
-the Leiningen plugin, the student code is then given to nREPL by Leiningen to be 
-evaluated. nREPL then uses the Clojure compiler to compile the code. If any errors are 
-thrown they will be given to the middleware. The middleware will then clean up those 
-error messages before they are sent back to Leiningen to be displayed by the GUI.
+Our plan for error handling is laid out in figure \ref{fig:OurSystem}. First, the student will use our graphical user interface(GUI) to run their project. The GUI abstracts over the command line interactions by providing a way of interacting that is more familiar to students. Next, the Leiningen plugin will inject any dependencies into the student's code required by our system. This includes our library of functions for the student or a graphical library that the student may need. After being processed by the Leiningen plugin, the student code is then given to nREPL by Leiningen to be evaluated. nREPL then uses the Clojure compiler to compile the code. If any errors are thrown they will be given to the middleware. The middleware will then clean up those error messages before they are sent back to Leiningen to be displayed by the GUI.
 
 
 \section{Conclusions}\label{sec:conclusion}
@@ -896,8 +673,7 @@ error messages before they are sent back to Leiningen to be displayed by the GUI
 %   paper or not...}
 % \emcomment{Emma - Don't worry about it for now. Do you have a reference you
 %   would like to add?}
-% \escomment{I have a few links to websites I used, but I'm not sure what format I 
-%should use for preparing them properly}
+% \escomment{I have a few links to websites I used, but I'm not sure what format I should use for preparing them properly}
 
 % That's all folks!
 \end{document}
