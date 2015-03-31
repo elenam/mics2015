@@ -1,6 +1,5 @@
 *.gz
 *.aux
-*.pdf
 *.bbl
 *.log
 *.blg
@@ -9,3 +8,5 @@
 *.snm
 *.toc
 *.vrb
+mics2015.pdf
+mics2015talk.pdf
