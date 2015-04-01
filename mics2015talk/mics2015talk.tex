@@ -62,6 +62,7 @@ April 11, 2015\par}
 \frametitle{Intro to Clojure}
 	\begin{itemize}
   	 \item Fill in things here......
+  	 \item \hfcomment{This probably needs to be a few slides.}
 	 \end{itemize}
 \end{frame}
 
@@ -134,7 +135,63 @@ April 11, 2015\par}
   	 \item Fill in things here......
 	 \end{itemize}
 \end{frame}
+% Henry & Max
+\section{Technical Setup}
+\begin{frame}
+\frametitle{Setup}
+	\begin{itemize}
+		\item IDE
+		\begin{itemize}
+			\item LightTable
+			\item Nightcode
+		\end{itemize}
+		\item Leiningen
+		\begin{itemize}
+			\item project manager
+			\item popular in Clojure community
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Current Workflow Diagram}
+\begin{figure}[h]
+ \includegraphics[width=10cm]{../CurrentErrorHandling.pdf}
+ \centering
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Issues 1}
+	\begin{itemize}
+		\item installation of Leiningen is nontrivial
+		\item command line acts as a barrier
+		\item we do not want students managing dependencies
+		\item no integration with new error handling system
+	\end{itemize} 
+\end{frame}
+
+\begin{frame}
+\frametitle{Proposed Solutions}
+	\begin{itemize}
+		\item use scripting to abstract over Leiningen installation
+		\item Graphical User Interface will abstract over command line
+		\item Leiningen plugin to inject needed dependencies
+		\item use nREPL to integrate new error handling system
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Proposed Workflow Diagram}
+\begin{figure}[h]
+ \includegraphics[width=9cm]{../OurErrorHandlingSystem.pdf}
+ \centering
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{What needs to be done}
+\end{frame}
 
 \end{document}
 
