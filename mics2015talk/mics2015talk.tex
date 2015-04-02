@@ -190,13 +190,15 @@ April 11, 2015\par}
 \begin{frame}
 \frametitle{Clojure error messages: background}
 	\begin{itemize}
-  		\item Error messages need to be:
+  		\item Error messages should be:
   		\begin{itemize}
   	 		\item helpful for debugging
   	 		\item easy to understand
   	 		\item approachable
   		\end{itemize}
+  		\item Clojure error messages are confusing
 	 \end{itemize}
+	 
 \end{frame}
 
 \begin{frame}[fragile]
@@ -228,22 +230,48 @@ Exception in thread "main" java.lang.RuntimeException: EOF while reading, starti
 \begin{frame}
 \frametitle{Error message transformations: try/catch}
 	\begin{itemize}
-  	 \item Fill in things here......
+  	 \item wrap user's code in try/catch block
+  	 \item capture the error message and check it against numerous regular expressions
+  	 \item once matched, replaced with improved message
+	 \end{itemize}
+	 Pros and Cons:
+	 \begin{itemize}
+	 \item able to handle both runtime and compilation exceptions
+	 \item usually cannot recover argument values
+	 \item additional complexity with REPL and lazy sequences
 	 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Error message transformations: function substitution}
 	\begin{itemize}
-  	 \item Fill in things here......
+  	 \item override built-in functions with identical ones that include type checking
+  	 \item potential errors can be detected with the type checks and a custom error message may be shown
+	 \end{itemize}
+	 Pros and Cons:
+	 \begin{itemize}
+	 \item unable to handle compilation exceptions
+	 \item able to recover argument values and use them for a more meaningful message
+	 \item can not handle student made functions
+	 \item impractical to redefine all existing functions
 	 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{User scenarios: example}
-	\begin{itemize}
-  	 \item Fill in things here......
-	 \end{itemize}
+	Erroneous code fragment:
+	\begin{verbatim}
+	(defn square-this (* input input))
+	
+	-> IllegalArgumentException Parameter declaration
+	* should be a vector 
+	clojure.core/assert-valid-fdecl (core.clj:6842)
+	\end{verbatim}
+	
+	Corrected Code:
+	\begin{verbatim}
+	(defn square-this [input] (* input input))
+	\end{verbatim}
 \end{frame}
 
 \begin{frame}
