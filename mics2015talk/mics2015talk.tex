@@ -59,11 +59,130 @@ April 11, 2015\par}
 \section{Overview of Clojure}
 
 \begin{frame}
-\frametitle{Intro to Clojure}
+\frametitle{Intro to Clojure and Clojure attributes}
 	\begin{itemize}
-  	 \item Fill in things here......
-  	 \item \hfcomment{This probably needs to be a few slides.}
+  	 \item Developed in 2007 by Rich Hickey
+  	 \item Dynamic
+  	 \item Functional
+  	 \item A Lisp language
+  	 \item Runs on the Java Virtual Machine (JVM)
+  	 \item Clojure's read-eval-print-loop (REPL)
+  	 \item Focus on immutable data types
 	 \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Prefix Notation}
+	\begin{itemize}
+  	 \item Clojure uses prefix notation
+  	 \begin{itemize}
+  	 	\item parentheses
+  	 	\item parameters
+  	 %\end{itemize}
+  	 \begin{verbatim}
+		(<function-name> <argument 1> <argument 2>)
+	 \end{verbatim}
+	 \end{itemize}
+	\end{itemize}
+	\begin{itemize}
+  	 	\item A simple example
+  	 	\begin{itemize}
+  	 	 \item \texttt{+} is a built-in function, not an operation
+  	 	%\end{itemize}
+  	 	\begin{verbatim}		
+		(+ 5 5)
+		-> 10
+	    \end{verbatim}
+	    \end{itemize}
+  	 \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Defining Functions and Variables}
+	\begin{itemize}
+  	 \item \texttt{def} can be used to define variables
+  	 \begin{verbatim}
+		(def mystring "Hello World")
+		mystring
+		-> "Hello World"
+	\end{verbatim}
+	\end{itemize}
+	\begin{itemize}
+  	 \item \texttt{defn} can be used to define functions
+  	 \begin{verbatim}
+		(defn increment-number [number] (+ number 1))
+		(increment-number 2)
+		-> 3
+	\end{verbatim}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Anonymous Functions}
+	\begin{itemize}
+  	 \item Anonymous functions are a way to implement a function on the fly, and use it only once\
+  	 \item A simple example
+  	 \begin{itemize}
+  	 	\item \texttt{map} takes a function and a collection as arguments, and applies the function to the entire collection
+  	 %\end{itemize}
+  	 	\begin{verbatim}
+		(map (fn [number] (+ number 1)) [0 1 2 3])
+		-> (1 2 3 4)
+	\end{verbatim}
+	\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Collections}
+    \begin{itemize}
+     \item All collections can contain any number of values of any data type
+	 \begin{itemize}
+	  \item Lists
+	  \begin{verbatim}
+	   (1 2 "foo" :a 9 "bar")
+	  \end{verbatim}
+  	  \item Vectors
+  	  \begin{verbatim}
+	   [1 2 "foo" :a 9 "bar"]
+	  \end{verbatim}
+  	  \item Sets
+  	  \begin{verbatim}
+	   #{1 2 "foo" :a 9 "bar"}
+	  \end{verbatim}
+  	  \item Hashmaps
+  	  \begin{itemize}
+  	 	 \item key-value pairs
+  	  \end{itemize}
+  	  %\end{itemize}
+  	  \begin{verbatim}
+	    	{:a 1, :b 2, :c 3}
+	  \end{verbatim}
+	 \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Laziness}
+	\begin{itemize}
+  	  \item The evaluation of an expression is postponed until the return value is needed
+  	  \begin{itemize}
+  	    \item Fibonacci sequence
+  	  \end{itemize}
+  	  \item A simple example
+  	  \begin{itemize}
+  	    \item \texttt{take} takes the first $n$ elements of a collection
+  	    \item \texttt{range} returns an infinite sequence of non-negative integers beginning at 0
+  	  \end{itemize}
+  	  \begin{verbatim}
+  	 	(take 10 (range))
+  	 	-> (0 1 2 3 4 5 6 7 8 9)
+  	  \end{verbatim}
+  	  \item A common example
+  	  \begin{verbatim}
+  	 	(if (< number 10) (+ number 1) (- number 1))
+  	  \end{verbatim}
+   \end{itemize}
 \end{frame}
 
 \section{Error Messages}
@@ -82,9 +201,28 @@ April 11, 2015\par}
 
 \begin{frame}[fragile]
 \frametitle{Clojure error messages: example}
-	\begin{itemize}
-  	 \item Fill in things here......
-	 \end{itemize}
+
+\begin{verbatim}
+Exception in thread "main" java.lang.RuntimeException: EOF while reading, starting at line 3, compiling:(compilation_errors/eof.clj:4:1)
+	at clojure.lang.Compiler.load(Compiler.java:7137)
+	at clojure.lang.RT.loadResourceScript(RT.java:370)
+	at clojure.lang.RT.loadResourceScript(RT.java:361)
+	at clojure.lang.RT.load(RT.java:440)
+	at clojure.lang.RT.load(RT.java:411)
+	at clojure.core$load$fn__5066.invoke(core.clj:5641)
+	at clojure.core$load.doInvoke(core.clj:5640)
+	at clojure.lang.RestFn.invoke(RestFn.java:408)
+	at clojure.core$load_one.invoke(core.clj:5446)
+	at clojure.core$load_lib$fn__5015.invoke(core.clj:5486)
+	at clojure.core$load_lib.doInvoke(core.clj:5485)
+	at clojure.lang.RestFn.applyTo(RestFn.java:142)
+	at clojure.core$apply.invoke(core.clj:626)
+	at clojure.core$load_libs.doInvoke(core.clj:5524)
+	at clojure.lang.RestFn.applyTo(RestFn.java:137)
+	at clojure.core$apply.invoke(core.clj:626)
+	at clojure.core$require.doInvoke(core.clj:5607)
+\end{verbatim}
+
 \end{frame}
 
 \begin{frame}
