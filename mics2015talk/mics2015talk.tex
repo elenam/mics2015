@@ -277,28 +277,45 @@ Exception in thread "main" java.lang.RuntimeException: EOF while reading, starti
 \begin{frame}
 \frametitle{User scenarios: explanation}
 	\begin{itemize}
-  	 \item Fill in things here......
+  	 \item Explore common use cases
+  	 \item Discover which errors occur
+  	 \item Develop useful hints
 	 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Hints: How they are helpful}
 	\begin{itemize}
-  	 \item Fill in things here......
+  	 \item Errors can have several underlying causes
+  	 \item Multiple hints per error
+  	 \item Provide more human interpretation of the issue
+  	 \item Offer suggestions on how to resolve issues
 	 \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
+Error:
 \frametitle{Hints: example}
-	\begin{itemize}
-  	 \item Fill in things here......
-	 \end{itemize}
+  	 \begin{verbatim}
+	CompilerException java.lang.RuntimeException:
+Unable to resolve symbol: Hello in this context
+	\end{verbatim}
+Hint:
+	\begin{verbatim}
+	It looks like Clojure is expecting that Hello is something
+named in your program. If you wanted Hello and any
+following words to be plain text, try surrounding them
+with double quotes. If Hello is referring to something
+named in your program, make sure it is spelled correctly.
+	\end{verbatim}
 \end{frame}
 
 \begin{frame}
 \frametitle{Hints: future work}
 	\begin{itemize}
-  	 \item Fill in things here......
+  	 \item Develop more user scenarios
+  	 \item Usability study with students
+  	 \item Provide links to Clojure documentation
 	 \end{itemize}
 \end{frame}
 % Henry & Max
