@@ -58,23 +58,23 @@ April 11, 2015\par}
 
 \section{Introduction to the Project}
 \begin{frame}
-	\frametitle{Clojure in an Introductory Course}
+	\frametitle{Clojure in an introductory course}
 	\begin{itemize}
-		\item developed in 2007 by Rich Hickey
-		\item in the Lisp family
+		\item Developed in 2007 by Rich Hickey
+		\item In the Lisp family
 		\item Felleisen et al found Lisp languages to be useful in introductory courses
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Motivations for the Project}
+\frametitle{Motivations for the project}
 	\begin{itemize}
 		\item ClojurEd
 			\begin{itemize}
 				\item ongoing project
 				\item introduce Clojure in an introductory course
 			\end{itemize}
-		\item our work focuses on error messages in Clojure
+		\item Our work focuses on error messages in Clojure
 			\begin{itemize}
 				\item focus on usability
 				\item error messages useful learning tool
@@ -97,64 +97,45 @@ April 11, 2015\par}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Prefix Notation}
+\frametitle{Prefix notation}
 	\begin{itemize}
-  	 \item Clojure uses prefix notation
-  	 \begin{itemize}
-  	 	\item parentheses
-  	 	\item parameters
-  	 %\end{itemize}
-  	 \begin{verbatim}
-		(<function-name> <argument 1> <argument 2>)
-	 \end{verbatim}
-	 \end{itemize}
-	\end{itemize}
-	\begin{itemize}
-  	 	\item A simple example
+  	  \item Clojure uses prefix notation
+  	  \begin{itemize}
+  	 	 \item parentheses
+  	 	 \item parameters
+  	  \end{itemize}
+		 
+	  \texttt{(<function-name> <argument 1> <argument 2>)}
+	  
+	  \begin{itemize}
+  	 	\item a simple example
   	 	\begin{itemize}
-  	 	 \item \texttt{+} is a built-in function, not an operation
-  	 	%\end{itemize}
+  	 	   \item \texttt{+} is a built-in function, not an operation
+  	 	\end{itemize}
   	 	\begin{verbatim}		
 		(+ 5 5)
 		-> 10
 	    \end{verbatim}
-	    \end{itemize}
-  	 \end{itemize}
+	    
+  	  \end{itemize}
+   \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Defining Functions and Variables}
+\frametitle{Defining functions and variables}
 	\begin{itemize}
-  	 \item \texttt{def} can be used to define variables
-  	 \begin{verbatim}
-		(def my-string "Hello World")
-		my-string
-		-> "Hello World"
-	\end{verbatim}
-	\end{itemize}
-	\begin{itemize}
-  	 \item \texttt{defn} can be used to define functions
-  	 \begin{verbatim}
-		(defn increment-number [number] (+ number 1))
-		(increment-number 2)
-		-> 3
-	\end{verbatim}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Anonymous Functions}
-	\begin{itemize}
-  	 \item Anonymous functions are a way to implement a function on the fly, and use it only once\
-  	 \item A simple example
-  	 \begin{itemize}
-  	 	\item \texttt{map} takes a function and a collection as arguments, and applies the function to the entire collection
-  	 %\end{itemize}
-  	 	\begin{verbatim}
-		(map (fn [number] (+ number 1)) [0 1 2 3])
-		-> (1 2 3 4)
-	\end{verbatim}
-	\end{itemize}
+  	  \item \texttt{def} can be used to define variables:
+  	  \begin{verbatim}
+		 (def my-string "Hello World")
+		 my-string
+		 -> "Hello World"
+	  \end{verbatim}
+  	  \item \texttt{defn} can be used to define functions:
+  	  \begin{verbatim}
+		 (defn increment-number [number] (+ number 1))
+		 (increment-number 2)
+		 -> 3
+	  \end{verbatim}
 	\end{itemize}
 \end{frame}
 
@@ -163,16 +144,15 @@ April 11, 2015\par}
     \begin{itemize}
      \item All collections can contain any number of values of any data type
 	 \begin{itemize}
-	  \item Lists
+	  \item lists
 	  \begin{verbatim}
 	   (1 2 "foo" :a 9 "bar")
 	  \end{verbatim}
-  	  \item Vectors
+  	  \item vectors
   	  \begin{verbatim}
 	   [1 2 "foo" :a 9 "bar"]
 	  \end{verbatim}
-  	  \item Hashmaps (key-value pairs)
-  	  %\end{itemize}
+  	  \item hashmaps (key-value pairs)
   	  \begin{verbatim}
 	    	{:a 1, :b 2, :c 3}
 	  \end{verbatim}
@@ -181,25 +161,37 @@ April 11, 2015\par}
 \end{frame}
 
 \begin{frame}[fragile]
+\frametitle{Anonymous functions}
+	\begin{itemize}
+  	  \item Anonymous functions are a way to implement a function on the fly, and use it only once
+  	  \begin{itemize}
+  	    \item a simple example
+  	    \begin{itemize}
+  	 	  \item \texttt{map} takes a function and a collection as arguments, and applies the function to the entire collection
+  	    \end{itemize}
+  	    
+		\texttt{(map (fn [number] (+ number 1)) [0 1 2 3])}
+		
+		\texttt{-> (1 2 3 4)}
+	 \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
 \frametitle{Lazy sequences}
 	\begin{itemize}
   	  \item Only a needed portion of a sequence is evaluated
-  	  \begin{itemize}
-  	    \item Fibonacci sequence
-  	  \end{itemize}
-  	  \item A simple example
-  	  \begin{itemize}
-  	    \item \texttt{take} takes the first $n$ elements of a collection
-  	    \item \texttt{range} returns an infinite sequence of non-negative integers beginning at 0
-  	  \end{itemize}
-  	  \begin{verbatim}
-  	 	(take 10 (range))
-  	 	-> (0 1 2 3 4 5 6 7 8 9)
-  	  \end{verbatim}
-  %	  \item A common example
-  %	  \begin{verbatim}
-  %	 	(if (< number 10) (+ number 1) (- number 1))
-  %	  \end{verbatim}
+		\begin{itemize}
+  	      \item a simple example
+  	        \begin{itemize}
+  	          \item \texttt{take} takes the first $n$ elements of a collection
+  	          \item \texttt{range} returns an infinite sequence of non-negative integers beginning at 0
+  	        \end{itemize}
+  	      \texttt{(take 10 (range))}
+  	 	      
+  	 	  \texttt{-> (0 1 2 3 4 5 6 7 8 9)}
+  	      \item Fibonacci sequence
+  	    \end{itemize}
    \end{itemize}
 \end{frame}
 
@@ -405,8 +397,10 @@ Unable to resolve symbol: Hello in this context
   	 \item Provide links to Clojure documentation
 	 \end{itemize}
 \end{frame}
+
 % Henry & Max
 \section{Technical Setup}
+
 \begin{frame}
 \frametitle{Setup}
 	\begin{itemize}
@@ -415,7 +409,7 @@ Unable to resolve symbol: Hello in this context
 			\item LightTable
 			\item Nightcode
 		\end{itemize}
-		\item project manager
+		\item Project manager
 		\begin{itemize}
 			\item Leiningen
 			\item popular in Clojure community
@@ -424,17 +418,17 @@ Unable to resolve symbol: Hello in this context
 \end{frame}
 
 \begin{frame}
-	\frametitle differences in error handling
+	\frametitle {Differences in error handling}
 	\begin{itemize}
-		\item runtime, compile time, REPL
-		\item consistency
-		\item laziness
-		\item try/catch does not catch all
+		\item Runtime, compile time, REPL
+		\item Consistency
+		\item Laziness
+		\item Try/catch does not catch all
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Current Workflow Diagram}
+\frametitle{Current workflow diagram}
 \begin{figure}[h]
  \includegraphics[width=10cm]{../CurrentErrorHandling.pdf}
  \centering
@@ -444,25 +438,25 @@ Unable to resolve symbol: Hello in this context
 \begin{frame}
 \frametitle{Issues}
 	\begin{itemize}
-		\item installation of Leiningen is nontrivial
-		\item command line acts as a barrier
-		\item we do not want students managing dependencies
-		\item no integration with new error handling system
+		\item Installation of Leiningen is nontrivial
+		\item Command line acts as a barrier
+		\item We do not want students managing dependencies
+		\item No integration with new error handling system
 	\end{itemize} 
 \end{frame}
 
 \begin{frame}
-\frametitle{Future Work}
+\frametitle{Future work}
 	\begin{itemize}
-		\item use scripting to abstract over Leiningen installation
+		\item Use scripting to abstract over Leiningen installation
 		\item Graphical User Interface will abstract over command line
 		\item Leiningen plugin to inject needed dependencies
-		\item use nREPL to integrate new error handling system
+		\item Use nREPL to integrate new error handling system
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Proposed Workflow Diagram}
+\frametitle{Proposed workflow diagram}
 \begin{figure}[h]
  \includegraphics[width=9cm]{../OurErrorHandlingSystem.pdf}
  \centering
@@ -472,9 +466,9 @@ Unable to resolve symbol: Hello in this context
 \begin{frame}
 \frametitle{What needs to be done}
 \begin{itemize}
-	\item these solutions are a work in progress
-	\item the system still needs implementation
-	\item the proposed solution is a result of our findings
+	\item These solutions are a work in progress
+	\item The system still needs implementation
+	\item The proposed solution is a result of our findings
 \end{itemize}
 \end{frame}
 
