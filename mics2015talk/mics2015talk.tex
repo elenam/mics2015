@@ -220,79 +220,127 @@ April 11, 2015\par}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Clojure error messages: example}
+\frametitle{Clojure error messages: examples}
 
-\begin{verbatim}
-Exception in thread "main" java.lang.RuntimeException: EOF while reading, starting at line 3, compiling:(compilation_errors/eof.clj:4:1)
-	at clojure.lang.Compiler.load(Compiler.java:7137)
-	at clojure.lang.RT.loadResourceScript(RT.java:370)
-	at clojure.lang.RT.loadResourceScript(RT.java:361)
-	at clojure.lang.RT.load(RT.java:440)
-	at clojure.lang.RT.load(RT.java:411)
-	at clojure.core$load$fn__5066.invoke(core.clj:5641)
-	at clojure.core$load.doInvoke(core.clj:5640)
-	at clojure.lang.RestFn.invoke(RestFn.java:408)
-	at clojure.core$load_one.invoke(core.clj:5446)
-	at clojure.core$load_lib$fn__5015.invoke(core.clj:5486)
-	at clojure.core$load_lib.doInvoke(core.clj:5485)
-	at clojure.lang.RestFn.applyTo(RestFn.java:142)
-	at clojure.core$apply.invoke(core.clj:626)
-	at clojure.core$load_libs.doInvoke(core.clj:5524)
-	at clojure.lang.RestFn.applyTo(RestFn.java:137)
-	at clojure.core$apply.invoke(core.clj:626)
-	at clojure.core$require.doInvoke(core.clj:5607)
+\begin{itemize}
+	\item \begin{verbatim}
+EOF while reading, starting at line 3, 
+compiling:(compilation_errors/eof.clj:4:1)
 \end{verbatim}
+
+	\item \begin{verbatim}
+IllegalArgumentException Parameter declaration
+	* should be a vector 
+	clojure.core/assert-valid-fdecl (core.clj:6842)
+\end{verbatim}
+
+\item \begin{verbatim}
+ClassCastException java.lang.String cannot be
+cast to clojure.lang.IPersistentCollection 
+clojure.core/conj (core.clj:83)
+\end{verbatim}
+
+\end{itemize}
 
 \end{frame}
 
 \begin{frame}
 \frametitle{Error message transformation: approaches}
-	Try/catch approach
 	\begin{itemize}
-  	\item wrap user's code in try/catch block
-  	\item capture the error message and check it against numerous regular expressions
-  	\item once matched, replaced with improved message
-	\end{itemize}
+	 	\item Function substitution approach
+	 		\begin{itemize}
+  	 			\item add type-checking preconditions
+  	 			\item type mismatch produces custom message
+	 		\end{itemize}
 	 
-	 Function substitution approach
-	 \begin{itemize}
-  	 \item override built-in functions with identical ones that include type checking
-  	 \item potential errors can be detected with the type checks and a custom error message may be shown
-	 \end{itemize}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Error message transformation: discussion}
-	 Function substitution approach
-	 \begin{itemize}
-	 \item able to recover argument values and use them for a more meaningful message
-	 \item unable to handle compilation exceptions
-	 \item can not handle student made functions
-	 \item impractical to redefine all existing functions
-	 \end{itemize}
-	 Try/catch approach
-	 \begin{itemize}
-	 \item able to handle both runtime and compilation exceptions
-	 \item usually cannot recover argument values
-	 \item additional complexity with REPL and lazy sequences
-	 \end{itemize}
+		\item Try/catch approach
+			\begin{itemize}
+  				\item wrap user's code in try/catch block
+  				\item capture error message
+  				\item check against predefined regular expressions
+  				\item replace with improved message
+			\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{User scenarios: example}
-	Erroneous code fragment:
-	\begin{verbatim}
-	(defn square-this (* input input))
+\frametitle{Error message transformation: discussion}
+
+	\begin{itemize}
+		\item Function substitution approach
+			\begin{itemize}
+				\item able to recover argument values and use them for a more meaningful message
+				\begin{verbatim}
+				(+ 2 "apple")
+				-> ERROR: In function +, the second argument
+				"apple" must be a number but is a string.
+				\end{verbatim}
+				\item unable to handle compilation exceptions
+				\item can not handle student made functions
+				\item impractical to redefine all existing functions
+			\end{itemize}
+		\item Try/catch approach
+			\begin{itemize}
+	 			\item able to handle both runtime and compilation exceptions
+				\item usually can not recover argument values
+	 		\end{itemize} 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{User scenarios: example slide 1}
+
+	\begin{itemize}
+		\item Erroneous code fragment:
+			\begin{verbatim}
+			print(Hello World)
+			\end{verbatim}
+			
+		\item Clojure error message:
+			\begin{verbatim}
+			CompilerException java.lang.RuntimeException:
+			Unable to resolve symbol: Hello in this context
+			\end{verbatim}
+			
+		\item Our improved error message:
+			\begin{verbatim}
+				ERROR: Compilation error: name Hello is undefined
+			\end{verbatim}
+			
+		\item Student edit
+		
+				\texttt{print(\alert{"Hello World"})}
+	\end{itemize}
 	
-	-> IllegalArgumentException Parameter declaration
-	* should be a vector 
-	clojure.core/assert-valid-fdecl (core.clj:6842)
-	\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{User scenarios: example slide 2}
+
+	\begin{itemize}
+	\item Student edit
+		
+				\texttt{print("Hello World")}
+				
+		\item Clojure error message:	
 	
-	Corrected Code:
+			\begin{verbatim}
+			ClassCastException java.lang.String cannot be
+			cast to clojure.lang.IFn
+			\end{verbatim} 
 	
-	\texttt{(defn square-this \alert{[input]} (* input input))}
+		\item Our improved error message:	
+	
+			\begin{verbatim}
+			ERROR: Attempted to use a string, but a function
+			was expected.
+			\end{verbatim}
+	
+		\item Corrected Code:
+		
+			\texttt{\alert{(print} "Hello World")}
+	\end{itemize} 	
+
 \end{frame}
 
 \begin{frame}
@@ -305,7 +353,7 @@ Exception in thread "main" java.lang.RuntimeException: EOF while reading, starti
 \end{frame}
 
 \begin{frame}
-\frametitle{Hints: How they are helpful}
+\frametitle{Hints: how they are helpful}
 	\begin{itemize}
   	 \item Errors can have several underlying causes
   	 \item Multiple hints per error
@@ -315,20 +363,38 @@ Exception in thread "main" java.lang.RuntimeException: EOF while reading, starti
 \end{frame}
 
 \begin{frame}[fragile]
-Error:
 \frametitle{Hints: example}
-  	 \begin{verbatim}
+
+	\begin{itemize}
+		\item Erroneous code fragment:
+		
+			\texttt{print(Hello World)}
+
+		\item Clojure error message:
+		
+  			 \begin{verbatim}
 	CompilerException java.lang.RuntimeException:
 Unable to resolve symbol: Hello in this context
-	\end{verbatim}
-Hint:
-	\begin{verbatim}
-	It looks like Clojure is expecting that Hello is something
-named in your program. If you wanted Hello and any
-following words to be plain text, try surrounding them
-with double quotes. If Hello is referring to something
-named in your program, make sure it is spelled correctly.
-	\end{verbatim}
+			\end{verbatim}
+			
+		\item Improved error message
+		
+			\begin{verbatim}
+			ERROR: Compilation error: name Hello is undefined
+			\end{verbatim}
+			
+		\item Hint:
+		
+			\begin{verbatim}
+	It looks like Clojure is expecting that Hello is
+	something named in your program. If you wanted Hello
+	and any following words to be plain text, try
+	surrounding them with double quotes. If Hello is
+	referring to something named in your program, make
+	sure it is spelled correctly.
+			\end{verbatim}
+	
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
