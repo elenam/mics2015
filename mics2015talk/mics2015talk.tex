@@ -59,15 +59,15 @@ April 11, 2015\par}
 \section{Overview of Clojure}
 
 \begin{frame}
-\frametitle{Intro to Clojure and Clojure attributes}
+\frametitle{Overview of Clojure}
 	\begin{itemize}
   	 \item Developed in 2007 by Rich Hickey
-  	 \item Dynamic
+  	 \item Dynamically typed
   	 \item Functional
   	 \item A Lisp language
   	 \item Runs on the Java Virtual Machine (JVM)
-  	 \item Clojure's read-eval-print-loop (REPL)
-  	 \item Focus on immutable data types
+  	 \item Read-eval-print-loop (REPL)
+  	 \item Data types immutable by default
 	 \end{itemize}
 \end{frame}
 
@@ -102,8 +102,8 @@ April 11, 2015\par}
 	\begin{itemize}
   	 \item \texttt{def} can be used to define variables
   	 \begin{verbatim}
-		(def mystring "Hello World")
-		mystring
+		(def my-string "Hello World")
+		my-string
 		-> "Hello World"
 	\end{verbatim}
 	\end{itemize}
@@ -146,14 +146,7 @@ April 11, 2015\par}
   	  \begin{verbatim}
 	   [1 2 "foo" :a 9 "bar"]
 	  \end{verbatim}
-  	  \item Sets
-  	  \begin{verbatim}
-	   #{1 2 "foo" :a 9 "bar"}
-	  \end{verbatim}
-  	  \item Hashmaps
-  	  \begin{itemize}
-  	 	 \item key-value pairs
-  	  \end{itemize}
+  	  \item Hashmaps (key-value pairs)
   	  %\end{itemize}
   	  \begin{verbatim}
 	    	{:a 1, :b 2, :c 3}
@@ -163,9 +156,9 @@ April 11, 2015\par}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Laziness}
+\frametitle{Lazy sequences}
 	\begin{itemize}
-  	  \item The evaluation of an expression is postponed until the return value is needed
+  	  \item Only a needed portion of a sequence is evaluated
   	  \begin{itemize}
   	    \item Fibonacci sequence
   	  \end{itemize}
@@ -178,10 +171,10 @@ April 11, 2015\par}
   	 	(take 10 (range))
   	 	-> (0 1 2 3 4 5 6 7 8 9)
   	  \end{verbatim}
-  	  \item A common example
-  	  \begin{verbatim}
-  	 	(if (< number 10) (+ number 1) (- number 1))
-  	  \end{verbatim}
+  %	  \item A common example
+  %	  \begin{verbatim}
+  %	 	(if (< number 10) (+ number 1) (- number 1))
+  %	  \end{verbatim}
    \end{itemize}
 \end{frame}
 
@@ -194,7 +187,7 @@ April 11, 2015\par}
   		\begin{itemize}
   	 		\item helpful for debugging
   	 		\item easy to understand
-  	 		\item approachable
+  	 		\item not intimidating
   		\end{itemize}
   		\item Clojure error messages are confusing
 	 \end{itemize}
@@ -228,32 +221,36 @@ Exception in thread "main" java.lang.RuntimeException: EOF while reading, starti
 \end{frame}
 
 \begin{frame}
-\frametitle{Error message transformations: try/catch}
+\frametitle{Error message transformation: approaches}
+	Try/catch approach
 	\begin{itemize}
-  	 \item wrap user's code in try/catch block
-  	 \item capture the error message and check it against numerous regular expressions
-  	 \item once matched, replaced with improved message
+  	\item wrap user's code in try/catch block
+  	\item capture the error message and check it against numerous regular expressions
+  	\item once matched, replaced with improved message
+	\end{itemize}
+	 
+	 Function substitution approach
+	 \begin{itemize}
+  	 \item override built-in functions with identical ones that include type checking
+  	 \item potential errors can be detected with the type checks and a custom error message may be shown
 	 \end{itemize}
-	 Pros and Cons:
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Error message transformation: discussion}
+	 Function substitution approach
+	 \begin{itemize}
+	 \item able to recover argument values and use them for a more meaningful message
+	 \item unable to handle compilation exceptions
+	 \item can not handle student made functions
+	 \item impractical to redefine all existing functions
+	 \end{itemize}
+	 Try/catch approach
 	 \begin{itemize}
 	 \item able to handle both runtime and compilation exceptions
 	 \item usually cannot recover argument values
 	 \item additional complexity with REPL and lazy sequences
-	 \end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Error message transformations: function substitution}
-	\begin{itemize}
-  	 \item override built-in functions with identical ones that include type checking
-  	 \item potential errors can be detected with the type checks and a custom error message may be shown
-	 \end{itemize}
-	 Pros and Cons:
-	 \begin{itemize}
-	 \item unable to handle compilation exceptions
-	 \item able to recover argument values and use them for a more meaningful message
-	 \item can not handle student made functions
-	 \item impractical to redefine all existing functions
 	 \end{itemize}
 \end{frame}
 
