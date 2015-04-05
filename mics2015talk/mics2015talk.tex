@@ -89,7 +89,6 @@ April 11, 2015\par}
 	\begin{itemize}
   	 \item Dynamically typed
   	 \item Functional
-
   	 \item Runs on the Java Virtual Machine (JVM)
   	 \item Read-eval-print-loop (REPL)
   	 \item Data types immutable by default
@@ -115,8 +114,7 @@ April 11, 2015\par}
   	 	\begin{verbatim}		
 		(+ 5 5)
 		-> 10
-	    \end{verbatim}
-	    
+	        \end{verbatim}
   	  \end{itemize}
    \end{itemize}
 \end{frame}
@@ -142,20 +140,20 @@ April 11, 2015\par}
 \begin{frame}[fragile]
 \frametitle{Collections}
     \begin{itemize}
-     \item All collections can contain any number of values of any data type
+         \item All collections can contain any number of values of any data type
 	 \begin{itemize}
-	  \item lists
-	  \begin{verbatim}
-	   (1 2 "foo" :a 9 "bar")
-	  \end{verbatim}
-  	  \item vectors
-  	  \begin{verbatim}
-	   [1 2 "foo" :a 9 "bar"]
-	  \end{verbatim}
-  	  \item hashmaps (key-value pairs)
-  	  \begin{verbatim}
+	   \item lists
+	   \begin{verbatim}
+	        (1 2 "foo" :a 9 "bar")
+	   \end{verbatim}
+  	   \item vectors
+  	   \begin{verbatim}
+	        [1 2 "foo" :a 9 "bar"]
+	   \end{verbatim}
+  	   \item hashmaps (key-value pairs)
+  	   \begin{verbatim}
 	    	{:a 1, :b 2, :c 3}
-	  \end{verbatim}
+	   \end{verbatim}
 	 \end{itemize}
     \end{itemize}
 \end{frame}
@@ -181,17 +179,17 @@ April 11, 2015\par}
 \frametitle{Lazy sequences}
 	\begin{itemize}
   	  \item Only a needed portion of a sequence is evaluated
-		\begin{itemize}
-  	      \item a simple example
-  	        \begin{itemize}
-  	          \item \texttt{take} takes the first $n$ elements of a collection
-  	          \item \texttt{range} returns an infinite sequence of non-negative integers beginning at 0
-  	        \end{itemize}
-  	      \texttt{(take 10 (range))}
+	  \begin{itemize}
+  	     \item a simple example
+  	     \begin{itemize}
+  	         \item \texttt{take} takes the first $n$ elements of a collection
+  	         \item \texttt{range} returns an infinite sequence of non-negative integers beginning at 0
+  	     \end{itemize}
+  	     \texttt{(take 10 (range))}
   	 	      
-  	 	  \texttt{-> (0 1 2 3 4 5 6 7 8 9)}
-  	      \item Fibonacci sequence
-  	    \end{itemize}
+  	     \texttt{-> (0 1 2 3 4 5 6 7 8 9)}
+  	     \item Fibonacci sequence
+  	   \end{itemize}
    \end{itemize}
 \end{frame}
 
