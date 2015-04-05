@@ -60,12 +60,26 @@ April 11, 2015\par}
 \begin{frame}
 	\frametitle{Clojure in an Introductory Course}
 	\begin{itemize}
-		\item Developed 
+		\item developed in 2007 by Rich Hickey
+		\item in the Lisp family
+		\item Felleisen et al found Lisp languages to be useful in introductory courses
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Motivations for the Project}
+	\begin{itemize}
+		\item ClojurEd
+			\begin{itemize}
+				\item ongoing project
+				\item introduce Clojure in an introductory course
+			\end{itemize}
+		\item our work focuses on error messages in Clojure
+			\begin{itemize}
+				\item focus on usability
+				\item error messages useful learning tool
+			\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \section{Overview of Clojure}
@@ -73,10 +87,9 @@ April 11, 2015\par}
 \begin{frame}
 \frametitle{Overview of Clojure}
 	\begin{itemize}
-  	 \item Developed in 2007 by Rich Hickey
   	 \item Dynamically typed
   	 \item Functional
-  	 \item A Lisp language
+
   	 \item Runs on the Java Virtual Machine (JVM)
   	 \item Read-eval-print-loop (REPL)
   	 \item Data types immutable by default
@@ -344,6 +357,16 @@ named in your program, make sure it is spelled correctly.
 	\end{itemize}
 \end{frame}
 
+\begin{frame}
+	\frametitle differences in error handling
+	\begin{itemize}
+		\item runtime, compile time, REPL
+		\item consistency
+		\item laziness
+		\item try/catch does not catch all
+	\end{itemize}
+\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{Current Workflow Diagram}
 \begin{figure}[h]
@@ -353,7 +376,7 @@ named in your program, make sure it is spelled correctly.
 \end{frame}
 
 \begin{frame}
-\frametitle{Issues 1}
+\frametitle{Issues}
 	\begin{itemize}
 		\item installation of Leiningen is nontrivial
 		\item command line acts as a barrier
@@ -363,7 +386,7 @@ named in your program, make sure it is spelled correctly.
 \end{frame}
 
 \begin{frame}
-\frametitle{Proposed Solutions}
+\frametitle{Future Work}
 	\begin{itemize}
 		\item use scripting to abstract over Leiningen installation
 		\item Graphical User Interface will abstract over command line
