@@ -405,31 +405,27 @@ Unable to resolve symbol: Hello in this context
 
 \begin{frame}
 \frametitle{Setup}
-	IDE options
 	\begin{itemize}
-		\item LightTable
-			\begin{itemize}
-				\item More established
-			\end{itemize}
-		\item Nightcode
-			\begin{itemize}
-				\item Newer Promising IDE
-			\end{itemize}
-	\end{itemize}
-	Project manager
-	\begin{itemize}
-		\item Leiningen
-		\item popular in Clojure community
+		\item IDE options
+		\begin{itemize}
+			\item LightTable
+			\item Nightcode
+		\end{itemize}
+		\item Project manager
+		\begin{itemize}
+			\item Leiningen
+			\item popular in Clojure community
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle {Error Handling}
+	\frametitle {Differences in error handling}
 	\begin{itemize}
-		\item Initial approach of try/catch
-		\item Maintain consistency between Runtime, compile time, REPL
-		\item Issues with laziness
-		\item Try/catch student code does not catch all
+		\item Runtime, compile time, REPL
+		\item Consistency
+		\item Laziness
+		\item Try/catch does not catch all
 	\end{itemize}
 \end{frame}
 
@@ -442,7 +438,7 @@ Unable to resolve symbol: Hello in this context
 \end{frame}
 
 \begin{frame}
-\frametitle{Issues with Current System}
+\frametitle{Issues}
 	\begin{itemize}
 		\item Installation of Leiningen is nontrivial
 		\item Command line acts as a barrier
@@ -452,12 +448,12 @@ Unable to resolve symbol: Hello in this context
 \end{frame}
 
 \begin{frame}
-\frametitle{Proposed Solutions}
+\frametitle{Future work}
 	\begin{itemize}
 		\item Use scripting to abstract over Leiningen installation
 		\item Graphical User Interface will abstract over command line
 		\item Leiningen plugin to inject needed dependencies
-		\item Use nREPL middleware to integrate new error handling system
+		\item Use nREPL to integrate new error handling system
 	\end{itemize}
 \end{frame}
 
@@ -470,18 +466,12 @@ Unable to resolve symbol: Hello in this context
 \end{frame}
 
 \begin{frame}
-\frametitle{Future Work}
-	Error Handling	
-	\begin{itemize}
-		\item Currently have regular expressions
-		\item Need user scenarios
-		\item Usability studies
-	\end{itemize}
-	Technical Implementation
-	\begin{itemize}
-		\item Implement items in the proposed diagram
-		\item Work on user interface through the IDE
-	\end{itemize}
+\frametitle{What needs to be done}
+\begin{itemize}
+	\item These solutions are a work in progress
+	\item The system still needs implementation
+	\item The proposed solution is a result of our findings
+\end{itemize}
 \end{frame}
 
 \end{document}
