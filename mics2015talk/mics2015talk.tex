@@ -20,6 +20,7 @@
 \definecolor{BlueViolet}{RGB}{138,43,226}
 \definecolor{Coquelicot}{RGB}{255, 56, 0}
 \definecolor{Teal}{RGB}{2,132,130}
+\definecolor{PrettyGreen}{RGB}{48,197,48}
 % Uncomment this if you want to show work-in-progress comments
 \newcommand{\comment}[1]{{\bf \tt  {#1}}}
 % Uncomment this if you don't want to show comments
@@ -141,18 +142,20 @@ April 11, 2015\par}
 \frametitle{Collections}
     \begin{itemize}
          \item All collections can contain any number of values of any data type
+         
 	 \begin{itemize}
 	   \item lists
-	   \begin{verbatim}
-	        (1 2 "foo" :a 9 "bar")
+	   
+	   \begin{verbatim}(1 2 "foo" :a 9 "bar")
 	   \end{verbatim}
+	   
   	   \item vectors
-  	   \begin{verbatim}
-	        [1 2 "foo" :a 9 "bar"]
+  	   
+  	   \begin{verbatim}[1 2 "foo" :a 9 "bar"]
 	   \end{verbatim}
   	   \item hashmaps (key-value pairs)
-  	   \begin{verbatim}
-	    	{:a 1, :b 2, :c 3}
+  	   
+  	   \begin{verbatim}{:a 1, :b 2, :c 3}
 	   \end{verbatim}
 	 \end{itemize}
     \end{itemize}
@@ -262,9 +265,12 @@ clojure.core/conj (core.clj:83)
 				\item able to recover argument values and use them for a more meaningful message
 				\begin{verbatim}
 				(+ 2 "apple")
+				\end{verbatim}
+				\textcolor{PrettyGreen}{
+				\texttt{
 				-> ERROR: In function +, the second argument
 				"apple" must be a number but is a string.
-				\end{verbatim}
+				}}
 				\item unable to handle compilation exceptions
 				\item can not handle user-made functions
 				\item impractical to redefine all existing functions
@@ -293,10 +299,10 @@ clojure.core/conj (core.clj:83)
 			\end{verbatim}
 			
 		\item Our improved error message:
-			\begin{verbatim}
-				ERROR: Compilation error: name Hello is undefined
-			\end{verbatim}
-			
+		
+			\textcolor{PrettyGreen}{
+			\texttt{ERROR: Compilation error: name Hello is undefined}
+			}
 		\item Student edit
 		
 				\texttt{print(\alert{"Hello World"})}
@@ -321,10 +327,9 @@ clojure.core/conj (core.clj:83)
 	
 		\item Our improved error message:	
 	
-			\begin{verbatim}
-			ERROR: Attempted to use a string, but a function
-			was expected.
-			\end{verbatim}
+			\textcolor{PrettyGreen}{
+			\texttt{ERROR: Attempted to use a string, but a function
+			was expected.}}
 	
 		\item Corrected Code:
 		
@@ -369,9 +374,8 @@ Unable to resolve symbol: Hello in this context
 			
 		\item Improved error message
 		
-			\begin{verbatim}
-			ERROR: Compilation error: name Hello is undefined
-			\end{verbatim}
+			\textcolor{PrettyGreen}{
+			\texttt{ERROR: Compilation error: name Hello is undefined}}
 			
 		\item Hint:
 		
