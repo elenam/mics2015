@@ -62,8 +62,9 @@ April 11, 2015\par}
 	\frametitle{Clojure in an introductory course}
 	\begin{itemize}
 		\item Developed in 2007 by Rich Hickey
-		\item In the Lisp family
+		\item Member of the Lisp family
 		\item Felleisen et al found Lisp languages to be useful in introductory courses
+		\item Current UMM course uses a Lisp language
 	\end{itemize}
 \end{frame}
 
@@ -77,7 +78,7 @@ April 11, 2015\par}
 			\end{itemize}
 		\item Our work focuses on error messages in Clojure
 			\begin{itemize}
-				\item error messages useful learning tool
+				\item error messages are a useful learning tool
 				\item focus on usability
 			\end{itemize}
 	\end{itemize}
@@ -91,8 +92,12 @@ April 11, 2015\par}
   	 \item Dynamically typed
   	 \item Data types immutable by default
   	 \item Functional
-  	 \item Read-eval-print-loop (REPL)
   	 \item Runs on the Java Virtual Machine (JVM)
+  	 \item Read-eval-print-loop (REPL)
+  	 	\begin{itemize}
+  	 	\item interactive environment
+  	 	\item useful for development and debugging
+  	 	\end{itemize}
 	 \end{itemize}
 \end{frame}
 
@@ -108,7 +113,7 @@ April 11, 2015\par}
 	     \texttt{(<function-name> <argument 1> <argument 2>)}
 	  
 	  
-  	 	 \item \texttt{+} is a built-in function, not an operation
+  	 	 \item \texttt{+} is a built-in function, not an operator
   	 	\begin{verbatim}		
 		(+ 5 5)
 		-> 10
@@ -161,7 +166,8 @@ April 11, 2015\par}
   	 	\item \texttt{map} takes a function and a collection as arguments, and applies the function to the entire collection
   	    
   	    
-		\texttt{(map (fn [number] (+ number 1)) `(0 1 2 3))}
+		\begin{verbatim}(map (fn [number] (+ number 1)) `(0 1 2 3))}
+		\end{verbatim}
 		
 		\texttt{-> (1 2 3 4)}
 		\end{itemize}
@@ -315,7 +321,7 @@ compiling:(compilation_errors/eof.clj:4:1)
 			Unable to resolve symbol: Hello in this context
 			\end{verbatim}
 			
-		\item Our improved error message:
+		\item Our modified error message:
 		
 			\textcolor{PrettyGreen}{
 			\texttt{ERROR: Compilation error: name Hello is undefined}
@@ -342,7 +348,7 @@ compiling:(compilation_errors/eof.clj:4:1)
 			cast to clojure.lang.IFn
 			\end{verbatim} 
 	
-		\item Our improved error message:	
+		\item Our modified error message:	
 	
 			\textcolor{PrettyGreen}{
 			\texttt{ERROR: Attempted to use a string, but a function
@@ -355,14 +361,6 @@ compiling:(compilation_errors/eof.clj:4:1)
 
 \end{frame}
 
-\begin{frame}
-\frametitle{User scenarios: explanation}
-	\begin{itemize}
-  	 \item Explore common use cases
-  	 \item Discover which errors occur
-  	 \item Develop useful hints
-	 \end{itemize}
-\end{frame}
 
 \begin{frame}
 \frametitle{Hints: how they are helpful}
@@ -406,9 +404,10 @@ compiling:(compilation_errors/eof.clj:4:1)
 \begin{frame}
 \frametitle{Hints: future work}
 	\begin{itemize}
+	 \item Hints still a work in progress
+	 \item Provide links to Clojure documentation
   	 \item Develop more user scenarios
   	 \item Usability study with students
-  	 \item Provide links to Clojure documentation
 	 \end{itemize}
 \end{frame}
 
