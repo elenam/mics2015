@@ -103,20 +103,17 @@ April 11, 2015\par}
   	  \begin{itemize}
   	 	 \item parentheses
   	 	 \item parameters
-  	  \end{itemize}
+  	 	 
 		 
-	  \texttt{(<function-name> <argument 1> <argument 2>)}
+	     \texttt{(<function-name> <argument 1> <argument 2>)}
 	  
-	  \begin{itemize}
-  	 	\item a simple example
-  	 	\begin{itemize}
-  	 	   \item \texttt{+} is a built-in function, not an operation
-  	 	\end{itemize}
+	  
+  	 	 \item \texttt{+} is a built-in function, not an operation
   	 	\begin{verbatim}		
 		(+ 5 5)
 		-> 10
 	        \end{verbatim}
-  	  \end{itemize}
+	          	  \end{itemize}
    \end{itemize}
 \end{frame}
 
@@ -148,11 +145,6 @@ April 11, 2015\par}
 	   
 	   \begin{verbatim}(1 2 "foo" :a 9 "bar")
 	   \end{verbatim}
-	   
-  	   \item vectors
-  	   
-  	   \begin{verbatim}[1 2 "foo" :a 9 "bar"]
-	   \end{verbatim}
   	   \item hashmaps (key-value pairs)
   	   
   	   \begin{verbatim}{:a 1, :b 2, :c 3}
@@ -166,15 +158,13 @@ April 11, 2015\par}
 	\begin{itemize}
   	  \item Anonymous functions are a way to implement a function on the fly, and use it only once
   	  \begin{itemize}
-  	    \item a simple example
-  	    \begin{itemize}
-  	 	  \item \texttt{map} takes a function and a collection as arguments, and applies the function to the entire collection
-  	    \end{itemize}
+  	 	\item \texttt{map} takes a function and a collection as arguments, and applies the function to the entire collection
   	    
-		\texttt{(map (fn [number] (+ number 1)) [0 1 2 3])}
+  	    
+		\texttt{(map (fn [number] (+ number 1)) `(0 1 2 3))}
 		
 		\texttt{-> (1 2 3 4)}
-	 \end{itemize}
+		\end{itemize}
    \end{itemize}
 \end{frame}
 
@@ -182,17 +172,17 @@ April 11, 2015\par}
 \frametitle{Lazy sequences}
 	\begin{itemize}
   	  \item Only a needed portion of a sequence is evaluated
-	  \begin{itemize}
-  	     \item a simple example
   	     \begin{itemize}
   	         \item \texttt{take} takes the first $n$ elements of a collection
   	         \item \texttt{range} returns an infinite sequence of non-negative integers beginning at 0
-  	     \end{itemize}
+  	     
+  	     
   	     \texttt{(take 10 (range))}
   	 	      
   	     \texttt{-> (0 1 2 3 4 5 6 7 8 9)}
+  	     
   	     \item Fibonacci sequence
-  	   \end{itemize}
+   \end{itemize}
    \end{itemize}
 \end{frame}
 
@@ -235,6 +225,33 @@ clojure.core/conj (core.clj:83)
 
 \end{itemize}
 
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Clojure error messages: stacktrace}
+
+\begin{verbatim}
+Exception in thread "main" java.lang.RuntimeException:
+EOF while reading, starting at line 3,
+compiling:(compilation_errors/eof.clj:4:1)
+	at clojure.lang.Compiler.load(Compiler.java:7137)
+	at clojure.lang.RT.loadResourceScript(RT.java:370)
+	at clojure.lang.RT.loadResourceScript(RT.java:361)
+	at clojure.lang.RT.load(RT.java:440)
+	at clojure.lang.RT.load(RT.java:411)
+	at clojure.core$load$fn__5066.invoke(core.clj:5641)
+	at clojure.core$load.doInvoke(core.clj:5640)
+	at clojure.lang.RestFn.invoke(RestFn.java:408)
+	at clojure.core$load_one.invoke(core.clj:5446)
+	at clojure.core$load_lib$fn__5015.invoke(core.clj:5486)
+	at clojure.core$load_lib.doInvoke(core.clj:5485)
+	at clojure.lang.RestFn.applyTo(RestFn.java:142)
+	at clojure.core$apply.invoke(core.clj:626)
+	at clojure.core$load_libs.doInvoke(core.clj:5524)
+	at clojure.lang.RestFn.applyTo(RestFn.java:137)
+	at clojure.core$apply.invoke(core.clj:626)
+	at clojure.core$require.doInvoke(core.clj:5607)
+\end{verbatim}
 \end{frame}
 
 \begin{frame}
@@ -400,27 +417,32 @@ clojure.core/conj (core.clj:83)
 
 \begin{frame}
 \frametitle{Setup}
+	IDE options
 	\begin{itemize}
-		\item IDE options
-		\begin{itemize}
-			\item LightTable
-			\item Nightcode
-		\end{itemize}
-		\item Project manager
-		\begin{itemize}
-			\item Leiningen
-			\item popular in Clojure community
-		\end{itemize}
+		\item LightTable
+			\begin{itemize}
+				\item More established
+			\end{itemize}
+		\item Nightcode
+			\begin{itemize}
+				\item Newer Promising IDE
+			\end{itemize}
+		\item ongoing open source projects
+	\end{itemize}
+	Project manager
+	\begin{itemize}
+		\item Leiningen
+		\item popular in Clojure community
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle {Differences in error handling}
+	\frametitle {Error Handling}
 	\begin{itemize}
-		\item Runtime, compile time, REPL
-		\item Consistency
-		\item Laziness
-		\item Try/catch does not catch all
+		\item Initial approach of try/catch
+		\item Maintain consistency between Runtime, compile time, REPL
+		\item Issues with laziness
+		\item Try/catch student code does not catch all
 	\end{itemize}
 \end{frame}
 
@@ -442,16 +464,6 @@ clojure.core/conj (core.clj:83)
 	\end{itemize} 
 \end{frame}
 
-\begin{frame}
-\frametitle{Future work}
-	\begin{itemize}
-		\item Use scripting to abstract over Leiningen installation
-		\item Graphical User Interface will abstract over command line
-		\item Leiningen plugin to inject needed dependencies
-		\item Use nREPL to integrate new error handling system
-	\end{itemize}
-\end{frame}
-
 \begin{frame}[fragile]
 \frametitle{Proposed workflow diagram}
 \begin{figure}[h]
@@ -461,12 +473,36 @@ clojure.core/conj (core.clj:83)
 \end{frame}
 
 \begin{frame}
-\frametitle{What needs to be done}
-\begin{itemize}
-	\item These solutions are a work in progress
-	\item The system still needs implementation
-	\item The proposed solution is a result of our findings
-\end{itemize}
+\frametitle{Future Work}
+	Error Handling	
+	\begin{itemize}
+		\item Currently have regular expressions
+		\item Need user scenarios
+		\item Usability studies
+	\end{itemize}
+	Technical Implementation
+	\begin{itemize}
+		\item Implement items in the proposed diagram
+		\item Work on user interface through the IDE
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Acknowledgments}
+	Our research was sponsored by:
+	\begin{itemize}
+	\item HHMI
+	\item UMN UROP
+	\item UMM MAP
+	\end{itemize}
+	
+	
+	{\centering
+	\noindent
+	Thank you! \par
+	Any questions? \par
+	}
 \end{frame}
 
 \end{document}
