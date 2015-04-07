@@ -108,30 +108,27 @@ April 11, 2015\par}
   	  \begin{itemize}
   	 	 \item parentheses
   	 	 \item parameters
-  	 	 
-		 
-	     \texttt{(<function-name> <argument 1> <argument 2>)}
-	  
-	  
+  	 	 \begin{verbatim}(<function-name> <argument 1> <argument 2>)
+  	 	 \end{verbatim}
   	 	 \item \texttt{+} is a built-in function, not an operator
-  	 	\begin{verbatim}		
-		(+ 5 5)
-		-> 10
-	        \end{verbatim}
-	          	  \end{itemize}
+  	 	 \begin{verbatim}		
+		 (+ 5 5)
+		 -> 10
+	     \end{verbatim}
+	  \end{itemize}
    \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Defining functions and variables}
 	\begin{itemize}
-  	  \item \texttt{def} can be used to define variables:
+  	  \item \texttt{def} can be used to define variables
   	  \begin{verbatim}
 		 (def my-string "Hello World")
 		 my-string
 		 -> "Hello World"
 	  \end{verbatim}
-  	  \item \texttt{defn} can be used to define functions:
+  	  \item \texttt{defn} can be used to define functions
   	  \begin{verbatim}
 		 (defn increment-number [number] (+ number 1))
 		 (increment-number 2)
@@ -143,18 +140,15 @@ April 11, 2015\par}
 \begin{frame}[fragile]
 \frametitle{Collections}
     \begin{itemize}
-         \item All collections can contain any number of values of any data type
-         
-	 \begin{itemize}
-	   \item lists
-	   
-	   \begin{verbatim}(1 2 "foo" :a 9 "bar")
-	   \end{verbatim}
-  	   \item hashmaps (key-value pairs)
-  	   
-  	   \begin{verbatim}{:a 1, :b 2, :c 3}
-	   \end{verbatim}
-	 \end{itemize}
+        \item All collections can contain any number of values of any data type
+	    \begin{itemize}
+	      \item lists
+	      \begin{verbatim}(1 2 "foo" :a 9 "bar")
+	      \end{verbatim}
+	      \item hashmaps (key-value pairs)
+	      \begin{verbatim}{:a 1, :b 2, :c 3}
+	      \end{verbatim}
+	    \end{itemize}
     \end{itemize}
 \end{frame}
 
@@ -164,13 +158,10 @@ April 11, 2015\par}
   	  \item Anonymous functions are a way to implement a function on the fly, and use it only once
   	  \begin{itemize}
   	 	\item \texttt{map} takes a function and a collection as arguments, and applies the function to the entire collection
-  	    
-  	    
-		\begin{verbatim}(map (fn [number] (+ number 1)) `(0 1 2 3))}
+		\begin{verbatim}(map (fn [number] (+ number 1)) `(0 1 2 3))
+		-> (1 2 3 4)
 		\end{verbatim}
-		
-		\texttt{-> (1 2 3 4)}
-		\end{itemize}
+	\end{itemize}
    \end{itemize}
 \end{frame}
 
@@ -178,18 +169,15 @@ April 11, 2015\par}
 \frametitle{Lazy sequences}
 	\begin{itemize}
   	  \item Only a needed portion of a sequence is evaluated
-  	     \begin{itemize}
-  	         \item \texttt{take} takes the first $n$ elements of a collection
-  	         \item \texttt{range} returns an infinite sequence of non-negative integers beginning at 0
-  	     
-  	     
-  	     \texttt{(take 10 (range))}
-  	 	      
-  	     \texttt{-> (0 1 2 3 4 5 6 7 8 9)}
-  	     
-  	     \item Fibonacci sequence
-   \end{itemize}
-   \end{itemize}
+  	  \begin{itemize}
+  	  	\item \texttt{take} takes the first $n$ elements of a collection
+  	  	\item \texttt{range} returns an infinite sequence of non-negative integers beginning at 0 	  	
+  	  	\begin{verbatim}(take 10 (range))
+-> (0 1 2 3 4 5 6 7 8 9)
+  	  	\end{verbatim}
+  	  	\item Fibonacci sequence
+  	  \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \section{Error Messages}
@@ -290,18 +278,17 @@ compiling:(compilation_errors/eof.clj:4:1)
 				(+ 2 "apple")
 				\end{verbatim}
 				\textcolor{PrettyGreen}{
-				\texttt{
-				-> ERROR: In function +, the second argument
+				\texttt{ERROR: In function +, the second argument
 				"apple" must be a number but is a string.
 				}}
 				\item unable to handle compilation exceptions
-				\item can not handle user-made functions
+				\item cannot handle user-made functions
 				\item impractical to redefine all existing functions
 			\end{itemize}
 		\item Try/catch approach
 			\begin{itemize}
 	 			\item able to handle both runtime and compilation exceptions
-				\item usually can not recover argument values
+				\item usually cannot recover argument values
 	 		\end{itemize} 
 	\end{itemize}
 \end{frame}
@@ -326,7 +313,7 @@ compiling:(compilation_errors/eof.clj:4:1)
 			\textcolor{PrettyGreen}{
 			\texttt{ERROR: Compilation error: name Hello is undefined}
 			}
-		\item Student edit
+		\item Student edit:
 		
 				\texttt{print(\alert{"Hello World"})}
 	\end{itemize}
@@ -337,12 +324,11 @@ compiling:(compilation_errors/eof.clj:4:1)
 \frametitle{User scenarios: example slide 2}
 
 	\begin{itemize}
-	\item Student edit
+	\item Student edit:
 		
 				\texttt{print("Hello World")}
 				
 		\item Clojure error message:	
-	
 			\begin{verbatim}
 			ClassCastException java.lang.String cannot be
 			cast to clojure.lang.IFn
@@ -354,7 +340,7 @@ compiling:(compilation_errors/eof.clj:4:1)
 			\texttt{ERROR: Attempted to use a string, but a function
 			was expected.}}
 	
-		\item Corrected Code:
+		\item Corrected code:
 		
 			\texttt{\alert{(print} "Hello World")}
 	\end{itemize} 	
@@ -416,30 +402,32 @@ compiling:(compilation_errors/eof.clj:4:1)
 
 \begin{frame}
 \frametitle{Setup}
-	IDE options
+	\begin{itemize}
+	\item IDE options
 	\begin{itemize}
 		\item LightTable
 			\begin{itemize}
-				\item More established
+				\item more established
 			\end{itemize}
 		\item Nightcode
 			\begin{itemize}
-				\item Newer Promising IDE
+				\item newer, promising IDE
 			\end{itemize}
 		\item ongoing open source projects
 	\end{itemize}
-	Project manager
+	\item Project manager
 	\begin{itemize}
 		\item Leiningen
 		\item popular in Clojure community
 	\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle {Error Handling}
+	\frametitle {Error handling}
 	\begin{itemize}
 		\item Initial approach of try/catch
-		\item Maintain consistency between Runtime, compile time, REPL
+		\item Maintain consistency between runtime, compile time, REPL
 		\item Issues with laziness
 		\item Try/catch student code does not catch all
 	\end{itemize}
@@ -472,17 +460,19 @@ compiling:(compilation_errors/eof.clj:4:1)
 \end{frame}
 
 \begin{frame}
-\frametitle{Future Work}
-	Error Handling	
+\frametitle{Future work}
 	\begin{itemize}
-		\item Currently have regular expressions
-		\item Need user scenarios
-		\item Usability studies
+	\item Error handling	
+	\begin{itemize}
+		\item currently have regular expressions
+		\item need user scenarios
+		\item usability studies
 	\end{itemize}
-	Technical Implementation
+	\item Technical implementation
 	\begin{itemize}
-		\item Implement items in the proposed diagram
-		\item Work on user interface through the IDE
+		\item implement items in the proposed diagram
+		\item work on user interface through the IDE
+	\end{itemize}
 	\end{itemize}
 \end{frame}
 
