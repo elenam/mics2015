@@ -58,6 +58,7 @@ April 11, 2015\par}
 \end{frame}
 
 \section{Introduction to the Project}
+
 \begin{frame}
 	\frametitle{Clojure in an introductory course}
 	\begin{itemize}
@@ -108,8 +109,8 @@ April 11, 2015\par}
   	  \begin{itemize}
   	 	 \item parentheses
   	 	 \item parameters
-  	 	 \begin{verbatim}(<function-name> <argument 1> <argument 2>)
-  	 	 \end{verbatim}
+  	 	 
+  	 	 \texttt{(<function-name> <argument 1> <argument 2>)}
   	 	 \item \texttt{+} is a built-in function, not an operator
   	 	 \begin{verbatim}		
 		 (+ 5 5)
@@ -123,17 +124,19 @@ April 11, 2015\par}
 \frametitle{Defining functions and variables}
 	\begin{itemize}
   	  \item \texttt{def} can be used to define variables
-  	  \begin{verbatim}
-		 (def my-string "Hello World")
-		 my-string
-		 -> "Hello World"
-	  \end{verbatim}
+  	  
+  	  \texttt{(def my-string "Hello World")}
+  	  
+  	  \texttt{my-string}
+  	  
+  	  \texttt{-> "Hello World"}
   	  \item \texttt{defn} can be used to define functions
-  	  \begin{verbatim}
-		 (defn increment-number [number] (+ number 1))
-		 (increment-number 2)
-		 -> 3
-	  \end{verbatim}
+  	  
+	  \texttt{(defn increment-number [number] (+ number 1))}
+	  
+	  \texttt{(increment-number 2)}
+	  
+	  \texttt{-> 3}
 	\end{itemize}
 \end{frame}
 
@@ -143,11 +146,11 @@ April 11, 2015\par}
         \item All collections can contain any number of values of any data type
 	    \begin{itemize}
 	      \item lists
-	      \begin{verbatim}(1 2 "foo" :a 9 "bar")
-	      \end{verbatim}
+	      
+	      \texttt{(1 2 "foo" :a 9 "bar")}
 	      \item hashmaps (key-value pairs)
-	      \begin{verbatim}{:a 1, :b 2, :c 3}
-	      \end{verbatim}
+	      
+	      \texttt{\{:a 1, :b 2, :c 3\}}
 	    \end{itemize}
     \end{itemize}
 \end{frame}
@@ -172,10 +175,13 @@ April 11, 2015\par}
   	  \begin{itemize}
   	  	\item \texttt{take} takes the first $n$ elements of a collection
   	  	\item \texttt{range} returns an infinite sequence of non-negative integers beginning at 0 	  	
-  	  	\begin{verbatim}(take 10 (range))
--> (0 1 2 3 4 5 6 7 8 9)
-  	  	\end{verbatim}
+  	  	
+  	  	\texttt{(take 10 (range))}
+
+		\texttt{-> (0 1 2 3 4 5 6 7 8 9)}
   	  	\item Fibonacci sequence
+  	  	
+  	  	\texttt{(1 1 2 3 5 8 13 ...)}
   	  \end{itemize}
   \end{itemize}
 \end{frame}
@@ -278,7 +284,7 @@ compiling:(compilation_errors/eof.clj:4:1)
 				(+ 2 "apple")
 				\end{verbatim}
 				\textcolor{PrettyGreen}{
-				\texttt{ERROR: In function +, the second argument
+				\texttt{In function +, the second argument
 				"apple" must be a number but is a string.
 				}}
 				\item unable to handle compilation exceptions
@@ -311,7 +317,7 @@ compiling:(compilation_errors/eof.clj:4:1)
 		\item Our modified error message:
 		
 			\textcolor{PrettyGreen}{
-			\texttt{ERROR: Compilation error: name Hello is undefined}
+			\texttt{Compilation error: name Hello is undefined}
 			}
 		\item Student edit:
 		
@@ -337,7 +343,7 @@ compiling:(compilation_errors/eof.clj:4:1)
 		\item Our modified error message:	
 	
 			\textcolor{PrettyGreen}{
-			\texttt{ERROR: Attempted to use a string, but a function
+			\texttt{Attempted to use a string, but a function
 			was expected.}}
 	
 		\item Corrected code:
@@ -371,7 +377,7 @@ compiling:(compilation_errors/eof.clj:4:1)
 		\item Improved error message:
 		
 			\textcolor{PrettyGreen}{
-			\texttt{ERROR: Compilation error: name Hello is undefined}}
+			\texttt{Compilation error: name Hello is undefined}}
 			
 		\item Hint:
 		
@@ -397,7 +403,6 @@ compiling:(compilation_errors/eof.clj:4:1)
 	 \end{itemize}
 \end{frame}
 
-% Henry & Max
 \section{Technical Setup}
 
 \begin{frame}
